@@ -1,0 +1,13 @@
+{
+  "ownerNumber": ["6281578859076@s.whatsapp.net"],
+  "ownerName": ["Creator Bot"],
+  "botName": "Z-Bot MultiDevice",
+  "sessionName": "kon",
+  "pathimg": "./media/Chitanda.jpg",
+  "gamewaktu": 90,
+  "limitCount": 25,
+  "gcount": {
+	"prem": 35,
+	"user": 15
+  }
+}
