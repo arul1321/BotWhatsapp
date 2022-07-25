@@ -90,7 +90,7 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 		const isUser = pendaftar.includes(sender)
 		const isPremium = isOwner ? true : _prem.checkPremiumUser(sender, premium)
                 const isWelcome = isGroup ? welcome.includes(from) ? true : false : false
-
+        const panggil = `@${jakol.split("@")[0]}`
 		const gcounti = setting.gcount
 		const gcount = isPremium ? gcounti.prem : gcounti.user
 
@@ -448,7 +448,7 @@ let { facebookdlv3 } = require('@bochilteam/scraper')
     const { result } = await facebookdlv3(args[1]).catch((err) => {
   reply(mess.error.api)
   })
-    for (const { url, isVideo } of result.reverse()) conn.sendMessage(from, {video:{url:url}, caption: 'Success', mimetype:'video/mp4'}, {quoted:msg}).catch((err) => {
+    for (const { url, isVideo } of result.reverse()) conn.sendMessage(from, { caption: 'Nih Kak ${panggil}, Success Download Video Facebook', video:{url:url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [sender]} ).catch((err) => {
   reply(mess.error.api)
   })
     limitAdd(sender, limit)
@@ -460,7 +460,7 @@ case prefix+'twitter':{
 	        let gut = await xfar.downloader.twitter(q)
 	        console.log(gut)
              let yuio = await getBuffer(gut.quality_720)
-	        conn.sendMessage(from, { caption: 'success', video: yuio, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [sender]} )
+	        conn.sendMessage(from, { caption: 'Nih Kak ${panggil}, Success Download Video Twitter', video: yuio, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [sender]} )
 	         limitAdd(sender, limit)
 	}
 	        break
@@ -481,7 +481,7 @@ case prefix+'twitter':{
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 	        let gut = await xfar.downloader.youtube(q)
 	        console.log(gut)
-	         let ryu = `🇵🇱 *Title :* ${gut.title} \n🇮🇩 *Username :* ${gut.username} \n🇵🇱 *Size :* ${gut.size}`
+	         let ryu = `Nih Kak ${panggil}\n\n🇵🇱 *Title :* ${gut.title} \n🇮🇩 *Username :* ${gut.username} \n🇵🇱 *Size :* ${gut.size}`
              let jiig = await getBuffer(gut.download_url)
 	         conn.sendMessage(from, { caption: ryu, video: jiig, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [sender]} )
 	         limitAdd(sender, limit)
@@ -534,9 +534,9 @@ case prefix+'instagram':
   hxz.igdl(q).then(data => {
   for (let i of data.medias) {
   if (i.url.includes('mp4')) {
-  conn.sendMessage(from, { caption: `Succes Download Video Instagram, Thanks For Using zBot`, video:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [sender]} )
+  conn.sendMessage(from, { caption: `Nih Kak ${panggil}, Succes Download Video Instagram, Thanks For Using zBot`, video:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [sender]} )
   } else {
-  conn.sendMessage(from, { caption: `Succes Download Image Instagram, Thanks For Using zBot`, image:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [sender]} )
+  conn.sendMessage(from, { caption: `Nih Kak ${panggil}, Succes Download Image Instagram, Thanks For Using zBot`, image:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [sender]} )
   }
   }
   })
@@ -563,7 +563,7 @@ case prefix+'instagram':
 			    if (!args[1].includes('tiktok')) return reply(mess.error.Iv)
 			    reply(mess.wait)
 			    bocil.tiktokdlv3(`${q}`).then( yut => {
-				  let anutxt = `• Author : ${yut.author.nickname}\n• Description : ${yut.description}\n• Avatar : ${yut.author.avatar}`
+				  let anutxt = `Nih Kak ${panggil}\n\n• Author : ${yut.author.nickname}\n• Description : ${yut.description}\n• Avatar : ${yut.author.avatar}`
 			      var tidtod5 = [
 						{ urlButton: { displayText: `Link`, url : `${q}` } },
 			{ quickReplyButton: { displayText: `Ubah Ke Audio`, id: `${prefix}tiktokaudio ${q}` } },
