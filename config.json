@@ -5,7 +5,7 @@
   "sessionName": "kon",
   "pathimg": "./media/Chitanda.jpg",
   "gamewaktu": 90,
-  "limitCount": 25,
+  "limitCount": 5,
   "gcount": {
 	"prem": 35,
 	"user": 15
