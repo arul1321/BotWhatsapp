@@ -444,12 +444,26 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 	        case prefix+'facebook':{
 if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 reply(mess.wait)
-let { facebookdlv3, facebookdlv2 } = require('@bochilteam/scraper')
-    const { result } = await facebookdlv3(args[1]).catch(async _ => await facebookdlv2(args[1]))
-    for (const { url, isVideo } of result.reverse()) conn.sendMessage(from, {video:{url:url}, caption: 'Success', mimetype:'video/mp4'}, {quoted:msg})
+let { facebookdlv3 } = require('@bochilteam/scraper')
+    const { result } = await facebookdlv3(args[1]).catch((err) => {
+  reply(mess.error.api)
+  })
+    for (const { url, isVideo } of result.reverse()) conn.sendMessage(from, {video:{url:url}, caption: 'Success', mimetype:'video/mp4'}, {quoted:msg}).catch((err) => {
+  reply(mess.error.api)
+  })
     limitAdd(sender, limit)
 }
 break
+case prefix+'twitter':{
+	        if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
+	        let gut = await xfar.downloader.twitter(q)
+	        console.log(gut)
+             let yuio = await getBuffer(gut.quality_720)
+	        conn.sendMessage(from, { caption: 'success', video: yuio, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [sender]} )
+	         limitAdd(sender, limit)
+	}
+	        break
 	        case prefix+'ytmp3':{
 	        if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
@@ -497,6 +511,7 @@ reply(mess.wait)
 }
 break
 	        case prefix+'sticktele': case prefix+'telesticker': case prefix+'telestick': case prefix+'stickertele':
+if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 reply(mess.wait)
 let packName = args[1].replace("https://t.me/addstickers/", "")
@@ -509,6 +524,7 @@ for (let i = 0; i < gas.result.stickers.length; i++) {
         let stick = "https://api.telegram.org/file/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/" + gasIn.result.file_path
         let media = await getBuffer(stick)
         conn.sendImageAsSticker(from, media, msg, { packname: packnamestick, author: authorstick })}     
+        limitAdd(sender, limit)
 break 
 case prefix+'instagram':
   if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)

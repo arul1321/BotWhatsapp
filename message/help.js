@@ -55,6 +55,8 @@ exports.allmenu = (sender, prefix, pushname, isOwner, isPremium, balance, limit,
   ≻ ${prefix}ytmp3 link
   ≻ ${prefix}ytmp4 link
   ≻ ${prefix}gitclone link
+  ≻ ${prefix}facebook link
+  ≻ ${prefix}twitter link
   
   *( 🔎 )  Search Menu*
   ≻ ${prefix}lirik
