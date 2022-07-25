@@ -493,7 +493,7 @@ case prefix+'instagram':
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
   reply(mess.wait)
-  bocil.instagramdlv3(q).then(async data => {
+  hxz.igdl(q).then(data => {
   for (let i of data.medias) {
   if (i.extension === "mp4") {
   let jig = await getBuffer(i.url)
@@ -527,7 +527,7 @@ case prefix+'instagram':
 			    if (!args[1].includes('tiktok')) return reply(mess.error.Iv)
 			    reply(mess.wait)
 			    bocil.tiktokdlv3(`${q}`).then( yut => {
-				  let anutxt = `• Author : ${yut.author.nickname}\n• Description : ${yut.author.description}\n• Avatar : ${yut.author.avatar}`
+				  let anutxt = `• Author : ${yut.author.nickname}\n• Description : ${yut.description}\n• Avatar : ${yut.author.avatar}`
 			      var tidtod5 = [
 						{ urlButton: { displayText: `Link`, url : `${q}` } },
 			{ quickReplyButton: { displayText: `Ubah Ke Audio`, id: `${prefix}tiktokaudio ${q}` } },
