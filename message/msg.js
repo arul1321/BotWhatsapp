@@ -445,7 +445,7 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 reply(mess.wait)
 let { facebookdlv3, facebookdlv2 } = require('@bochilteam/scraper')
-    const { result } = await facebookdlv3(args[0]).catch(async _ => await facebookdlv2(args[0]))
+    const { result } = await facebookdlv3(args[1]).catch(async _ => await facebookdlv2(args[1]))
     for (const { url, isVideo } of result.reverse()) conn.sendMessage(from, {video:{url:url}, caption: 'Success', mimetype:'video/mp4'}, {quoted:msg})
     limitAdd(sender, limit)
 }
@@ -483,10 +483,23 @@ break
 					conn.sendMessage(from, { document: { url: data.url }, fileName: `${data.filename}`, mimetype: 'zip' }, { quoted: msg })
 					limitAdd(sender, limit)
 					break
+			case prefix+'gitdownload': case prefix+'gitclone':{
+if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+if (args.length < 2) return reply(`Kirim perintah ${command} link`)
+reply(mess.wait) 
+	const regex = /(?:https|git)(?::\/\/|@)github\.com[\/:]([^\/:]+)\/(.+)/i
+    let [_, user, repo] = args[1].match(regex) || []
+    repo = repo.replace(/.git$/, "")
+    let url = `https://api.github.com/repos/${user}/${repo}/zipball`
+    let filename = `${repo}`
+    conn.sendMessage(from, {document: {url: `${url}`}, mimetype: 'application/zip', fileName: `${filename}`}, { quoted : msg })
+ limitAdd(sender, limit)
+}
+break
 	        case prefix+'sticktele': case prefix+'telesticker': case prefix+'telestick': case prefix+'stickertele':
 if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 reply(mess.wait)
-let packName = args[0].replace("https://t.me/addstickers/", "")
+let packName = args[1].replace("https://t.me/addstickers/", "")
 let gas = await fetchJson(`https://api.telegram.org/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/getStickerSet?name=${encodeURIComponent(packName)}`, { method: "GET", headers: { "User-Agent": "GoogleBot" } })
 reply(`*Total stiker:* ${gas.result.stickers.length}
 *Estimasi selesai:* ${gas.result.stickers.length * 1.5} detik`.trim())
