@@ -22,17 +22,17 @@ function toCommas(x) {
 exports.allmenu = (sender, prefix, pushname, isOwner, isPremium, balance, limit, limitCount, glimit, gcount) => {
 	return `*── 「 ${setting.botName} - MD Beta 」 ──*
 	
-  _*${ucapanWaktu} ${pushname !== undefined ? pushname : 'Kak'}*_
+    🎆 *${ucapanWaktu} ${pushname !== undefined ? pushname : 'Kak'}*
 
-    Library : *Baileys-MD*.
-    Prefix : ( ${prefix} )
-    Tanggal Server : ${moment.tz('Asia/Jakarta').format('DD/MM/YY')}
-    Waktu Server : ${moment.tz('Asia/Jakarta').format('HH:mm:ss')}
+    🐺Library : *Baileys-MD*.
+    🦊Prefix : ( ${prefix} )
+    🐱Tanggal Server : ${moment.tz('Asia/Jakarta').format('DD/MM/YY')}
+    🦁Waktu Server : ${moment.tz('Asia/Jakarta').format('HH:mm:ss')}
 
-	Status : ${isOwner ? 'Owner' : isPremium ? 'Premium' : 'Free'}
-	Limit Harian : ${isOwner ? '-' : isPremium ? 'Unlimited' : getLimit(sender, limitCount, limit)}
-	Limit Game : ${isOwner ? '-' : cekGLimit(sender, gcount, glimit)}
-	Balance : $${toCommas(getBalance(sender, balance))}
+	🦄Status : ${isOwner ? 'Owner' : isPremium ? 'Premium' : 'Free'}
+	🐯Limit Harian : ${isOwner ? '-' : isPremium ? 'Unlimited' : getLimit(sender, limitCount, limit)}
+	🐼Limit Game : ${isOwner ? '-' : cekGLimit(sender, gcount, glimit)}
+	🐮Balance : $${toCommas(getBalance(sender, balance))}
 
   *( 📍 )  Main Menu*
   ≻ ${prefix}menu
@@ -45,17 +45,15 @@ exports.allmenu = (sender, prefix, pushname, isOwner, isPremium, balance, limit,
 
   *( ✏️ )  Converter/Tools*
   ≻ ${prefix}sticker
-  ≻ ${prefix}toimg
-  ≻ ${prefix}tovid
 
   *( ⌛ )  Downloader*
-  ≻ ${prefix}tiktok
-  ≻ ${prefix}instagram
-  
-  *( ♻️ )  Random Menu*
-  ≻ ${prefix}quote
-  ≻ ${prefix}cecan
-  ≻ ${prefix}cogan
+  ≻ ${prefix}tiktok link
+  ≻ ${prefix}tiktokaudio link 
+  ≻ ${prefix}instagram link
+  ≻ ${prefix}stickertele link
+  ≻ ${prefix}mediafire link
+  ≻ ${prefix}ytmp3 link
+  ≻ ${prefix}ytmp4 link
   
   *( 🔎 )  Search Menu*
   ≻ ${prefix}lirik
@@ -93,5 +91,5 @@ exports.allmenu = (sender, prefix, pushname, isOwner, isPremium, balance, limit,
   ≻ ${prefix}addprem
   ≻ ${prefix}delprem
 
-`+'     \`\`\`Powered by Nodejs\`\`\`'
+`+'     \`\`\`Simple Bot Whtsapp\`\`\`'
 }

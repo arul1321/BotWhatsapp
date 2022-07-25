@@ -1,9 +1,4 @@
-/**
-  * Created by Irfan
-  * Contact me on WhatsApp wa.me/6285791458996
-  * Follow me on Instagram @irfann._x
-  * If you want to buy an updated script that is not encrypted, please WhatsApp me
-*/
+
 
 "use strict";
 const {
@@ -78,8 +73,10 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 		const isCmd = command.startsWith(prefix)
 		const isGroup = msg.key.remoteJid.endsWith('@g.us')
 		const sender = isGroup ? (msg.key.participant ? msg.key.participant : msg.participant) : msg.key.remoteJid
-		const isOwner = ownerNumber == sender ? true : ["6285791458996@s.whatsapp.net", "628990999699@s.whatsapp.net"].includes(sender) ? true : false
+		const isOwner = ownerNumber == sender ? true : ["6281578859076@s.whatsapp.net", "628990999699@s.whatsapp.net"].includes(sender) ? true : false
 		const pushname = msg.pushName
+		const quoted = msg.quoted ? m.quoted : m
+        const mime = (quoted.msg || quoted).mimetype || ''
 		const q = chats.slice(command.length + 1, chats.length)
 		const body = chats.startsWith(prefix) ? chats : ''
 		const botNumber = conn.user.id.split(':')[0] + '@s.whatsapp.net'
@@ -102,7 +99,9 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
                 const mention = typeof(mentionByTag) == 'string' ? [mentionByTag] : mentionByTag
                 mention != undefined ? mention.push(mentionByReply) : []
                 const mentionUser = mention != undefined ? mention.filter(n => n) : []
-		
+	   const butlink = [
+						{ urlButton: { displayText: `Link`, url : `${q}` } }
+				]
 		async function downloadAndSaveMediaMessage (type_file, path_file) {
 			if (type_file === 'image') {
 				var stream = await downloadContentFromMessage(msg.message.imageMessage || msg.message.extendedTextMessage?.contextInfo.quotedMessage.imageMessage, 'image')
@@ -138,6 +137,21 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 				return path_file
 			}
 		}
+		conn.downloadAndSaveMediaMessage = async (message, filename, attachExtension = true) => {
+        let quoted = message.msg ? message.msg : message
+        let mime = (message.msg || message).mimetype || ''
+        let messageType = message.mtype ? message.mtype.replace(/Message/gi, '') : mime.split('/')[0]
+        const stream = await downloadContentFromMessage(quoted, messageType)
+        let buffer = Buffer.from([])
+        for await(const chunk of stream) {
+            buffer = Buffer.concat([buffer, chunk])
+        }
+	let type = await FileType.fromBuffer(buffer)
+        trueFileName = attachExtension ? (filename + '.' + type.ext) : filename
+        // save to file
+        await fs.writeFileSync(trueFileName, buffer)
+        return trueFileName
+    }
 		const sendFileFromUrl = async (from, url, caption, options = {}) => {
 		    let mime = '';
 		    let res = await axios.head(url)
@@ -222,10 +236,10 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 		}
 		
 		const buttonsDefault = [
-			{ callButton: { displayText: `Call Owner!`, phoneNumber: `+6285791458996` } },
-			{ urlButton: { displayText: `Script!`, url : `https://github.com/rtwone/chitandabot` } },
+			{ callButton: { displayText: `Call Owner!`, phoneNumber: `+6281578859076` } },
+			{ urlButton: { displayText: `Instagram`, url : `https://instagram.com/_daaa_1` } },
 			{ quickReplyButton: { displayText: `🧑 Owner`, id: `${prefix}owner` } },
-			{ quickReplyButton: { displayText: `💰 Donasi`, id: `${prefix}donate` } }
+			{ quickReplyButton: { displayText: `🚀 Speed`, id: `${prefix}speed` } }
 		]
         
 		const isImage = (type == 'imageMessage')
@@ -310,7 +324,7 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 			case prefix+'menu':
 			case prefix+'help':
 			    var teks = allmenu(sender, prefix, pushname, isOwner, isPremium, balance, limit, limitCount, glimit, gcount)
-			    conn.sendMessage(from, { caption: teks, location: { jpegThumbnail: fs.readFileSync(setting.pathimg) }, templateButtons: buttonsDefault, footer: 'NullTeam-ID © 2021', mentions: [sender] })
+			    conn.sendMessage(from, { text: teks, footer: `Z-Bot Multidevice`, templateButtons: buttonsDefault, quoted:msg})
 				break
 			case prefix+'runtime':
 			    reply(runtime(process.uptime()))
@@ -320,10 +334,6 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
                             let latensi = speed() - timestamp
                             textImg(`${latensi.toFixed(4)} Second`)
 		            break
-			case prefix+'donate':
-			case prefix+'donasi':
-			    reply(`──「 MENU DONATE 」──\n\nHi ${pushname} 👋🏻\n\`\`\`GOPAY : 085791458996\`\`\`\n\`\`\`PULSA : 085735338148 (Indosat)\`\`\`\nTerimakasih untuk kamu yang sudah donasi untuk perkembangan bot ini _^\n──「 THX FOR YOU ! 」──`)
-			    break
 			case prefix+'owner':
 			    for (let x of ownerNumber) {
 			      sendContact(from, x.split('@s.whatsapp.net')[0], 'Owner', msg)
@@ -355,7 +365,7 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
                 mentions(txt, men, true)
                 break
 	        // Converter & Tools Menu
-			case prefix+'sticker': case prefix+'stiker': case prefix+'s':
+			case prefix+'sticker2': case prefix+'stiker2': case prefix+'s2':
 			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 				if (isImage || isQuotedImage) {
 		           var stream = await downloadContentFromMessage(msg.message.imageMessage || msg.message.extendedTextMessage?.contextInfo.quotedMessage.imageMessage, 'image')
@@ -369,12 +379,10 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 			       ffmpeg(`./${rand1}`)
 				.on("error", console.error)
 				.on("end", () => {
-				  exec(`webpmux -set exif ./sticker/data.exif ./${rand2} -o ./${rand2}`, async (error) => {
 				    conn.sendMessage(from, { sticker: fs.readFileSync(`./${rand2}`) }, { quoted: msg })
 				    limitAdd(sender, limit)
 					fs.unlinkSync(`./${rand1}`)
-			            fs.unlinkSync(`./${rand2}`)
-			          })
+			            fs.unlinkSync(`./${rand2}`)          
 				 })
 				.addOutputOptions(["-vcodec", "libwebp", "-vf", "scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse"])
 				.toFormat('webp')
@@ -391,13 +399,11 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 			         ffmpeg(`./${rand1}`)
 				  .on("error", console.error)
 				  .on("end", () => {
-				    exec(`webpmux -set exif ./sticker/data.exif ./${rand2} -o ./${rand2}`, async (error) => {
 				      conn.sendMessage(from, { sticker: fs.readFileSync(`./${rand2}`) }, { quoted: msg })
 				      limitAdd(sender, limit)
 					  fs.unlinkSync(`./${rand1}`)
 				      fs.unlinkSync(`./${rand2}`)
 				    })
-				  })
 				 .addOutputOptions(["-vcodec", "libwebp", "-vf", "scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse"])
 				 .toFormat('webp')
 				 .save(`${rand2}`)
@@ -435,38 +441,74 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 			    }
 			    break
 	        // Downloader Menu
-	        case prefix+'sticktele': case prefix+'telesticker': case prefix+'telestick': case prefix+'stickertele':{
-if (!q) throw `Example : ${prefix + command} https://t.me/addstickers/rndomnih`
+	        case prefix+'ytmp3':{
+	        if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
+	        let gut = await hxz.youtube(q)
+	        console.log(gut)
+	         let ryu = `🇵🇱 *Title :* ${gut.title} \n🇮🇩 *ID :* ${gut.id} \n🇵🇱 *Thumb :* ${gut.thumb}`
+             reply(ryu)
+             let yuio = await getBuffer(gut.mp3)
+	        conn.sendMessage(from, { audio: yuio, mimetype: 'audio/mp4' }, { quoted: msg })
+	         limitAdd(sender, limit)
+	}
+	        break
+	        case prefix+'ytmp4':{
+	        if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
+	        let gut = await xfar.downloader.youtube(q)
+	        console.log(gut)
+	         let ryu = `🇵🇱 *Title :* ${gut.title} \n🇮🇩 *Username :* ${gut.username} \n🇵🇱 *Size :* ${gut.size}`
+             let jiig = await getBuffer(gut.download_url)
+	         conn.sendMessage(from, { caption: ryu, video: jiig, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [sender]} )
+	         limitAdd(sender, limit)
+}
+	        break
+	        case prefix+'mediafire':
+					if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
+			    if (!isUrl(args[1])) return reply(mess.error.Iv)
+			    if (!args[1].includes('mediafire')) return reply(mess.error.Iv)
+			    reply(mess.wait)
+					var data = await fetchJson(`https://docs-jojo.herokuapp.com/api/mediafire?url=${q}`)
+					conn.sendMessage(from, { document: { url: data.url }, fileName: `${data.filename}`, mimetype: 'zip' }, { quoted: msg })
+					limitAdd(sender, limit)
+					break
+	        case prefix+'sticktele': case prefix+'telesticker': case prefix+'telestick': case prefix+'stickertele':
+if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 reply(mess.wait)
 let packName = args[0].replace("https://t.me/addstickers/", "")
 let gas = await fetchJson(`https://api.telegram.org/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/getStickerSet?name=${encodeURIComponent(packName)}`, { method: "GET", headers: { "User-Agent": "GoogleBot" } })
-m.reply(`*Total stiker:* ${gas.result.stickers.length}
+reply(`*Total stiker:* ${gas.result.stickers.length}
 *Estimasi selesai:* ${gas.result.stickers.length * 1.5} detik`.trim())
 for (let i = 0; i < gas.result.stickers.length; i++) {
         let fileId = gas.result.stickers[i].thumb.file_id
         let gasIn = await fetchJson(`https://api.telegram.org/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/getFile?file_id=${fileId}`)
         let stick = "https://api.telegram.org/file/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/" + gasIn.result.file_path
         let media = await getBuffer(stick)
-        conn.sendImageAsSticker(from, media, msg, { packname: packnamestick, author: authorstick })}
-        
-break
-			case prefix+'tiktok':
-			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+        conn.sendImageAsSticker(from, media, msg, { packname: packnamestick, author: authorstick })}     
+break 
+case prefix+'instagram':
+  if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
-			    if (!args[1].includes('tiktok')) return reply(mess.error.Iv)
-			    reply(mess.wait)
-			    var yut = await bocil.tiktokdlv3(args[0])
-let teks = `
-🇮🇩 *Author :*${res.author.nickname}
-🇵🇱 *Link Avatar :* ${res.author.avatar}
-🇮🇩 *Caption :* ${res.author.description}
-🇵🇱 *Url :* ${res.video.no_watermark}
-`
-reply(teks)
-limitAdd(sender, limit)
-conn.sendMessage(from, { video: { url: res.video.no_watermark }}, { quoted: msg })
-break
+  reply(mess.wait)
+  bocil.instagramdlv3(q).then(async data => {
+  for (let i of data.medias) {
+  if (i.extension === "mp4") {
+  let jig = await getBuffer(i.url)
+  conn.sendMessage(from, { caption: `Succes Download Video Instagram, Thanks For Using zBot`, video: jig, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [sender]} )
+  } else if (i.extension === "jpg") {
+  let rel = await getBuffer(i.url)
+  conn.sendMessage(from, { caption: `Succes Download Video Instagram, Thanks For Using zBot`, image: rel, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [sender]} )
+  }
+  }
+  })
+  .catch((err) => {
+  reply(mess.error.api)
+  })
+  limitAdd(sender, limit)
+  break 
 			case prefix+'tiktokaudio':
 			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
@@ -475,6 +517,22 @@ break
 			    reply(mess.wait)
 			    hxz.ttdownloader(args[1]).then( data => {
 			      conn.sendMessage(from, { audio: { url: data.nowm }, mimetype: 'audio/mp4' }, { quoted: msg })
+			       limitAdd(sender, limit)
+				}).catch(() => reply(mess.error.api))
+		        break
+		case prefix+'tiktok':
+			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
+			    if (!isUrl(args[1])) return reply(mess.error.Iv)
+			    if (!args[1].includes('tiktok')) return reply(mess.error.Iv)
+			    reply(mess.wait)
+			    bocil.tiktokdlv3(`${q}`).then( yut => {
+				  let anutxt = `• Author : ${yut.author.nickname}\n• Description : ${yut.author.description}\n• Avatar : ${yut.author.avatar}`
+			      var tidtod5 = [
+						{ urlButton: { displayText: `Link`, url : `${q}` } },
+			{ quickReplyButton: { displayText: `Ubah Ke Audio`, id: `${prefix}tiktokaudio ${q}` } },
+				]
+				conn.sendMessage(from, { caption: anutxt, video: {url: yut.video.no_watermark}, templateButtons: tidtod5, footer: 'Z-Bot Multidevice', mentions: [sender]} )
 			       limitAdd(sender, limit)
 				}).catch(() => reply(mess.error.api))
 		        break
@@ -549,32 +607,6 @@ break
                     reply('Sukses!')
                 }
                 break
-			// Random Menu
-			case prefix+'quote': case prefix+'quotes':
-			case prefix+'randomquote': case prefix+'randomquotes':
-			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
-				var data = await fetchJson(`https://megayaa.herokuapp.com/api/randomquote`)
-			    reply(data.result.quotes+'\n\n-- '+data.result.author)
-				limitAdd(sender, limit)
-				break
-			case prefix+'cecan': case prefix+'cewek':
-			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
-				reply(mess.wait)
-			    var query = ["cecan hd","cecan indo","cewe cantik", "cewe aesthetic", "cecan aesthetic"]
-                var data = await pinterest(pickRandom(query))
-				var but = [{buttonId: `${command}`, buttonText: { displayText: "Next Photo" }, type: 1 }]
-				conn.sendMessage(from, { caption: "Random Cewe Cantik", image: { url: pickRandom(data.result) }, buttons: but, footer: 'Pencet tombol dibawah untuk foto selanjutnya' }, { quoted: msg })
-			    limitAdd(sender, limit)
- 			    break
-			case prefix+'cogan': case prefix+'cowok':
-			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
-				reply(mess.wait)
-				var query = ["cogan hd","cogan indo","cowo ganteng","handsome boy","hot boy","oppa","cowo aesthetic","cogan aesthetic"]
-				var data = await pinterest(pickRandom(query))
-				var but = [{buttonId: `${command}`, buttonText: { displayText: "Next Photo" }, type: 1 }]
-				conn.sendMessage(from, { caption: "Random Cowo Ganteng", image: { url: pickRandom(data.result) }, buttons: but, footer: 'Pencet tombol dibawah untuk foto selanjutnya' }, { quoted: msg })
-			    limitAdd(sender, limit)
-				break
 			// Search Menu
 			case prefix+'lirik': case 'liriklagu':
 			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
@@ -637,8 +669,8 @@ break
  *Data berhasil didapatkan*
  *Hasil pencarian dari ${q}*
  
- *${prefix}getmusic <no urutan>*
- *${prefix}getvideo <no urutan>*
+ *${prefix}ytmp3 link*
+ *${prefix}ytmp4 link*
  Untuk mengambil Audio/Video dari hasil pencarian`
                 for (let i = 0; i < jumlah; i++) {
 				  no += 1
