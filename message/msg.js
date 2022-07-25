@@ -448,7 +448,7 @@ let { facebookdlv3 } = require('@bochilteam/scraper')
     const { result } = await facebookdlv3(args[1]).catch((err) => {
   reply(mess.error.api)
   })
-    for (const { url, isVideo } of result.reverse()) conn.sendMessage(from, { caption: `Nih Kak ${panggil}, Success Download Video Facebook`, video:{url:url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} ).catch((err) => {
+    for (const { url, isVideo } of result.reverse()) conn.sendMessage(from, { caption: ` Success Download Video Facebook`, video:{url:url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} ).catch((err) => {
   reply(mess.error.api)
   })
     limitAdd(sender, limit)
@@ -461,7 +461,7 @@ case prefix+'twitter':{
 	        console.log(gut)
 	         reply(mess.wait)
              let yuio = await getBuffer(gut.quality_720)
-	        conn.sendMessage(from, { caption: `Nih Kak ${panggil}, Success Download Video Twitter`, video: yuio, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
+	        conn.sendMessage(from, { caption: ` Success Download Video Twitter`, video: yuio, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
 	         limitAdd(sender, limit)
 	}
 	        break
@@ -537,9 +537,9 @@ case prefix+'instagram':
   hxz.igdl(q).then(data => {
   for (let i of data.medias) {
   if (i.url.includes('mp4')) {
-  conn.sendMessage(from, { caption: `Nih Kak ${panggil}, Succes Download Video Instagram, Thanks For Using zBot`, video:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
+  conn.sendMessage(from, { caption: ` Succes Download Video Instagram, Thanks For Using zBot`, video:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
   } else {
-  conn.sendMessage(from, { caption: `Nih Kak ${panggil}, Succes Download Image Instagram, Thanks For Using zBot`, image:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
+  conn.sendMessage(from, { caption: ` Succes Download Image Instagram, Thanks For Using zBot`, image:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
   }
   }
   })
