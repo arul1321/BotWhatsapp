@@ -365,7 +365,7 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
                 mentions(txt, men, true)
                 break
 	        // Converter & Tools Menu
-			case prefix+'sticker2': case prefix+'stiker2': case prefix+'s2':
+			case prefix+'sticker': case prefix+'stiker': case prefix+'s':
 			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 				if (isImage || isQuotedImage) {
 		           var stream = await downloadContentFromMessage(msg.message.imageMessage || msg.message.extendedTextMessage?.contextInfo.quotedMessage.imageMessage, 'image')
@@ -441,6 +441,15 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 			    }
 			    break
 	        // Downloader Menu
+	        case prefix+'facebook':{
+if (args.length < 2) return reply(`Kirim perintah ${command} link`)
+reply(mess.wait)
+let { facebookdlv3, facebookdlv2 } = require('@bochilteam/scraper')
+    const { result } = await facebookdlv3(args[0]).catch(async _ => await facebookdlv2(args[0]))
+    for (const { url, isVideo } of result.reverse()) conn.sendMessage(from, {video:{url:url}, caption: 'Success', mimetype:'video/mp4'}, {quoted:msg})
+    limitAdd(sender, limit)
+}
+break
 	        case prefix+'ytmp3':{
 	        if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
@@ -498,7 +507,7 @@ case prefix+'instagram':
   if (i.url.includes('mp4')) {
   conn.sendMessage(from, { caption: `Succes Download Video Instagram, Thanks For Using zBot`, video:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [sender]} )
   } else {
-  conn.sendMessage(from, { caption: `Succes Download Video Instagram, Thanks For Using zBot`, image:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [sender]} )
+  conn.sendMessage(from, { caption: `Succes Download Image Instagram, Thanks For Using zBot`, image:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [sender]} )
   }
   }
   })
