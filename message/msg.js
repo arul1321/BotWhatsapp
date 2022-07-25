@@ -495,12 +495,10 @@ case prefix+'instagram':
   reply(mess.wait)
   hxz.igdl(q).then(data => {
   for (let i of data.medias) {
-  if (i.extension === "mp4") {
-  let jig = await getBuffer(i.url)
-  conn.sendMessage(from, { caption: `Succes Download Video Instagram, Thanks For Using zBot`, video: jig, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [sender]} )
-  } else if (i.extension === "jpg") {
-  let rel = await getBuffer(i.url)
-  conn.sendMessage(from, { caption: `Succes Download Video Instagram, Thanks For Using zBot`, image: rel, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [sender]} )
+  if (i.url.includes('mp4')) {
+  conn.sendMessage(from, { caption: `Succes Download Video Instagram, Thanks For Using zBot`, video:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [sender]} )
+  } else {
+  conn.sendMessage(from, { caption: `Succes Download Video Instagram, Thanks For Using zBot`, image:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [sender]} )
   }
   }
   })
