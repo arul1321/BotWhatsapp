@@ -60,7 +60,7 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 		const chats = (type === 'conversation' && msg.message.conversation) ? msg.message.conversation : (type === 'imageMessage') && msg.message.imageMessage.caption ? msg.message.imageMessage.caption : (type === 'videoMessage') && msg.message.videoMessage.caption ? msg.message.videoMessage.caption : (type === 'extendedTextMessage') && msg.message.extendedTextMessage.text ? msg.message.extendedTextMessage.text : (type === 'buttonsResponseMessage') && quotedMsg.fromMe && msg.message.buttonsResponseMessage.selectedButtonId ? msg.message.buttonsResponseMessage.selectedButtonId : (type === 'templateButtonReplyMessage') && quotedMsg.fromMe && msg.message.templateButtonReplyMessage.selectedId ? msg.message.templateButtonReplyMessage.selectedId : (type === 'messageContextInfo') ? (msg.message.buttonsResponseMessage?.selectedButtonId || msg.message.listResponseMessage?.singleSelectReply.selectedRowId) : (type == 'listResponseMessage') && quotedMsg.fromMe && msg.message.listResponseMessage.singleSelectReply.selectedRowId ? msg.message.listResponseMessage.singleSelectReply.selectedRowId : ""
                 const toJSON = j => JSON.stringify(j, null,'\t')
 		if (conn.multi) {
-			var prefix = /^[°•π÷×¶∆£¢€¥®™✓_=|~!?#$%^&.+-,\/\\©^]/.test(chats) ? chats.match(/^[°•π÷×¶∆£¢€¥®™✓_=|~!?#$%^&.+-,\/\\©^]/gi) : '#'
+			var prefix = /^[°•π÷×¶∆£¢€¥®™✓_=|~!?#%^&.+-,\/\\©^]/.test(chats) ? chats.match(/^[°•π÷×¶∆£¢€¥®™✓_=|~!?#$%^&.+-,\/\\©^]/gi) : '#'
 		} else {
 			if (conn.nopref) {
 				prefix = ''
@@ -90,7 +90,7 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 		const isUser = pendaftar.includes(sender)
 		const isPremium = isOwner ? true : _prem.checkPremiumUser(sender, premium)
                 const isWelcome = isGroup ? welcome.includes(from) ? true : false : false
-        const panggil = `@${jakol.split("@")[0]}`
+        const panggil = `@${sender.split("@")[0]}`
 		const gcounti = setting.gcount
 		const gcount = isPremium ? gcounti.prem : gcounti.user
 
@@ -459,6 +459,7 @@ case prefix+'twitter':{
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 	        let gut = await xfar.downloader.twitter(q)
 	        console.log(gut)
+	         reply(mess.wait)
              let yuio = await getBuffer(gut.quality_720)
 	        conn.sendMessage(from, { caption: 'Nih Kak ${panggil}, Success Download Video Twitter', video: yuio, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [sender]} )
 	         limitAdd(sender, limit)
@@ -469,6 +470,7 @@ case prefix+'twitter':{
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 	        let gut = await hxz.youtube(q)
 	        console.log(gut)
+	         reply(mess.wait)
 	         let ryu = `🇵🇱 *Title :* ${gut.title} \n🇮🇩 *ID :* ${gut.id} \n🇵🇱 *Thumb :* ${gut.thumb}`
              reply(ryu)
              let yuio = await getBuffer(gut.mp3)
@@ -481,6 +483,7 @@ case prefix+'twitter':{
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 	        let gut = await xfar.downloader.youtube(q)
 	        console.log(gut)
+	         reply(mess.wait)
 	         let ryu = `Nih Kak ${panggil}\n\n🇵🇱 *Title :* ${gut.title} \n🇮🇩 *Username :* ${gut.username} \n🇵🇱 *Size :* ${gut.size}`
              let jiig = await getBuffer(gut.download_url)
 	         conn.sendMessage(from, { caption: ryu, video: jiig, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [sender]} )
