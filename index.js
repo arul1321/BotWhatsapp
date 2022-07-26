@@ -10,10 +10,15 @@ const {
 default: makeWASocket,
 BufferJSON,
 initInMemoryKeyStore,
+generateWAMessageFromContent, 
+generateMessageID,
 DisconnectReason,
 AnyMessageContent,
 makeInMemoryStore,
 useSingleFileAuthState,
+proto,
+generateForwardMessageContent,
+prepareWAMessageMedia,
 delay
 } = require("@adiwajshing/baileys")
 const figlet = require("figlet");
@@ -118,7 +123,30 @@ browser: ["Z-Bot Multi Device", "Safari", "3.0"]
 		}
 	})
 	conn.ev.on('creds.update', () => saveState)
-     
+    
+conn.reSize = async (image, width, height) => {
+       let jimp = require('jimp')
+       var oyy = await jimp.read(image);
+       var kiyomasa = await oyy.resize(width, height).getBufferAsync(jimp.MIME_JPEG)
+       return kiyomasa
+       }
+        conn.send5ButGif = async (from, text = '' , footer = '', gif, but = [], buff, options = {}) =>{
+        let resize = await conn.reSize(buff, 300, 150)
+        let a = [1,2]
+        let b = a[Math.floor(Math.random() * a.length)]
+        let message = await prepareWAMessageMedia({ video: gif, gifPlayback: true, jpegThumbnail: resize, gifAttribution: b}, { upload: conn.waUploadToServer })
+        var template = generateWAMessageFromContent(from, proto.Message.fromObject({
+        templateMessage: {
+        hydratedTemplate: {
+        videoMessage: message.videoMessage,
+               "hydratedContentText": text,
+               "hydratedFooterText": footer,
+               "hydratedButtons": but
+            }
+            }
+            }), options)
+            conn.relayMessage(from, template.message, { messageId: template.key.id })
+    } 
      /**
      * 
      * @param {*} jid 
