@@ -130,11 +130,10 @@ conn.reSize = async (image, width, height) => {
        var kiyomasa = await oyy.resize(width, height).getBufferAsync(jimp.MIME_JPEG)
        return kiyomasa
        }
-        conn.send5ButGif = async (from, text = '' , footer = '', gif, but = [], buff, options = {}) =>{
-        let resize = await conn.reSize(buff, 300, 150)
+        conn.send5ButGif = async (from, text = '' , footer = '', gif, but = [], options = {}) =>{
         let a = [1,2]
         let b = a[Math.floor(Math.random() * a.length)]
-        let message = await prepareWAMessageMedia({ video: gif, gifPlayback: true, jpegThumbnail: resize, gifAttribution: b}, { upload: conn.waUploadToServer })
+        let message = await prepareWAMessageMedia({ video: gif, gifPlayback: true, gifAttribution: b}, { upload: conn.waUploadToServer })
         var template = generateWAMessageFromContent(from, proto.Message.fromObject({
         templateMessage: {
         hydratedTemplate: {
