@@ -37,7 +37,6 @@ exports.allmenu = (sender, prefix, pushname, isOwner, isPremium, balance, limit,
   *( 📍 )  Main Menu*
   ≻ ${prefix}menu
   ≻ ${prefix}owner
-  ≻ ${prefix}donasi
   ≻ ${prefix}speed
   ≻ ${prefix}runtime
   ≻ ${prefix}cekprem
@@ -47,24 +46,24 @@ exports.allmenu = (sender, prefix, pushname, isOwner, isPremium, balance, limit,
   ≻ ${prefix}sticker
 
   *( ⌛ )  Downloader*
-  ≻ ${prefix}tiktok link
-  ≻ ${prefix}tiktokaudio link 
-  ≻ ${prefix}instagram link
-  ≻ ${prefix}stickertele link
-  ≻ ${prefix}mediafire link
-  ≻ ${prefix}ytmp3 link
-  ≻ ${prefix}ytmp4 link
-  ≻ ${prefix}gitclone link
-  ≻ ${prefix}facebook link
-  ≻ ${prefix}twitter link
+  ≻ ${prefix}tiktok link Ⓛ
+  ≻ ${prefix}tiktokaudio link Ⓛ
+  ≻ ${prefix}instagram link Ⓛ
+  ≻ ${prefix}stickertele link Ⓛ
+  ≻ ${prefix}mediafire link Ⓛ
+  ≻ ${prefix}ytmp3 link Ⓛ
+  ≻ ${prefix}ytmp4 link Ⓛ
+  ≻ ${prefix}gitclone link Ⓛ
+  ≻ ${prefix}facebook link Ⓛ
+  ≻ ${prefix}twitter link Ⓛ
   
   *( 🔎 )  Search Menu*
-  ≻ ${prefix}lirik
-  ≻ ${prefix}grupwa
-  ≻ ${prefix}ytsearch
+  ≻ ${prefix}lirik Ⓛ
+  ≻ ${prefix}grupwa Ⓛ
+  ≻ ${prefix}ytsearch Ⓛ
   
   *( 🎮 )  Game Menu*
-  ≻ ${prefix}tebakgambar
+  ≻ ${prefix}tebakgambar Ⓛⓖ
   
   *( 🏦 )  Payment & Bank*
   ≻ ${prefix}buylimit
@@ -93,6 +92,7 @@ exports.allmenu = (sender, prefix, pushname, isOwner, isPremium, balance, limit,
   ≻ ${prefix}leave
   ≻ ${prefix}addprem
   ≻ ${prefix}delprem
+  ≻ ${prefix}sendsession
 
 `+'     \`\`\`Simple Bot Whtsapp\`\`\`'
 }
