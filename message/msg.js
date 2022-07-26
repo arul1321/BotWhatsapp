@@ -239,7 +239,7 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 			{ callButton: { displayText: `Call Owner!`, phoneNumber: `+6281578859076` } },
 			{ urlButton: { displayText: `Instagram`, url : `https://instagram.com/_daaa_1` } },
 			{ quickReplyButton: { displayText: `🧑 Owner`, id: `${prefix}owner` } },
-			{ quickReplyButton: { displayText: `🚀 Speed`, id: `${prefix}speed` } }
+			{ quickReplyButton: { displayText: `📛 Rules`, id: `${prefix}info` } }
 		]
         
 		const isImage = (type == 'imageMessage')
@@ -254,7 +254,7 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 
 		// Auto Read & Presence Online
 		conn.sendReadReceipt(from, sender, [msg.key.id])
-		conn.sendPresenceUpdate('available', from)
+		conn.sendPresenceUpdate('compossing', from)
 		
 		// Auto Registrasi
 		if (isCmd && !isUser) {
@@ -322,8 +322,6 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 		switch(command) {
 			// Main Menu
 			case prefix+'info':
-			let auh = fs.readFileSync('./media/thumb.jpg')
-			let auhu = fs.readFileSync('./media/bot.gif')
 			let rules = `
 > Jangan Spam Bot
 > Jangan Kirim Virtext/Virgam
@@ -331,7 +329,7 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 
 Melanggar ?  *Block*
 `
-conn.send5ButGif(from, rules, `Z-Bot Multidevice`, auhu, buttonsDefault, auh)
+conn.sendMessage(from, { text: rules, footer: `Z-Bot Multidevice`, templateButtons: buttonsDefault, quoted:msg})
 			break
 			case prefix+'menu':
 			case prefix+'help':

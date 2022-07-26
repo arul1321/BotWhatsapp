@@ -30,7 +30,7 @@ exports.allmenu = (sender, prefix, pushname, isOwner, isPremium, balance, limit,
     🦁Waktu Server : ${moment.tz('Asia/Jakarta').format('HH:mm:ss')}
 
 	🦄Status : ${isOwner ? 'Owner' : isPremium ? 'Premium' : 'Free'}
-	🐯Limit Harian : ${isOwner ? '-' : isPremium ? 'Unlimited' : getLimit(sender, limitCount, limit)}
+	🐯Limit : ${isOwner ? '-' : isPremium ? 'Unlimited' : getLimit(sender, limitCount, limit)}
 	🐼Limit Game : ${isOwner ? '-' : cekGLimit(sender, gcount, glimit)}
 	🐮Balance : $${toCommas(getBalance(sender, balance))}
 
@@ -41,6 +41,7 @@ exports.allmenu = (sender, prefix, pushname, isOwner, isPremium, balance, limit,
   ≻ ${prefix}runtime
   ≻ ${prefix}cekprem
   ≻ ${prefix}listprem
+  ≻ ${prefix}topbalance
 
   *( ✏️ )  Converter/Tools*
   ≻ ${prefix}sticker
