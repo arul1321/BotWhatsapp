@@ -321,6 +321,18 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 
 		switch(command) {
 			// Main Menu
+			case prefix+'info':
+			let auh = fs.readFileSync('./media/thumb.jpg')
+			let auhu = fs.readFileSync('./media/bot.gif')
+			let rules = `
+> Jangan Spam Bot
+> Jangan Kirim Virtext/Virgam
+> Jangan Telpon Bot
+
+Melanggar ?  *Block*
+`
+conn.send5ButGif(from, rules, `Z-Bot Multidevice`, auhu, buttonsDefault, auh)
+			break
 			case prefix+'menu':
 			case prefix+'help':
 			    var teks = allmenu(sender, prefix, pushname, isOwner, isPremium, balance, limit, limitCount, glimit, gcount)
@@ -411,6 +423,7 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 			
 	        // Downloader Menu
 	        case prefix+'facebook':{
+if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 reply(mess.wait)
 let { facebookdlv3 } = require('@bochilteam/scraper')
