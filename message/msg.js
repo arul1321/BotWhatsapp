@@ -54,7 +54,27 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 		if (msg.isBaileys) return
 		const jam = moment.tz('asia/jakarta').format('HH:mm:ss')
 		let dt = moment(Date.now()).tz('Asia/Jakarta').locale('id').format('a')
-		const ucapanWaktu = "Selamat "+dt.charAt(0).toUpperCase() + dt.slice(1)
+		//const ucapanWaktu = "Selamat "+dt.charAt(0).toUpperCase() + dt.slice(1)
+const time = moment.tz('Asia/Jakarta').format('DD/MM HH:mm:ss')
+const time2 = moment().tz('Asia/Jakarta').format('HH:mm:ss')
+if(time2 < "23:59:00"){
+var ucapanWaktu = 'Good night🌃'
+}
+if(time2 < "19:00:00"){
+var ucapanWaktu = 'Good afternoon🌆'
+}
+if(time2 < "18:00:00"){
+var ucapanWaktu = 'Good afternoon🌅'
+}
+if(time2 < "15:00:00"){
+var ucapanWaktu = 'Good day🏙'
+}
+if(time2 < "11:00:00"){
+var ucapanWaktu = 'Good morning🌁'
+}
+if(time2 < "05:00:00"){
+var ucapanWaktu = 'Good morning🌉'
+}
 		const content = JSON.stringify(msg.message)
 		const from = msg.key.remoteJid
 		const chats = (type === 'conversation' && msg.message.conversation) ? msg.message.conversation : (type === 'imageMessage') && msg.message.imageMessage.caption ? msg.message.imageMessage.caption : (type === 'videoMessage') && msg.message.videoMessage.caption ? msg.message.videoMessage.caption : (type === 'extendedTextMessage') && msg.message.extendedTextMessage.text ? msg.message.extendedTextMessage.text : (type === 'buttonsResponseMessage') && quotedMsg.fromMe && msg.message.buttonsResponseMessage.selectedButtonId ? msg.message.buttonsResponseMessage.selectedButtonId : (type === 'templateButtonReplyMessage') && quotedMsg.fromMe && msg.message.templateButtonReplyMessage.selectedId ? msg.message.templateButtonReplyMessage.selectedId : (type === 'messageContextInfo') ? (msg.message.buttonsResponseMessage?.selectedButtonId || msg.message.listResponseMessage?.singleSelectReply.selectedRowId) : (type == 'listResponseMessage') && quotedMsg.fromMe && msg.message.listResponseMessage.singleSelectReply.selectedRowId ? msg.message.listResponseMessage.singleSelectReply.selectedRowId : ""
@@ -334,6 +354,26 @@ Melanggar ?  *Block*
 `
 conn.sendMessage(from, { text: rules, footer: `Z-Bot Multidevice`, templateButtons: btn, quoted:msg})
 			break
+			case prefix+'tes':
+let bton = [
+			{ quickReplyButton: { displayText: `🎶 Music`, id: `${prefix}ytmp3 ` } },
+			{ quickReplyButton: { displayText: `📽 Video`, id: `${prefix}ytmp4 ` } },
+			{ urlButton: { displayText: `Url Video`, url : `instagram.com` } },
+		]
+const buttonMessage = {
+                                document: { url: "https://wa.me/17608914335"},
+                                jpegThumbnail: fs.readFileSync(`./media/thumb.jpg`),
+                                mimetype: 'application/pdf',
+                                fileName: `${ucapanWaktu}`,
+                                fileLength: 887890909999999,
+                                pageCount: 1234567890123456789012345,
+                                caption: `tes`,
+                                footer: `tes`,
+                                templateButtons: bton,
+                                headerType: 1
+                            }
+conn.sendMessage(from, buttonMessage, {quoted: msg, ephemeralExpiration: 88899644, contextInfo: { forwardingScore: 99999, isForwarded: true }})
+			break
 			case prefix+'menu':
 			case prefix+'help':
 			    var teks = allmenu(speed, runtime, sender, prefix, pushname, isOwner, isPremium, balance, limit, limitCount, glimit, gcount, pendaftar)
@@ -462,7 +502,9 @@ break
 case prefix+'twitter':{
 	        if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
-	        let gut = await xfar.downloader.twitter(q)
+	        let gut = await xfar.downloader.twitter(q).catch((err) => {
+  reply(mess.error.api)
+  })
 	        console.log(gut)
 	         reply(mess.wait)
              let yuio = await getBuffer(gut.quality_720)
@@ -475,29 +517,29 @@ case prefix+'twitter':{
 	        break
 	        case prefix+'ytmp3':{
 	        if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
-			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
-	        let gut = await hxz.youtube(q)
-	        console.log(gut)
-	         reply(mess.wait)
-	         let ryu = `🇵🇱 *Title :* ${gut.title} \n🇮🇩 *ID :* ${gut.id} \n🇵🇱 *Thumb :* ${gut.thumb}`
-             reply(ryu)
-             let yuio = await getBuffer(gut.mp3)
-	        conn.sendMessage(from, { audio: yuio, mimetype: 'audio/mp4' }, { quoted: msg }).catch((err) => {
+			if (args.length < 2) return reply(`Kirim perintah ${command} link`)
+	        let { yta } = require('../lib/y2mate').catch((err) => {
   reply(mess.error.api)
   })
-	         limitAdd(sender, limit)
+            let quality = '128kbps'
+            let media = await yta(text, quality)
+            if (media.filesize >= 100000) return reply('File Melebihi Batas ')
+            conn.send5ButLoc(from, `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${q}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '128kbps'}`, `© Z-Bot Whatsapp Multidevice`, `${media.thumb}`, butlink)
+            conn.sendMessage(from, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: msg })
+	        limitAdd(sender, limit)
              
 	}
 	        break
 	        case prefix+'ytmp4':{
 	        if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
-			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
-	        let gut = await xfar.downloader.youtube(q)
-	        console.log(gut)
-	         reply(mess.wait)
-	         let ryu = `🇵🇱 *Title :* ${gut.title} \n🇮🇩 *Username :* ${gut.username} \n🇵🇱 *Size :* ${gut.size}`
-             let jiig = await getBuffer(gut.download_url)
-	         conn.sendMessage(from, { caption: ryu, video: jiig, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} ).catch((err) => {
+			if (args.length < 2) return reply(`Kirim perintah ${command} link`)
+			let { ytv } = require('../lib/y2mate').catch((err) => {
+  reply(mess.error.api)
+  })
+            let quality = args[1] ? args[1] : '480p'
+            let media = await ytv(text, quality)
+            if (media.filesize >= 100000) return reply('File Melebihi Batas')
+            conn.sendMessage(from, { caption: `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${q}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '480p'}`, video: { url: media.dl_link }, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} ).catch((err) => {
   reply(mess.error.api)
   })
 	         limitAdd(sender, limit)
@@ -510,7 +552,9 @@ case prefix+'twitter':{
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
 			    if (!args[1].includes('mediafire')) return reply(mess.error.Iv)
 			    reply(mess.wait)
-					var data = await fetchJson(`https://docs-jojo.herokuapp.com/api/mediafire?url=${q}`)
+					var data = await fetchJson(`https://docs-jojo.herokuapp.com/api/mediafire?url=${q}`).catch((err) => {
+  reply(mess.error.api)
+  })
 					conn.sendMessage(from, { document: { url: data.url }, fileName: `${data.filename}`, mimetype: 'zip' }, { quoted: msg }).catch((err) => {
   reply(mess.error.api)
   })
@@ -538,7 +582,9 @@ if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit
 if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 reply(mess.wait)
 let packName = args[1].replace("https://t.me/addstickers/", "")
-let gas = await fetchJson(`https://api.telegram.org/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/getStickerSet?name=${encodeURIComponent(packName)}`, { method: "GET", headers: { "User-Agent": "GoogleBot" } })
+let gas = await fetchJson(`https://api.telegram.org/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/getStickerSet?name=${encodeURIComponent(packName)}`, { method: "GET", headers: { "User-Agent": "GoogleBot" } }).catch((err) => {
+  reply(mess.error.api)
+  })
 reply(`*Total stiker:* ${gas.result.stickers.length}
 *Estimasi selesai:* ${gas.result.stickers.length * 1.5} detik`.trim())
 for (let i = 0; i < gas.result.stickers.length; i++) {

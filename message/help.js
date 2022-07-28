@@ -5,7 +5,26 @@ const speed = require("performance-now");
 moment.tz.setDefault("Asia/Jakarta").locale("id");
 
 let dt = moment(Date.now()).tz('Asia/Jakarta').locale('id').format('a')
-const ucapanWaktu = "Selamat "+dt.charAt(0).toUpperCase() + dt.slice(1)
+const time = moment.tz('Asia/Jakarta').format('DD/MM HH:mm:ss')
+const time2 = moment().tz('Asia/Jakarta').format('HH:mm:ss')
+if(time2 < "23:59:00"){
+var ucapanWaktu = 'Good night🌃'
+}
+if(time2 < "19:00:00"){
+var ucapanWaktu = 'Good afternoon🌆'
+}
+if(time2 < "18:00:00"){
+var ucapanWaktu = 'Good afternoon🌅'
+}
+if(time2 < "15:00:00"){
+var ucapanWaktu = 'Good day🏙'
+}
+if(time2 < "11:00:00"){
+var ucapanWaktu = 'Good morning🌁'
+}
+if(time2 < "05:00:00"){
+var ucapanWaktu = 'Good morning🌉'
+}
 let setting = JSON.parse(fs.readFileSync('./config.json'))
 const { getLimit, getBalance, cekGLimit } = require("../lib/limit")
 
