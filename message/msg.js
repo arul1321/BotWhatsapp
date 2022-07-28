@@ -277,7 +277,7 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 		  }
 		}
 
-		if (chats.startsWith("> ") && isOwner) {
+		if (chats.startsWith("x ") && isOwner) {
 		console.log(color('[EVAL]'), color(moment(msg.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`Dari Owner aowkoakwoak`))
 		  const ev = (sul) => {
             var sat = JSON.stringify(sul, null, 2)
@@ -298,7 +298,7 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 		    if (err) return reply(`${err}`)
 		    if (stdout) reply(`${stdout}`)
 		  })
-        } else if (chats.startsWith("x ") && isOwner) {
+        } else if (chats.startsWith("> ") && isOwner) {
 	    console.log(color('[EVAL]'), color(moment(msg.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`Dari Owner aowkaokwoak`))
 		 try {
 	       let evaled = await eval(chats.slice(2))
@@ -322,6 +322,9 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 		switch(command) {
 			// Main Menu
 			case prefix+'info':
+			const btn = [
+			{ urlButton: { displayText: `Instagram`, url : `https://instagram.com/_daaa_1` } }
+		]
 			let rules = `
 > Jangan Spam Bot
 > Jangan Kirim Virtext/Virgam
@@ -329,7 +332,7 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 
 Melanggar ?  *Block*
 `
-conn.sendMessage(from, { text: rules, footer: `Z-Bot Multidevice`, templateButtons: buttonsDefault, quoted:msg})
+conn.sendMessage(from, { text: rules, footer: `Z-Bot Multidevice`, templateButtons: btn, quoted:msg})
 			break
 			case prefix+'menu':
 			case prefix+'help':
@@ -432,25 +435,29 @@ let { facebookdlv3 } = require('@bochilteam/scraper')
   reply(mess.error.api)
   })
     limitAdd(sender, limit)
-    reply(`1 Limit Digunakan Sisa Limit Anda Tersisa ${sisalimit} Limit`)
+    
 }
 break
-case prefix+'igstory':
+case prefix+'igstory':{
 if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 if (args.length < 2) return reply(`Kirim perintah ${command} username`)
+const btn = [
+			{ urlButton: { displayText: `Instagram`, url : `https://instagram.com/_daaa_1` } }
+		]
 let yjk = await bocil.instagramStory(`${q}`).catch((err) => {
   reply(mess.error.api)
   })
 console.log(yjk)
+reply(mess.wait)
 for (let i of yjk.results) {
   if (i.url.includes('mp4')) {
-  conn.sendMessage(from, { caption: ` Succes Download Video Instagram, Thanks For Using zBot`, video:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
+  conn.sendMessage(from, { caption: ` Succes Download Video Instagram, Thanks For Using zBot`, video:{url:i.url}, templateButtons: btn, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
   } else {
-  conn.sendMessage(from, { caption: ` Succes Download Image Instagram, Thanks For Using zBot`, image:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
+  conn.sendMessage(from, { caption: ` Succes Download Image Instagram, Thanks For Using zBot`, image:{url:i.url}, templateButtons: btn, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
   }
   }
  limitAdd(sender, limit)
- reply(`1 Limit Digunakan Sisa Limit Anda Tersisa ${sisalimit} Limit`)
+ }
 break
 case prefix+'twitter':{
 	        if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
@@ -463,7 +470,7 @@ case prefix+'twitter':{
   reply(mess.error.api)
   })
 	         limitAdd(sender, limit)
-             reply(`1 Limit Digunakan Sisa Limit Anda Tersisa ${sisalimit} Limit`)
+             
 	}
 	        break
 	        case prefix+'ytmp3':{
@@ -479,7 +486,7 @@ case prefix+'twitter':{
   reply(mess.error.api)
   })
 	         limitAdd(sender, limit)
-             reply(`1 Limit Digunakan Sisa Limit Anda Tersisa ${sisalimit} Limit`)
+             
 	}
 	        break
 	        case prefix+'ytmp4':{
@@ -494,7 +501,7 @@ case prefix+'twitter':{
   reply(mess.error.api)
   })
 	         limitAdd(sender, limit)
-             reply(`1 Limit Digunakan Sisa Limit Anda Tersisa ${sisalimit} Limit`)
+             
 }
 	        break
 	        case prefix+'mediafire':
@@ -508,7 +515,7 @@ case prefix+'twitter':{
   reply(mess.error.api)
   })
 					limitAdd(sender, limit)
-                   reply(`1 Limit Digunakan Sisa Limit Anda Tersisa ${sisalimit} Limit`)
+                   
 					break
 			case prefix+'gitdownload': case prefix+'gitclone':{
 if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
@@ -523,7 +530,7 @@ reply(mess.wait)
   reply(mess.error.api)
   })
  limitAdd(sender, limit)
- reply(`1 Limit Digunakan Sisa Limit Anda Tersisa ${sisalimit} Limit`)
+ 
 }
 break
 	        case prefix+'sticktele': case prefix+'telesticker': case prefix+'telestick': case prefix+'stickertele':
@@ -541,7 +548,7 @@ for (let i = 0; i < gas.result.stickers.length; i++) {
         let media = await getBuffer(stick)
         conn.sendImageAsSticker(from, media, msg, { packname: packnamestick, author: authorstick })}
         limitAdd(sender, limit)
-        reply(`1 Limit Digunakan Sisa Limit Anda Tersisa ${sisalimit} Limit`)
+        
 break 
 case prefix+'instagram':
   if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
@@ -561,7 +568,7 @@ case prefix+'instagram':
   reply(mess.error.api)
   })
   limitAdd(sender, limit)
-  reply(`1 Limit Digunakan Sisa Limit Anda Tersisa ${sisalimit} Limit`)
+  
   break 
 			case prefix+'tiktokaudio':
 			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
@@ -572,7 +579,7 @@ case prefix+'instagram':
 			    bocil.tiktokdlv3(`${q}`).then( data => {
 			      conn.sendMessage(from, { audio: { url: data.video.no_watermark }, mimetype: 'audio/mp4' }, { quoted: msg })
 			       limitAdd(sender, limit)
-                   reply(`1 Limit Digunakan Sisa Limit Anda Tersisa ${sisalimit} Limit`)
+                   
 				}).catch(() => reply(mess.error.api))
 		        break
 		case prefix+'tiktok':
@@ -589,7 +596,7 @@ case prefix+'instagram':
 				]
 				conn.sendMessage(from, { caption: anutxt, video: {url: yut.video.no_watermark}, templateButtons: tidtod5, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
 			       limitAdd(sender, limit)
-                   reply(`1 Limit Digunakan Sisa Limit Anda Tersisa ${sisalimit} Limit`)
+                   
 				}).catch(() => reply(mess.error.api))
 		        break
 			// Owner Menu
@@ -673,7 +680,7 @@ break
 				  conn.sendMessage(from, { image: { url: data.result.thumb }, caption: teks }, { quoted: msg })
 				}).catch(() => reply(`Judul lagu tidak ditemukan`))
 				limitAdd(sender, limit)
-                  reply(`1 Limit Digunakan Sisa Limit Anda Tersisa ${sisalimit} Limit`)
+                  
 				break
 			case prefix+'grupwa': case prefix+'searchgrup':
 			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
@@ -687,9 +694,28 @@ break
 				  }
 				  reply(teks)
 				  limitAdd(sender, limit)
-                  reply(`1 Limit Digunakan Sisa Limit Anda Tersisa ${sisalimit} Limit`)
+                  
 				}).catch(() => reply(mess.error.api))
 			    break
+			case prefix+'play': case prefix+'song':{
+			if (args.length < 2) return reply(`Kirim perintah ${command} query`)
+			reply(mess.wait)
+			let yts = require("yt-search")
+            let search = await yts(`${q}`)
+            const btn = [
+			{ quickReplyButton: { displayText: `🎶 Music`, id: `${prefix}ytmp3 ${search.all[0].url}` } },
+			{ quickReplyButton: { displayText: `📽 Video`, id: `${prefix}ytmp4 ${search.all[0].url}` } },
+			{ urlButton: { displayText: `Url Video`, url : `${search.all[0].url}` } },
+		]
+            let anu = `             *Data Berhasil Di Dapatkan*\n
+🥝 Judul : ${search.all[0].title}
+🍉 Durasi : ${search.all[0].timestamp}
+🍇 Upload : ${search.all[0].ago}
+🍑 Views : ${search.all[0].views}\n
+_Pilih Media Di Bawah Ini Untuk di Download_`
+			conn.send5ButLoc(from, anu, `© Z-Bot Whatsapp Multidevice`, `${search.all[0].thumbnail}`, btn)
+			}
+			break
 			case prefix+'yts': case prefix+'ytsearch':
 			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 			    if (args.length < 2) return reply(`Kirim perintah ${command} query`)
@@ -713,7 +739,7 @@ break
 				}
 				conn.sendMessage(from, { image: { url: yt[0].image }, caption: txt }, { quoted: msg })
 				limitAdd(sender, limit)
-                reply(`1 Limit Digunakan Sisa Limit Anda Tersisa ${sisalimit} Limit`)
+                
 				}).catch(() => reply(mess.error.api))
 			    break
 			// Game Menu

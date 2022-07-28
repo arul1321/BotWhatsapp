@@ -68,40 +68,41 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
   19. ${yui}${prefix}igstory username${yui} Ⓛ
   
   *(🔎)  Search Menu*
-  20. ${yui}${prefix}lirik${yui} Ⓛ
-  21. ${yui}${prefix}grupwa${yui} Ⓛ
-  22. ${yui}${prefix}ytsearch${yui} Ⓛ
+  20. ${yui}${prefix}play${yui} 
+  21. ${yui}${prefix}lirik${yui} Ⓛ
+  22. ${yui}${prefix}grupwa${yui} Ⓛ
+  23. ${yui}${prefix}ytsearch${yui} Ⓛ
   
   *(🎮)  Game Menu*
-  23. ${yui}${prefix}tebakgambar${yui} Ⓛⓖ
+  24. ${yui}${prefix}tebakgambar${yui} Ⓛⓖ
   
   *(🏦)  Payment & Bank*
-  24. ${yui}${prefix}buylimit${yui}
-  25. ${yui}${prefix}buyglimit${yui}
-  26. ${yui}${prefix}transfer${yui}
-  27. ${yui}${prefix}limit${yui}
-  28. ${yui}${prefix}balance${yui}
+  25. ${yui}${prefix}buylimit${yui}
+  26. ${yui}${prefix}buyglimit${yui}
+  27. ${yui}${prefix}transfer${yui}
+  28. ${yui}${prefix}limit${yui}
+  29. ${yui}${prefix}balance${yui}
   
   *(👥)  Group Menu*
-  29. ${yui}${prefix}linkgrup${yui}
-  30. ${yui}${prefix}setppgrup${yui}
-  31. ${yui}${prefix}setnamegc${yui}
-  32. ${yui}${prefix}setdesc${yui}
-  33. ${yui}${prefix}group${yui}
-  34. ${yui}${prefix}revoke${yui}
-  35. ${yui}${prefix}hidetag${yui}
+  30. ${yui}${prefix}linkgrup${yui}
+  31. ${yui}${prefix}setppgrup${yui}
+  32. ${yui}${prefix}setnamegc${yui}
+  33. ${yui}${prefix}setdesc${yui}
+  34. ${yui}${prefix}group${yui}
+  35. ${yui}${prefix}revoke${yui}
+  36. ${yui}${prefix}hidetag${yui}
   
   *(🧑🏻‍💻)  Owner Menu*
-  36. ${yui}> evalcode${yui}
-  37. ${yui}x evalcode-2${yui}
-  38. ${yui}$ executor${yui}
-  39. ${yui}${prefix}join${yui}
-  40. ${yui}${prefix}broadcast${yui}
-  41. ${yui}${prefix}setppbot${yui}
-  42. ${yui}${prefix}leave${yui}
-  43. ${yui}${prefix}addprem${yui}
-  44. ${yui}${prefix}delprem${yui}
-  45. ${yui}${prefix}sendsession${yui}
+  37. ${yui}> evalcode${yui}
+  38. ${yui}x evalcode-2${yui}
+  39. ${yui}$ executor${yui}
+  40. ${yui}${prefix}join${yui}
+  41. ${yui}${prefix}broadcast${yui}
+  42. ${yui}${prefix}setppbot${yui}
+  43. ${yui}${prefix}leave${yui}
+  44. ${yui}${prefix}addprem${yui}
+  45. ${yui}${prefix}delprem${yui}
+  46. ${yui}${prefix}sendsession${yui}
 
 *──「 Simple Bot Whatsapp MD Beta 」──*
 `
