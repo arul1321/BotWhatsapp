@@ -29,6 +29,7 @@ const logg = require('pino')
 const clui = require('clui')
 const { Spinner } = clui
 const { serialize } = require("./lib/myfunc");
+const { getBuffer, fetchJson, fetchText, getRandom, getGroupAdmins, runtime, sleep, makeid } = require("./lib/myfunc");
 const { color, mylog, infolog } = require("./lib/color");
 const time = moment(new Date()).format('HH:mm:ss DD/MM/YYYY')
 let setting = JSON.parse(fs.readFileSync('./config.json'));
@@ -130,6 +131,24 @@ conn.reSize = async (image, width, height) => {
        var kiyomasa = await oyy.resize(width, height).getBufferAsync(jimp.MIME_JPEG)
        return kiyomasa
        }
+       conn.send5ButLoc = async (from, text = '' , footer = '', lok, but = [], options = {}) =>{
+       let resize = await conn.reSize(lok, 300, 150)
+       var template = generateWAMessageFromContent(from, {
+       "templateMessage": {
+       "hydratedTemplate": {
+       "locationMessage": {
+       "degreesLatitude": 0,
+       "degreesLongitude": 0,
+       "jpegThumbnail": resize
+       },
+       "hydratedContentText": text,
+       "hydratedFooterText": footer,
+       "hydratedButtons": but
+       }
+       }
+       }, options)
+       conn.relayMessage(from, template.message, { messageId: template.key.id })
+      }
         conn.send5ButGif = async (from, text = '' , footer = '', gif, but = [], options = {}) =>{
         let a = [1,2]
         let b = a[Math.floor(Math.random() * a.length)]
