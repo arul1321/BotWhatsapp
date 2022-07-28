@@ -518,11 +518,11 @@ case prefix+'twitter':{
 	        case prefix+'ytmp3':{
 	        if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 			if (args.length < 2) return reply(`Kirim perintah ${command} link`)
-	        let { yta } = require('../lib/y2mate').catch((err) => {
+	        let { yta } = require('../lib/y2mate')
+            let quality = '128kbps'
+            let media = await yta(q).catch((err) => {
   reply(mess.error.api)
   })
-            let quality = '128kbps'
-            let media = await yta(text, quality)
             if (media.filesize >= 100000) return reply('File Melebihi Batas ')
             conn.send5ButLoc(from, `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${q}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '128kbps'}`, `© Z-Bot Whatsapp Multidevice`, `${media.thumb}`, butlink)
             conn.sendMessage(from, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: msg })
@@ -533,11 +533,11 @@ case prefix+'twitter':{
 	        case prefix+'ytmp4':{
 	        if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 			if (args.length < 2) return reply(`Kirim perintah ${command} link`)
-			let { ytv } = require('../lib/y2mate').catch((err) => {
+			let { ytv } = require('../lib/y2mate')
+            let quality = args[1] ? args[1] : '480p'
+            let media = await ytv(q).catch((err) => {
   reply(mess.error.api)
   })
-            let quality = args[1] ? args[1] : '480p'
-            let media = await ytv(text, quality)
             if (media.filesize >= 100000) return reply('File Melebihi Batas')
             conn.sendMessage(from, { caption: `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${q}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '480p'}`, video: { url: media.dl_link }, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} ).catch((err) => {
   reply(mess.error.api)
