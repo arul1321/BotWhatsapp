@@ -38,12 +38,13 @@ function toCommas(x) {
 	   x = x.replace(pattern, "$1,$2");
 	return x;
 }
-var p = 0
 var yui ='```'
 let timestamp = speed();
 let latensi = speed() - timestamp
+         
            
 exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium, balance, limit, limitCount, glimit, gcount, pendaftar) => {
+    var p = 0
 	return `
 🎆 *Hallo ${ucapanWaktu} ${pushname !== undefined ? pushname : 'Kak'}*
 
