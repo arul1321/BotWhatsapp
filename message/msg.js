@@ -55,8 +55,8 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 		const jam = moment.tz('asia/jakarta').format('HH:mm:ss')
 		let dt = moment(Date.now()).tz('Asia/Jakarta').locale('id').format('a')
 		//const ucapanWaktu = "Selamat "+dt.charAt(0).toUpperCase() + dt.slice(1)
-const time = moment.tz('Asia/Jakarta').format('DD/MM HH:mm:ss')
-const time2 = moment().tz('Asia/Jakarta').format('HH:mm:ss')
+const time2 = moment.tz('Asia/Jakarta').format('DD/MM HH:mm:ss')
+const time = moment().tz('Asia/Jakarta').format('HH:mm:ss')
 if(time2 < "23:59:00"){
 var ucapanWaktu = 'Good night🌃'
 }
@@ -258,8 +258,8 @@ var ucapanWaktu = 'Good morning🌉'
 		const buttonsDefault = [
 			{ callButton: { displayText: `Call Owner!`, phoneNumber: `+6281578859076` } },
 			{ urlButton: { displayText: `Instagram`, url : `https://instagram.com/_daaa_1` } },
-			{ quickReplyButton: { displayText: `🧑 Owner`, id: `${prefix}owner` } },
-			{ quickReplyButton: { displayText: `📛 Rules`, id: `${prefix}info` } }
+			{ quickReplyButton: { displayText: `• Owner`, id: `${prefix}owner` } },
+			{ quickReplyButton: { displayText: `• Rules`, id: `${prefix}info` } }
 		]
         
 		const isImage = (type == 'imageMessage')
@@ -463,20 +463,16 @@ conn.sendMessage(from, buttonMessage, {quoted: msg, ephemeralExpiration: 8889964
                 break
 			
 	        // Downloader Menu
-	        case prefix+'facebook':{
+	        case prefix+'facebook':
 if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 reply(mess.wait)
-let { facebookdlv3 } = require('@bochilteam/scraper')
-    const { result } = await facebookdlv3(args[1]).catch((err) => {
+let bko = await xfar.downloader.facebook(`${q}`).catch((err) => {
   reply(mess.error.api)
   })
-    for (const { url, isVideo } of result.reverse()) conn.sendMessage(from, { caption: ` Success Download Video Facebook`, video:{url:url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} ).catch((err) => {
-  reply(mess.error.api)
-  })
-    limitAdd(sender, limit)
-    
-}
+let yu1io = await getBuffer(bko.hd)
+			      conn.sendMessage(from, { caption: ` Success Download Video Facebook`, video: yu1io, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
+			       limitAdd(sender, limit)
 break
 case prefix+'igstory':{
 if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
@@ -524,7 +520,7 @@ case prefix+'twitter':{
   reply(mess.error.api)
   })
             if (media.filesize >= 100000) return reply('File Melebihi Batas ')
-            conn.send5ButLoc(from, `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${q}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '128kbps'}`, `© Z-Bot Whatsapp Multidevice`, `${media.thumb}`, butlink)
+            conn.send5ButLoc(from, `• Title : ${media.title}\n• File Size : ${media.filesizeF}\n• Url : ${q}\n• Ext : MP3\n• Resolusi : ${args[1] || '128kbps'}`, `•� Z-Bot Whatsapp Multidevice`, `${media.thumb}`, butlink)
             conn.sendMessage(from, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: msg })
 	        limitAdd(sender, limit)
              
@@ -539,7 +535,7 @@ case prefix+'twitter':{
   reply(mess.error.api)
   })
             if (media.filesize >= 100000) return reply('File Melebihi Batas')
-            conn.sendMessage(from, { caption: `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${q}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '480p'}`, video: { url: media.dl_link }, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} ).catch((err) => {
+            conn.sendMessage(from, { caption: `• Title : ${media.title}\n• File Size : ${media.filesizeF}\n• Url : ${q}\n• Ext : MP3\n• Resolusi : ${args[1] || '480p'}`, video: { url: media.dl_link }, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} ).catch((err) => {
   reply(mess.error.api)
   })
 	         limitAdd(sender, limit)
@@ -625,7 +621,6 @@ case prefix+'instagram':
 			    bocil.tiktokdlv3(`${q}`).then( data => {
 			      conn.sendMessage(from, { audio: { url: data.video.no_watermark }, mimetype: 'audio/mp4' }, { quoted: msg })
 			       limitAdd(sender, limit)
-                   
 				}).catch(() => reply(mess.error.api))
 		        break
 		case prefix+'tiktok':

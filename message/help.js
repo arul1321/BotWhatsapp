@@ -38,6 +38,7 @@ function toCommas(x) {
 	   x = x.replace(pattern, "$1,$2");
 	return x;
 }
+var p = 0
 var yui ='```'
 let timestamp = speed();
 let latensi = speed() - timestamp
@@ -60,68 +61,68 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
 🐯Limit : ${isOwner ? 'Infinity' : isPremium ? 'Unlimited' : getLimit(sender, limitCount, limit)}
 🐼Limit Game : ${isOwner ? 'Infinity' : cekGLimit(sender, gcount, glimit)}
 🐮Balance : $${toCommas(getBalance(sender, balance))}
-	
+	${readmore}
   *(🌹)  Main Menu*
-  1. ${yui}${prefix}menu${yui}
-  2. ${yui}${prefix}owner${yui}
-  3. ${yui}${prefix}speed${yui}
-  4. ${yui}${prefix}runtime${yui}
-  5. ${yui}${prefix}cekprem${yui}
-  6. ${yui}${prefix}listprem${yui}
-  7. ${yui}${prefix}topbalance${yui}
+  ${p+=1}. ${yui}${prefix}menu${yui}
+  ${p+=1}. ${yui}${prefix}owner${yui}
+  ${p+=1}. ${yui}${prefix}speed${yui}
+  ${p+=1}. ${yui}${prefix}runtime${yui}
+  ${p+=1}. ${yui}${prefix}cekprem${yui}
+  ${p+=1}. ${yui}${prefix}listprem${yui}
+  ${p+=1}. ${yui}${prefix}topbalance${yui}
 
   *(🍉)  Converter/Tools*
-  8. ${yui}${prefix}sticker${yui}
+  ${p+=1}. ${yui}${prefix}sticker${yui}
 
   *(🥝)  Downloader*
-  9.   ${yui}${prefix}tiktok link${yui} Ⓛ
-  10. ${yui}${prefix}tiktokaudio link${yui} Ⓛ
-  11. ${yui}${prefix}instagram link${yui} Ⓛ
-  12. ${yui}${prefix}stickertele link${yui} Ⓛ
-  13. ${yui}${prefix}mediafire link${yui} Ⓛ
-  14. ${yui}${prefix}ytmp3 link${yui} Ⓛ
-  15. ${yui}${prefix}ytmp4 link${yui} Ⓛ
-  16. ${yui}${prefix}gitclone link${yui} Ⓛ
-  17. ${yui}${prefix}facebook link${yui} Ⓛ
-  18. ${yui}${prefix}twitter link${yui} Ⓛ
-  19. ${yui}${prefix}igstory username${yui} Ⓛ
+  ${p+=1}. ${yui}${prefix}tiktok link${yui} Ⓛ
+  ${p+=1}. ${yui}${prefix}tiktokaudio link${yui} Ⓛ
+  ${p+=1}. ${yui}${prefix}instagram link${yui} Ⓛ
+  ${p+=1}. ${yui}${prefix}stickertele link${yui} Ⓛ
+  ${p+=1}. ${yui}${prefix}mediafire link${yui} Ⓛ
+  ${p+=1}. ${yui}${prefix}ytmp3 link${yui} Ⓛ
+  ${p+=1}. ${yui}${prefix}ytmp4 link${yui} Ⓛ
+  ${p+=1}. ${yui}${prefix}gitclone link${yui} Ⓛ
+  ${p+=1}. ${yui}${prefix}facebook link${yui} Ⓛ
+  ${p+=1}. ${yui}${prefix}twitter link${yui} Ⓛ
+  ${p+=1}. ${yui}${prefix}igstory username${yui} Ⓛ
   
   *(🔎)  Search Menu*
-  20. ${yui}${prefix}play${yui} 
-  21. ${yui}${prefix}lirik${yui} Ⓛ
-  22. ${yui}${prefix}grupwa${yui} Ⓛ
-  23. ${yui}${prefix}ytsearch${yui} Ⓛ
+  ${p+=1}. ${yui}${prefix}play${yui} 
+  ${p+=1}. ${yui}${prefix}lirik${yui} Ⓛ
+  ${p+=1}. ${yui}${prefix}grupwa${yui} Ⓛ
+  ${p+=1}. ${yui}${prefix}ytsearch${yui} Ⓛ
   
   *(🎮)  Game Menu*
-  24. ${yui}${prefix}tebakgambar${yui} Ⓛⓖ
+  ${p+=1}. ${yui}${prefix}tebakgambar${yui} Ⓛⓖ
   
   *(🏦)  Payment & Bank*
-  25. ${yui}${prefix}buylimit${yui}
-  26. ${yui}${prefix}buyglimit${yui}
-  27. ${yui}${prefix}transfer${yui}
-  28. ${yui}${prefix}limit${yui}
-  29. ${yui}${prefix}balance${yui}
+  ${p+=1}. ${yui}${prefix}buylimit${yui}
+  ${p+=1}. ${yui}${prefix}buyglimit${yui}
+  ${p+=1}. ${yui}${prefix}transfer${yui}
+  ${p+=1}. ${yui}${prefix}limit${yui}
+  ${p+=1}. ${yui}${prefix}balance${yui}
   
   *(👥)  Group Menu*
-  30. ${yui}${prefix}linkgrup${yui}
-  31. ${yui}${prefix}setppgrup${yui}
-  32. ${yui}${prefix}setnamegc${yui}
-  33. ${yui}${prefix}setdesc${yui}
-  34. ${yui}${prefix}group${yui}
-  35. ${yui}${prefix}revoke${yui}
-  36. ${yui}${prefix}hidetag${yui}
+  ${p+=1}. ${yui}${prefix}linkgrup${yui}
+  ${p+=1}. ${yui}${prefix}setppgrup${yui}
+  ${p+=1}. ${yui}${prefix}setnamegc${yui}
+  ${p+=1}. ${yui}${prefix}setdesc${yui}
+  ${p+=1}. ${yui}${prefix}group${yui}
+  ${p+=1}. ${yui}${prefix}revoke${yui}
+  ${p+=1}. ${yui}${prefix}hidetag${yui}
   
   *(🧑🏻‍💻)  Owner Menu*
-  37. ${yui}> evalcode${yui}
-  38. ${yui}x evalcode-2${yui}
-  39. ${yui}$ executor${yui}
-  40. ${yui}${prefix}join${yui}
-  41. ${yui}${prefix}broadcast${yui}
-  42. ${yui}${prefix}setppbot${yui}
-  43. ${yui}${prefix}leave${yui}
-  44. ${yui}${prefix}addprem${yui}
-  45. ${yui}${prefix}delprem${yui}
-  46. ${yui}${prefix}sendsession${yui}
+  ${p+=1}. ${yui}> evalcode${yui}
+  ${p+=1}. ${yui}x evalcode-2${yui}
+  ${p+=1}. ${yui}$ executor${yui}
+  ${p+=1}. ${yui}${prefix}join${yui}
+  ${p+=1}. ${yui}${prefix}broadcast${yui}
+  ${p+=1}. ${yui}${prefix}setppbot${yui}
+  ${p+=1}. ${yui}${prefix}leave${yui}
+  ${p+=1}. ${yui}${prefix}addprem${yui}
+  ${p+=1}. ${yui}${prefix}delprem${yui}
+  ${p+=1}. ${yui}${prefix}sendsession${yui}
 
 *──「 Simple Bot Whatsapp MD Beta 」──*
 `
