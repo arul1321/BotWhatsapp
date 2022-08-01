@@ -597,8 +597,8 @@ case prefix+'instagram':
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
   reply(mess.wait)
-  hxz.igdl(q).then(data => {
-  for (let i of data.medias) {
+  bocil.instagramdl(q).then(data => {
+  for (let i of data) {
   if (i.url.includes('mp4')) {
   conn.sendMessage(from, { caption: ` Succes Download Video Instagram, Thanks For Using zBot`, video:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
   } else {
