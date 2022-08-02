@@ -78,7 +78,8 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
   *(🥝)  Downloader*
   ${p+=1}. ${yui}${prefix}tiktok link${yui} Ⓛ
   ${p+=1}. ${yui}${prefix}tiktokaudio link${yui} Ⓛ
-  ${p+=1}. ${yui}${prefix}instagram link${yui} Ⓛ
+  ${p+=1}. ${yui}${prefix}igfoto link${yui} Ⓛ
+  ${p+=1}. ${yui}${prefix}igvideo link${yui} Ⓛ
   ${p+=1}. ${yui}${prefix}stickertele link${yui} Ⓛ
   ${p+=1}. ${yui}${prefix}mediafire link${yui} Ⓛ
   ${p+=1}. ${yui}${prefix}ytmp3 link${yui} Ⓛ

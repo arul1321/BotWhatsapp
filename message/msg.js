@@ -592,17 +592,47 @@ for (let i = 0; i < gas.result.stickers.length; i++) {
         limitAdd(sender, limit)
         
 break 
-case prefix+'instagram':
-  if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+case prefix+'igfoto':
+if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
   reply(mess.wait)
   bocil.instagramdl(q).then(data => {
   for (let i of data) {
-  if (i.url.includes('mp4')) {
-  conn.sendMessage(from, { caption: ` Succes Download Video Instagram, Thanks For Using zBot`, video:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
-  } else {
   conn.sendMessage(from, { caption: ` Succes Download Image Instagram, Thanks For Using zBot`, image:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
+  }
+  })
+  .catch((err) => {
+  reply(mess.error.api)
+  })
+  limitAdd(sender, limit)
+  break
+case prefix+'igvideo':
+if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
+			    if (!isUrl(args[1])) return reply(mess.error.Iv)
+  reply(mess.wait)
+  bocil.instagramdl(q).then(data => {
+  for (let i of data) {
+  conn.sendMessage(from, { caption: ` Succes Download Video Instagram, Thanks For Using zBot`, video:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
+  }
+  })
+  .catch((err) => {
+  reply(mess.error.api)
+  })
+  limitAdd(sender, limit)
+  break
+case prefix+'instagram':
+  if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
+			    if (!isUrl(args[1])) return reply(mess.error.Iv)
+  reply(mess.wait)
+  ra.instagramDown(q).then(data => {
+  for (let i of data.result) {
+  if (i.url.includes('mp4')) {
+  conn.sendMessage(from, { caption: ` Succes Download Video Instagram, Thanks For Using zBot`, video:{url:i.data}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
+  } else {
+  conn.sendMessage(from, { caption: ` Succes Download Image Instagram, Thanks For Using zBot`, image:{url:i.data}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
   }
   }
   })
