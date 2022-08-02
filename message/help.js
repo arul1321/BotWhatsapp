@@ -62,7 +62,7 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
 🐯Limit : ${isOwner ? 'Infinity' : isPremium ? 'Unlimited' : getLimit(sender, limitCount, limit)}
 🐼Limit Game : ${isOwner ? 'Infinity' : cekGLimit(sender, gcount, glimit)}
 🐮Balance : $${toCommas(getBalance(sender, balance))}
-	${readmore}
+
   *(🌹)  Main Menu*
   ${p+=1}. ${yui}${prefix}menu${yui}
   ${p+=1}. ${yui}${prefix}owner${yui}
@@ -90,7 +90,7 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
   ${p+=1}. ${yui}${prefix}facebook link${yui} Ⓛ
   ${p+=1}. ${yui}${prefix}twitter link${yui} Ⓛ
   ${p+=1}. ${yui}${prefix}igstory username${yui} Ⓛ
-  
+  ${readmore}
   *(🔎)  Search Menu*
   ${p+=1}. ${yui}${prefix}play${yui} 
   ${p+=1}. ${yui}${prefix}lirik${yui} Ⓛ
@@ -127,6 +127,86 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
   ${p+=1}. ${yui}${prefix}addprem${yui}
   ${p+=1}. ${yui}${prefix}delprem${yui}
   ${p+=1}. ${yui}${prefix}sendsession${yui}
+  
+  *(✏️)  Maker Menu*
+ ${p+=1}. ${yui}${prefix}papercut${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}transformer${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}neondevil${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}3dstone${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}3davengers${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}thunder${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}window${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}blackpink${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}glitch${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}3dneon${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}neon${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}greenneon${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}bokeh${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}hollographic${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}joker${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}dropwater${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}neonlight${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}thewall${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}natural${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}carbon${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}pencil${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}candy${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}christmas${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}3dchristmas${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}sparklechristmas${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}deepsea${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}scifi${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}rainbow${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}waterpipe${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}spooky${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}pencil${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}circuit${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}discovery${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}metalic${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}fiction${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}demon${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}transformer${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}berry${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}thunder${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}magma${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}3dstone${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}neonlight${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}glitch${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}harrypotter${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}brokenglass${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}papercut${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}watercolor${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}multicolor${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}neondevil${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}underwater${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}graffitibike${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}snow${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}cloud${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}honey${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}ice${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}fruitjuice${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}biscuit${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}wood${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}chocolate${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}strawberry${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}matrix${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}blood${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}dropwater${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}toxic${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}lava${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}rock${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}bloodglas${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}hallowen${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}darkgold${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}joker${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}wicker${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}firework${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}skeleton${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}blackpink${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}sand${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}glue${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}1917${yui} Ⓛ
+ ${p+=1}. ${yui}${prefix}leaves${yui} Ⓛ
 
 *──「 Simple Bot Whatsapp MD Beta 」──*
 `

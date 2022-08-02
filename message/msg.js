@@ -28,6 +28,7 @@ const speed = require("performance-now");
 const request = require("request");
 const ms = require("parse-ms");
 const thu = fs.readFileSync('./media/thumb.jpg')
+const maker = require('mumaker')
 // Exif
 const Exif = require("../lib/exif")
 const exif = new Exif()
@@ -271,10 +272,12 @@ var ucapanWaktu = 'Good morning🌉'
 		const isQuotedDocument = isQuotedMsg ? content.includes('documentMessage') ? true : false : false
 		const isQuotedVideo = isQuotedMsg ? content.includes('videoMessage') ? true : false : false
 		const isQuotedSticker = isQuotedMsg ? content.includes('stickerMessage') ? true : false : false
-
+     
 		// Auto Read & Presence Online
-		conn.sendReadReceipt(from, sender, [msg.key.id])
-		conn.sendPresenceUpdate('compossing', from)
+		if (msg.message) {
+        conn.sendPresenceUpdate('recording', from, sender, [msg.key.id])
+        conn.sendReadReceipt(from, sender, [msg.key.id])          
+        }
 		
 		// Auto Registrasi
 		if (isCmd && !isUser) {
@@ -418,6 +421,380 @@ conn.sendMessage(from, buttonMessage, {quoted: msg, ephemeralExpiration: 8889964
                 mentions(txt, men, true)
                 break
 	        // Converter & Tools Menu
+case prefix+'candy':
+case prefix+'christmas':
+case prefix+'3dchristmas':
+case prefix+'sparklechristmas':
+case prefix+'deepsea':
+case prefix+'scifi':
+case prefix+'rainbow':
+case prefix+'waterpipe':
+case prefix+'spooky':
+case prefix+'pencil':
+case prefix+'circuit':
+case prefix+'discovery':
+case prefix+'metalic':
+case prefix+'fiction':
+case prefix+'demon':
+case prefix+'transformer':
+case prefix+'berry':
+case prefix+'thunder':
+case prefix+'magma':
+case prefix+'3dstone':
+case prefix+'neonlight':
+case prefix+'glitch':
+case prefix+'harrypotter':
+case prefix+'brokenglass':
+case prefix+'papercut':
+case prefix+'watercolor':
+case prefix+'multicolor':
+case prefix+'neondevil':
+case prefix+'underwater':
+case prefix+'graffitibike':
+case prefix+'snow':
+case prefix+'cloud':
+case prefix+'honey':
+case prefix+'ice':
+case prefix+'fruitjuice':
+case prefix+'biscuit':
+case prefix+'wood':
+case prefix+'chocolate':
+case prefix+'strawberry':
+case prefix+'matrix':
+case prefix+'blood':
+case prefix+'dropwater':
+case prefix+'toxic':
+case prefix+'lava':
+case prefix+'rock':
+case prefix+'bloodglas':
+case prefix+'hallowen':
+case prefix+'darkgold':
+case prefix+'joker':
+case prefix+'wicker':
+case prefix+'firework':
+case prefix+'skeleton':
+case prefix+'blackpink':
+case prefix+'sand':
+case prefix+'glue':
+case prefix+'1917':
+case prefix+'leaves':{
+	if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
+	  reply(mess.wait)
+             	let link
+             	if (/candy/.test(command)) link = 'https://textpro.me/create-christmas-candy-cane-text-effect-1056.html'
+             	if (/christmas/.test(command)) link = 'https://textpro.me/christmas-tree-text-effect-online-free-1057.html'
+             	if (/3dchristmas/.test(command)) link = 'https://textpro.me/3d-christmas-text-effect-by-name-1055.html'
+             	if (/sparklechristmas/.test(command)) link = 'https://textpro.me/sparkles-merry-christmas-text-effect-1054.html'
+             	if (/deepsea/.test(command)) link = 'https://textpro.me/create-3d-deep-sea-metal-text-effect-online-1053.html'
+             	if (/scifi/.test(command)) link = 'https://textpro.me/create-3d-sci-fi-text-effect-online-1050.html'
+             	if (/rainbow/.test(command)) link = 'https://textpro.me/3d-rainbow-color-calligraphy-text-effect-1049.html'
+             	if (/waterpipe/.test(command)) link = 'https://textpro.me/create-3d-water-pipe-text-effects-online-1048.html'
+             	if (/spooky/.test(command)) link = 'https://textpro.me/create-halloween-skeleton-text-effect-online-1047.html'
+             	if (/pencil/.test(command)) link = 'https://textpro.me/create-a-sketch-text-effect-online-1044.html'
+             	if (/circuit/.test(command)) link = 'https://textpro.me/create-blue-circuit-style-text-effect-online-1043.html'
+             	if (/discovery/.test(command)) link = 'https://textpro.me/create-space-text-effects-online-free-1042.html'
+             	if (/metalic/.test(command)) link = 'https://textpro.me/creat-glossy-metalic-text-effect-free-online-1040.html'
+             	if (/fiction/.test(command)) link = 'https://textpro.me/create-science-fiction-text-effect-online-free-1038.html'
+             	if (/demon/.test(command)) link = 'https://textpro.me/create-green-horror-style-text-effect-online-1036.html'
+             	if (/transformer/.test(command)) link = 'https://textpro.me/create-a-transformer-text-effect-online-1035.html'
+             	if (/berry/.test(command)) link = 'https://textpro.me/create-berry-text-effect-online-free-1033.html'
+             	if (/thunder/.test(command)) link = 'https://textpro.me/online-thunder-text-effect-generator-1031.html'
+             	if (/magma/.test(command)) link = 'https://textpro.me/create-a-magma-hot-text-effect-online-1030.html'
+             	if (/3dstone/.test(command)) link = 'https://textpro.me/3d-stone-cracked-cool-text-effect-1029.html'
+             	if (/neonlight/.test(command)) link = 'https://textpro.me/create-3d-neon-light-text-effect-online-1028.html'
+             	if (/glitch/.test(command)) link = 'https://textpro.me/create-impressive-glitch-text-effects-online-1027.html'
+             	if (/harrypotter/.test(command)) link = 'https://textpro.me/create-harry-potter-text-effect-online-1025.html'
+             	if (/brokenglass/.test(command)) link = 'https://textpro.me/broken-glass-text-effect-free-online-1023.html'
+             	if (/papercut/.test(command)) link = 'https://textpro.me/create-art-paper-cut-text-effect-online-1022.html'
+             	if (/watercolor/.test(command)) link = 'https://textpro.me/create-a-free-online-watercolor-text-effect-1017.html'
+             	if (/multicolor/.test(command)) link = 'https://textpro.me/online-multicolor-3d-paper-cut-text-effect-1016.html'
+             	if (/neondevil/.test(command)) link = 'https://textpro.me/create-neon-devil-wings-text-effect-online-free-1014.html'
+             	if (/underwater/.test(command)) link = 'https://textpro.me/3d-underwater-text-effect-generator-online-1013.html'
+             	if (/graffitibike/.test(command)) link = 'https://textpro.me/create-wonderful-graffiti-art-text-effect-1011.html'
+             	if (/snow/.test(command)) link = 'https://textpro.me/create-snow-text-effects-for-winter-holidays-1005.html'
+             	if (/cloud/.test(command)) link = 'https://textpro.me/create-a-cloud-text-effect-on-the-sky-online-1004.html'
+             	if (/honey/.test(command)) link = 'https://textpro.me/honey-text-effect-868.html'
+             	if (/ice/.test(command)) link = 'https://textpro.me/ice-cold-text-effect-862.html'
+             	if (/fruitjuice/.test(command)) link = 'https://textpro.me/fruit-juice-text-effect-861.html'
+             	if (/biscuit/.test(command)) link = 'https://textpro.me/biscuit-text-effect-858.html'
+             	if (/wood/.test(command)) link = 'https://textpro.me/wood-text-effect-856.html'
+             	if (/chocolate/.test(command)) link = 'https://textpro.me/chocolate-cake-text-effect-890.html'
+             	if (/strawberry/.test(command)) link = 'https://textpro.me/strawberry-text-effect-online-889.html'
+             	if (/matrix/.test(command)) link = 'https://textpro.me/matrix-style-text-effect-online-884.html'
+             	if (/blood/.test(command)) link = 'https://textpro.me/horror-blood-text-effect-online-883.html'
+             	if (/dropwater/.test(command)) link = 'https://textpro.me/dropwater-text-effect-872.html'
+             	if (/toxic/.test(command)) link = 'https://textpro.me/toxic-text-effect-online-901.html'
+             	if (/lava/.test(command)) link = 'https://textpro.me/lava-text-effect-online-914.html'
+             	if (/rock/.test(command)) link = 'https://textpro.me/rock-text-effect-online-915.html'
+             	if (/bloodglas/.test(command)) link = 'https://textpro.me/blood-text-on-the-frosted-glass-941.html'
+             	if (/hallowen/.test(command)) link = 'https://textpro.me/halloween-fire-text-effect-940.html'
+             	if (/darkgold/.test(command)) link = 'https://textpro.me/metal-dark-gold-text-effect-online-939.html'
+             	if (/joker/.test(command)) link = 'https://textpro.me/create-logo-joker-online-934.html'
+             	if (/wicker/.test(command)) link = 'https://textpro.me/wicker-text-effect-online-932.html'
+             	if (/firework/.test(command)) link = 'https://textpro.me/firework-sparkle-text-effect-930.html'
+             	if (/skeleton/.test(command)) link = 'https://textpro.me/skeleton-text-effect-online-929.html'
+             	if (/blackpink/.test(command)) link = 'https://textpro.me/create-blackpink-logo-style-online-1001.html'
+             	if (/sand/.test(command)) link = 'https://textpro.me/write-in-sand-summer-beach-free-online-991.html'
+             	if (/glue/.test(command)) link = 'https://textpro.me/create-3d-glue-text-effect-with-realistic-style-986.html'
+             	if (/1917/.test(command)) link = 'https://textpro.me/1917-style-text-effect-online-980.html'
+                if (/leaves/.test(command)) link = 'https://textpro.me/natural-leaves-text-effect-931.html'
+             	let anu = await maker.textpro(link, q)
+                conn.sendMessage(from, { image: { url: anu }, caption: 'nih' }, { quoted: msg })
+                limitAdd(sender, limit)
+             }
+             break
+case prefix+'papercut':{
+	      if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
+	      reply(mess.wait)
+	limitAdd(sender, limit)
+	      maker.textpro("https://textpro.me/create-art-paper-cut-text-effect-online-1022.html", [
+`${q}`,])
+         .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
+         .catch((err) => console.log(err));
+            limitAdd(sender, limit)
+ }
+break
+case prefix+'transformer':{
+	      if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
+	      reply(mess.wait)
+	limitAdd(sender, limit)
+	      maker.textpro("https://textpro.me/create-a-transformer-text-effect-online-1035.html", [
+`${q}`,])
+.then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
+.catch((err) => console.log(err));
+   limitAdd(sender, limit)
+ }
+break
+case prefix+'neondevil':{
+	      if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
+	      reply(mess.wait)
+	limitAdd(sender, limit)
+	      maker.textpro("https://textpro.me/create-neon-devil-wings-text-effect-online-free-1014.html", [
+`${q}`,])
+         .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
+         .catch((err) => console.log(err));
+            limitAdd(sender, limit)
+ }
+break
+case prefix+'3dstone':{
+	if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
+	reply(mess.wait)
+	limitAdd(sender, limit)
+	maker.textpro("https://textpro.me/3d-stone-cracked-cool-text-effect-1029.html", [
+    `${q}`,])
+  .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
+  .catch((err) => console.log(err));
+      limitAdd(sender, limit)
+ }
+break
+case prefix+'3davengers':{
+	if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
+	reply(mess.wait)
+	limitAdd(sender, limit)
+	maker.textpro("https://textpro.me/create-3d-avengers-logo-online-974.html", [
+    `${q}`,])
+  .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
+  .catch((err) => console.log(err));
+      limitAdd(sender, limit)
+ }
+break
+case prefix+'thunder':{
+	if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
+	reply(mess.wait)
+	limitAdd(sender, limit)
+	maker.textpro("https://textpro.me/online-thunder-text-effect-generator-1031.html", [
+    `${q}`,])
+  .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
+  .catch((err) => console.log(err));
+      limitAdd(sender, limit)
+ }
+break
+case prefix+'window':{
+	if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
+	reply(mess.wait)
+	limitAdd(sender, limit)
+	maker.textpro("https://textpro.me/write-text-on-foggy-window-online-free-1015.html", [
+    `${q}`,])
+  .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
+  .catch((err) => console.log(err));
+      limitAdd(sender, limit)
+ }
+break
+case prefix+'blackpink':{
+	if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
+	reply(mess.wait)
+	limitAdd(sender, limit)
+	maker.textpro("https://textpro.me/create-blackpink-logo-style-online-1001.html", [
+    `${q}`,])
+  .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
+  .catch((err) => console.log(err));
+      limitAdd(sender, limit)
+ }
+break
+	case prefix+'glitch':{
+	if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
+	reply(mess.wait)
+	limitAdd(sender, limit)
+	maker.textpro("https://textpro.me/create-impressive-glitch-text-effects-online-1027.html", [
+    `${q}`,])
+  .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
+  .catch((err) => console.log(err));
+      limitAdd(sender, limit)
+ }
+break
+	case prefix+'3dneon':{
+	if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
+	reply(mess.wait)
+	limitAdd(sender, limit)
+	maker.textpro("https://textpro.me/create-3d-neon-light-text-effect-online-1028.html", [
+    `${q}`,])
+  .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
+  .catch((err) => console.log(err));
+      limitAdd(sender, limit)
+ }
+break
+	case prefix+'neon':{
+	if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
+	reply(mess.wait)
+	limitAdd(sender, limit)
+	maker.textpro("https://textpro.me/neon-text-effect-online-879.html", [
+    `${q}`,])
+  .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
+  .catch((err) => console.log(err));
+      limitAdd(sender, limit)
+ }
+break
+	case prefix+'greenneon':{
+	if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
+	reply(mess.wait)
+	limitAdd(sender, limit)
+	maker.textpro("https://textpro.me/green-neon-text-effect-874.html", [
+    `${q}`,])
+  .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
+  .catch((err) => console.log(err));
+      limitAdd(sender, limit)
+ }
+break
+  case prefix+'bokeh':{
+	if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
+	reply(mess.wait)
+	limitAdd(sender, limit)
+	maker.textpro("https://textpro.me/bokeh-text-effect-876.html", [
+    `${q}`,])
+  .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
+  .catch((err) => console.log(err));
+      limitAdd(sender, limit)
+ }
+break
+   case prefix+'hollographic':{
+	if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
+	reply(mess.wait)
+	limitAdd(sender, limit)
+	maker.textpro("https://textpro.me/holographic-3d-text-effect-975.html", [
+    `${q}`,])
+  .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
+  .catch((err) => console.log(err));
+      limitAdd(sender, limit)
+ }
+break
+	case prefix+'joker':{
+	if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
+	reply(mess.wait)
+	limitAdd(sender, limit)
+	maker.textpro("https://textpro.me/create-logo-joker-online-934.html", [
+    `${q}`,])
+  .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
+  .catch((err) => console.log(err));
+      limitAdd(sender, limit)
+ }
+break
+	case prefix+'dropwater':{
+	if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
+	reply(mess.wait)
+	limitAdd(sender, limit)
+	maker.textpro("https://textpro.me/dropwater-text-effect-872.html", [
+    `${q}`,])
+  .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
+  .catch((err) => console.log(err));
+      limitAdd(sender, limit)
+ }
+break
+	case prefix+'neonlight':{
+	if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
+	reply(mess.wait)
+	limitAdd(sender, limit)
+	maker.textpro("https://textpro.me/neon-light-text-effect-with-galaxy-style-981.html", [
+    `${q}`,])
+  .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
+  .catch((err) => console.log(err));
+      limitAdd(sender, limit)
+ }
+break
+	case prefix+'thewall':{
+	if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
+	reply(mess.wait)
+	limitAdd(sender, limit)
+	maker.textpro("https://textpro.me/break-wall-text-effect-871.html", [
+    `${text}`,])
+  .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
+  .catch((err) => console.log(err));
+  }
+   break
+	case prefix+'natural':{
+	if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
+	reply(mess.wait)
+	limitAdd(sender, limit)
+	maker.textpro("https://textpro.me/natural-leaves-text-effect-931.html", [
+    `${q}`,])
+  .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
+  .catch((err) => console.log(err));
+      limitAdd(sender, limit)
+ }
+break
+	case prefix+'carbon':{
+	if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
+	reply(mess.wait)
+	limitAdd(sender, limit)
+	maker.textpro("https://textpro.me/carbon-text-effect-833.html", [
+    `${q}`,])
+  .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
+  .catch((err) => console.log(err));
+      limitAdd(sender, limit)
+ }
+break
+case prefix+'pencil':{
+	if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
+	reply(mess.wait)
+	limitAdd(sender, limit)
+	maker.textpro("https://textpro.me/create-a-sketch-text-effect-online-1044.html", [
+    `${q}`,])
+  .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
+  .catch((err) => console.log(err));
+      limitAdd(sender, limit)
+ }
+break
 			case prefix+'sticker': case prefix+'stiker': case prefix+'s':
 				if (isImage || isQuotedImage) {
 		           var stream = await downloadContentFromMessage(msg.message.imageMessage || msg.message.extendedTextMessage?.contextInfo.quotedMessage.imageMessage, 'image')
@@ -661,12 +1038,12 @@ case prefix+'instagram':
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
   reply(mess.wait)
-  ra.instagramDown(q).then(data => {
-  for (let i of data.result) {
+  bocil.instagramdlv3(q).then(data => {
+  for (let i of data) {
   if (i.url.includes('mp4')) {
-  conn.sendMessage(from, { caption: ` Succes Download Video Instagram, Thanks For Using zBot`, video:{url:i.data}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
+  conn.sendMessage(from, { caption: ` Succes Download Video Instagram, Thanks For Using zBot`, video:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
   } else {
-  conn.sendMessage(from, { caption: ` Succes Download Image Instagram, Thanks For Using zBot`, image:{url:i.data}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
+  conn.sendMessage(from, { caption: ` Succes Download Image Instagram, Thanks For Using zBot`, image:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
   }
   }
   })
