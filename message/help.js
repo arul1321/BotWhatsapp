@@ -74,6 +74,8 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
 
   *(🍉)  Converter/Tools*
   ${p+=1}. ${yui}${prefix}sticker${yui}
+  ${p+=1}. ${yui}${prefix}toimg${yui}
+  ${p+=1}. ${yui}${prefix}emojimix 😀+😂${yui}
 
   *(🥝)  Downloader*
   ${p+=1}. ${yui}${prefix}tiktok link${yui} Ⓛ
