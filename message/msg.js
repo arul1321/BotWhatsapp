@@ -357,6 +357,17 @@ Melanggar ?  *Block*
 `
 conn.sendMessage(from, { text: rules, footer: `Z-Bot Multidevice`, templateButtons: btn, quoted:msg})
 			break
+			case prefix+'tyu':{
+			let resie = fs.readFileSync(`./media/l.jpg`)
+			let btn = [
+			{ quickReplyButton: { displayText: `🎶 Music`, id: `${prefix}ytmp3 ` } },
+			{ quickReplyButton: { displayText: `📽 Video`, id: `${prefix}ytmp4 ` } },
+			{ urlButton: { displayText: `Url Video`, url : `instagram.com` } },
+		]
+			anu = `tes`
+			conn.send5ButLoc(from, anu, `•� Z-Bot Whatsapp Multidevice`, resie, btn)
+			}
+			break
 			case prefix+'tes2':
 let bton = [
 			{ quickReplyButton: { displayText: `🎶 Music`, id: `${prefix}ytmp3 ` } },
@@ -398,7 +409,7 @@ conn.sendMessage(from, buttonMessage, {quoted: msg, ephemeralExpiration: 8889964
 			case prefix+'cekprem':
             case prefix+'cekpremium':
                 if (!isPremium) return reply(`Kamu bukan user premium, kirim perintah *${prefix}daftarprem* untuk membeli premium`)
-                if (isOwner) return reply(`Lu owner bego!`)
+                if (isOwner) return reply(`Lu owner bang!`)
                 if (_prem.getPremiumExpired(sender, premium) == "PERMANENT") return reply(`PERMANENT`)
                 let cekvip = ms(_prem.getPremiumExpired(sender, premium) - Date.now())
                 let premiumnya = `*Expire :* ${cekvip.days} day(s) ${cekvip.hours} hour(s) ${cekvip.minutes} minute(s)`
@@ -841,6 +852,7 @@ break
 			case prefix+'toimg': case prefix+'toimage':
 			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 			    if (!isQuotedSticker) return reply(`Reply stikernya!`)
+			   reply(mess.wait)
 			    var stream = await downloadContentFromMessage(msg.message.extendedTextMessage?.contextInfo.quotedMessage.stickerMessage, 'sticker')
 			    var buffer = Buffer.from([])
 			    for await(const chunk of stream) {
@@ -881,8 +893,12 @@ reply(mess.wait)
 let bko = await xfar.downloader.facebook(`${q}`).catch((err) => {
   reply(mess.error.api)
   })
-let yu1io = await getBuffer(bko.hd)
-			      conn.sendMessage(from, { caption: ` Success Download Video Facebook`, video: yu1io, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
+let yu1io = await getBuffer(bko.hd).catch((err) => {
+  reply(mess.error.api)
+  })
+			      conn.sendMessage(from, { caption: ` Success Download Video Facebook`, video: yu1io, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} ).catch((err) => {
+  reply(mess.error.api)
+  })
 			       limitAdd(sender, limit)
 break
 case prefix+'igstory':{
@@ -914,7 +930,9 @@ case prefix+'twitter':{
   })
 	        console.log(gut)
 	         reply(mess.wait)
-             let yuio = await getBuffer(gut.quality_720)
+             let yuio = await getBuffer(gut.quality_720).catch((err) => {
+  reply(mess.error.api)
+  })
 	        conn.sendMessage(from, { caption: ` Success Download Video Twitter`, video: yuio, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} ).catch((err) => {
   reply(mess.error.api)
   })
@@ -1401,9 +1419,6 @@ _Pilih Media Di Bawah Ini Untuk di Download_`
                 }
 				break
 			default:
-			if (!isGroup && isCmd) {
-				reply(`Command belum tersedia, coba beberapa hari kedepan yaa! _^`)
-			}
 		}
 	} catch (err) {
 		console.log(color('[ERROR]', 'red'), err)
