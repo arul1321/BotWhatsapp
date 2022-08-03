@@ -293,7 +293,7 @@ var ucapanWaktu = 'Good morning🌉'
 		cekWaktuGame(conn, tebakgambar)
 		if (isPlayGame(from, tebakgambar) && isUser) {
 		  if (chats.toLowerCase() == getJawabanGame(from, tebakgambar)) {
-		    var htgm = randomNomor(100, 150)
+		    var htgm = randomNomor(400, 500)
 			addBalance(sender, htgm, balance)
 		    reply(`*Selamat Jawaban Kamu Benar 🎉*\n\nJawaban : ${getJawabanGame(from, tebakgambar)}\nHadiah : ${htgm} balance\n\nIngin bermain lagi? ketik *${prefix}tebakgambar*`)
 		    tebakgambar.splice(getGamePosi(from, tebakgambar), 1)
@@ -357,7 +357,7 @@ Melanggar ?  *Block*
 `
 conn.sendMessage(from, { text: rules, footer: `Z-Bot Multidevice`, templateButtons: btn, quoted:msg})
 			break
-			case prefix+'tes':
+			case prefix+'tes2':
 let bton = [
 			{ quickReplyButton: { displayText: `🎶 Music`, id: `${prefix}ytmp3 ` } },
 			{ quickReplyButton: { displayText: `📽 Video`, id: `${prefix}ytmp4 ` } },
@@ -1348,11 +1348,11 @@ _Pilih Media Di Bawah Ini Untuk di Download_`
             }
                 break
             case prefix+'buylimit':{
-                if (args.length < 2) return reply(`Kirim perintah *${prefix}buylimit* jumlah limit yang ingin dibeli\n\nHarga 1 limit = $150 balance`)
+                if (args.length < 2) return reply(`Kirim perintah *${prefix}buylimit* jumlah limit yang ingin dibeli\n\nHarga 1 limit = $50 balance`)
                 if (args[1].includes('-')) return reply(`Jangan menggunakan -`)
                 if (isNaN(args[1])) return reply(`Harus berupa angka`)
                 if (args[1].toLowerCase() === 'infinity') return reply(`Yahaha saya ndak bisa di tipu`)
-                let ane = Number(parseInt(args[1]) * 150)
+                let ane = Number(parseInt(args[1]) * 50)
                 if (getBalance(sender, balance) < ane) return reply(`Balance kamu tidak mencukupi untuk pembelian ini`)
                 kurangBalance(sender, ane, balance)
                 giveLimit(sender, parseInt(args[1]), limit)
