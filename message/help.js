@@ -1,7 +1,6 @@
 const moment = require("moment-timezone");
 const fs = require("fs");
 const speed = require("performance-now");
-
 moment.tz.setDefault("Asia/Jakarta").locale("id");
 let dt = moment(Date.now()).tz('Asia/Jakarta').locale('id').format('a')
 const time = moment.tz('Asia/Jakarta').format('DD/MM HH:mm:ss')

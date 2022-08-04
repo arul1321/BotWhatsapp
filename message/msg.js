@@ -11,7 +11,6 @@ const { pinterest } = require("../lib/pinterest")
 const { isLimit, limitAdd, getLimit, giveLimit, addBalance, kurangBalance, getBalance, isGame, gameAdd, givegame, cekGLimit } = require("../lib/limit");
 const { addPlayGame, getJawabanGame, isPlayGame, cekWaktuGame, getGamePosi } = require("../lib/game");
 const _prem = require("../lib/premium");
-
 const fs = require ("fs");
 const moment = require("moment-timezone");
 const util = require("util");
@@ -295,7 +294,11 @@ var ucapanWaktu = 'Good morning🌉'
 		  if (chats.toLowerCase() == getJawabanGame(from, tebakgambar)) {
 		    var htgm = randomNomor(400, 500)
 			addBalance(sender, htgm, balance)
-		    reply(`*Selamat Jawaban Kamu Benar 🎉*\n\nJawaban : ${getJawabanGame(from, tebakgambar)}\nHadiah : ${htgm} balance\n\nIngin bermain lagi? ketik *${prefix}tebakgambar*`)
+		    var polo= `*Selamat Jawaban Kamu Benar 🎉*\n\nJawaban : ${getJawabanGame(from, tebakgambar)}\nHadiah : ${htgm} balance\n\nIngin bermain lagi? tekan tombol dibawah`
+		    const btn = [
+			{ quickReplyButton: { displayText: `• Tebak Gambar`, id: `${prefix}tebakgambar` } }
+		]
+		    conn.sendMessage(from, { text: polo, footer: `Z-Bot Multidevice`, templateButtons: btn, quoted:msg})
 		    tebakgambar.splice(getGamePosi(from, tebakgambar), 1)
 		  }
 		}
@@ -1249,7 +1252,7 @@ _Pilih Media Di Bawah Ini Untuk di Download_`
 				kotz.tebakgambar().then( data => {
 				  data = data[0]
 				  data.jawaban = data.jawaban.split('Jawaban ').join('')
-				  var teks = `*TEBAK GAMBAR*\n\n`+monospace(`Petunjuk : ${data.jawaban.replace(/[b|c|d|f|g|h|j|k|l|m|n|p|q|r|s|t|v|w|x|y|z]/gi, '_')}\nWaktu : ${gamewaktu}s`)
+				  var teks = `*TEBAK GAMBAR*\n\n`+monospace(`Petunjuk : ${data.jawaban.replace(/[b|c|d|f|g|h|j|k|l|m|n|p|q|r|s|t|v|w|x|y|z]/gi, '_')}\nWaktu : ${gamewaktu}s\n\nJawab Menggunakan Huruf Kecil Semua`)
 				  conn.sendMessage(from, { image: { url: data.image }, caption: teks }, { quoted: msg })
 				  .then( res => {
 					var jawab = data.jawaban.toLowerCase()
