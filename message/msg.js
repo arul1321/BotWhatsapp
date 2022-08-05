@@ -358,7 +358,7 @@ const getCase = (cases) => {
 return "case"+`'${cases}'`+fs.readFileSync("./message/msg.js").toString().split('case prefix+\''+cases+'\'')[1].split("break")[0]+"break"
 }
 reply(`${getCase(q)}`)
-addCmd(command, 1, dashboard)
+addCmd(command.slice(1), 1, dashboard)
 break
 			case prefix+'info':
 			const btn = [
@@ -372,62 +372,29 @@ break
 Melanggar ?  *Block*
 `
 conn.sendMessage(from, { text: rules, footer: `Z-Bot Multidevice`, templateButtons: btn, quoted:msg})
-addCmd(command, 1, dashboard)
-			break
-			case prefix+'tyu':{
-			let resie = fs.readFileSync(`./media/l.jpg`)
-			let btn = [
-			{ quickReplyButton: { displayText: `🎶 Music`, id: `${prefix}ytmp3 ` } },
-			{ quickReplyButton: { displayText: `📽 Video`, id: `${prefix}ytmp4 ` } },
-			{ urlButton: { displayText: `Url Video`, url : `instagram.com` } },
-		]
-			anu = `tes`
-			conn.send5ButLoc(from, anu, `•� Z-Bot Whatsapp Multidevice`, resie, btn)
-			}
-			break
-			case prefix+'tes2':
-let bton = [
-			{ quickReplyButton: { displayText: `🎶 Music`, id: `${prefix}ytmp3 ` } },
-			{ quickReplyButton: { displayText: `📽 Video`, id: `${prefix}ytmp4 ` } },
-			{ urlButton: { displayText: `Url Video`, url : `instagram.com` } },
-		]
-const buttonMessage = {
-                                document: { url: "https://wa.me/17608914335"},
-                                jpegThumbnail: fs.readFileSync(`./media/thumb.jpg`),
-                                mimetype: 'application/pdf',
-                                fileName: `${ucapanWaktu}`,
-                                fileLength: 887890909999999,
-                                pageCount: 1234567890123456789012345,
-                                caption: `tes`,
-                                footer: `tes`,
-                                templateButtons: bton,
-                                headerType: 1
-                            }
-conn.sendMessage(from, buttonMessage, {quoted: msg, ephemeralExpiration: 88899644, contextInfo: { forwardingScore: 99999, isForwarded: true }})
+addCmd(command.slice(1), 1, dashboard)
 			break
 			case prefix+'menu':
-			case prefix+'help':
 			    var teks = allmenu(speed, runtime, sender, prefix, pushname, isOwner, isPremium, balance, limit, limitCount, glimit, gcount, pendaftar)
 			    conn.sendMessage(from, { text: teks, footer: `Z-Bot Multidevice`, templateButtons: buttonsDefault, quoted:msg})
-			addCmd(command, 1, dashboard)
+			addCmd(command.slice(1), 1, dashboard)
 				break
 			case prefix+'runtime':
 			    reply(runtime(process.uptime()))
-			addCmd(command, 1, dashboard)
+			addCmd(command.slice(1), 1, dashboard)
 			    break
 			case prefix+'speed':
 			    let timestamp = speed();
                             let latensi = speed() - timestamp
                             textImg(`${latensi.toFixed(4)} Second`)
-                            addCmd(command, 1, dashboard)
+                            addCmd(command.slice(1), 1, dashboard)
 		            break
 			case prefix+'owner':
 			    for (let x of ownerNumber) {
 			      sendContact(from, x.split('@s.whatsapp.net')[0], 'Owner', msg)
 			    }
-			addCmd(command, 1, dashboard)
+			addCmd(command.slice(1), 1, dashboard)
 			    break
-			case prefix+'cekprem':
             case prefix+'cekpremium':
                 if (!isPremium) return reply(`Kamu bukan user premium, kirim perintah *${prefix}daftarprem* untuk membeli premium`)
                 if (isOwner) return reply(`Lu owner bang!`)
@@ -435,7 +402,7 @@ conn.sendMessage(from, buttonMessage, {quoted: msg, ephemeralExpiration: 8889964
                 let cekvip = ms(_prem.getPremiumExpired(sender, premium) - Date.now())
                 let premiumnya = `*Expire :* ${cekvip.days} day(s) ${cekvip.hours} hour(s) ${cekvip.minutes} minute(s)`
                 reply(premiumnya)
-                addCmd(command, 1, dashboard)
+                addCmd(command.slice(1), 1, dashboard)
                 break
             case prefix+'listprem':
                 let txt = `List Prem\nJumlah : ${premium.length}\n\n`
@@ -452,7 +419,7 @@ conn.sendMessage(from, buttonMessage, {quoted: msg, ephemeralExpiration: 8889964
                   }
                 }
                 mentions(txt, men, true)
-                addCmd(command, 1, dashboard)
+                addCmd(command.slice(1), 1, dashboard)
                 break
 	        // Converter & Tools Menu
 case prefix+'candy':
@@ -576,7 +543,7 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
              	let anu = await maker.textpro(link, q)
                 conn.sendMessage(from, { image: { url: anu }, caption: 'nih' }, { quoted: msg })
                 limitAdd(sender, limit)
-                addCmd(command, 1, dashboard)
+                addCmd(command.slice(1), 1, dashboard)
              }
              break
 case prefix+'papercut':{
@@ -589,7 +556,7 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
          .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
          .catch((err) => console.log(err));
             limitAdd(sender, limit)
-            addCmd(command, 1, dashboard)
+            addCmd(command.slice(1), 1, dashboard)
  }
 break
 case prefix+'transformer':{
@@ -601,7 +568,7 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
 .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
 .catch((err) => console.log(err));
    limitAdd(sender, limit)
-   addCmd(command, 1, dashboard)
+   addCmd(command.slice(1), 1, dashboard)
  }
 break
 case prefix+'neondevil':{
@@ -613,7 +580,7 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
          .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
          .catch((err) => console.log(err));
             limitAdd(sender, limit)
-            addCmd(command, 1, dashboard)
+            addCmd(command.slice(1), 1, dashboard)
  }
 break
 case prefix+'3dstone':{
@@ -625,7 +592,7 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
   .catch((err) => console.log(err));
       limitAdd(sender, limit)
-      addCmd(command, 1, dashboard)
+      addCmd(command.slice(1), 1, dashboard)
  }
 break
 case prefix+'3davengers':{
@@ -637,7 +604,7 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
   .catch((err) => console.log(err));
       limitAdd(sender, limit)
-      addCmd(command, 1, dashboard)
+      addCmd(command.slice(1), 1, dashboard)
  }
 break
 case prefix+'thunder':{
@@ -649,7 +616,7 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
   .catch((err) => console.log(err));
       limitAdd(sender, limit)
-      addCmd(command, 1, dashboard)
+      addCmd(command.slice(1), 1, dashboard)
  }
 break
 case prefix+'window':{
@@ -661,7 +628,7 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
   .catch((err) => console.log(err));
       limitAdd(sender, limit)
-      addCmd(command, 1, dashboard)
+      addCmd(command.slice(1), 1, dashboard)
  }
 break
 case prefix+'blackpink':{
@@ -673,7 +640,7 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
   .catch((err) => console.log(err));
       limitAdd(sender, limit)
-      addCmd(command, 1, dashboard)
+      addCmd(command.slice(1), 1, dashboard)
  }
 break
 	case prefix+'glitch':{
@@ -685,7 +652,7 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
   .catch((err) => console.log(err));
       limitAdd(sender, limit)
-      addCmd(command, 1, dashboard)
+      addCmd(command.slice(1), 1, dashboard)
  }
 break
 	case prefix+'3dneon':{
@@ -697,7 +664,7 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
   .catch((err) => console.log(err));
       limitAdd(sender, limit)
-      addCmd(command, 1, dashboard)
+      addCmd(command.slice(1), 1, dashboard)
  }
 break
 	case prefix+'neon':{
@@ -709,7 +676,7 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
   .catch((err) => console.log(err));
       limitAdd(sender, limit)
-      addCmd(command, 1, dashboard)
+      addCmd(command.slice(1), 1, dashboard)
  }
 break
 	case prefix+'greenneon':{
@@ -721,7 +688,7 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
   .catch((err) => console.log(err));
       limitAdd(sender, limit)
-      addCmd(command, 1, dashboard)
+      addCmd(command.slice(1), 1, dashboard)
  }
 break
   case prefix+'bokeh':{
@@ -733,7 +700,7 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
   .catch((err) => console.log(err));
       limitAdd(sender, limit)
-      addCmd(command, 1, dashboard)
+      addCmd(command.slice(1), 1, dashboard)
  }
 break
    case prefix+'hollographic':{
@@ -745,7 +712,7 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
   .catch((err) => console.log(err));
       limitAdd(sender, limit)
-      addCmd(command, 1, dashboard)
+      addCmd(command.slice(1), 1, dashboard)
  }
 break
 	case prefix+'joker':{
@@ -757,7 +724,7 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
   .catch((err) => console.log(err));
       limitAdd(sender, limit)
-      addCmd(command, 1, dashboard)
+      addCmd(command.slice(1), 1, dashboard)
  }
 break
 	case prefix+'dropwater':{
@@ -769,7 +736,7 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
   .catch((err) => console.log(err));
       limitAdd(sender, limit)
-      addCmd(command, 1, dashboard)
+      addCmd(command.slice(1), 1, dashboard)
  }
 break
 	case prefix+'neonlight':{
@@ -781,7 +748,7 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
   .catch((err) => console.log(err));
       limitAdd(sender, limit)
-      addCmd(command, 1, dashboard)
+      addCmd(command.slice(1), 1, dashboard)
  }
 break
 	case prefix+'thewall':{
@@ -789,7 +756,7 @@ break
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
 	reply(mess.wait)
 	limitAdd(sender, limit)
-	addCmd(command, 1, dashboard)
+	addCmd(command.slice(1), 1, dashboard)
 	maker.textpro("https://textpro.me/break-wall-text-effect-871.html", [
     `${text}`,])
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
@@ -805,7 +772,7 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
   .catch((err) => console.log(err));
       limitAdd(sender, limit)
-      addCmd(command, 1, dashboard)
+      addCmd(command.slice(1), 1, dashboard)
  }
 break
 	case prefix+'carbon':{
@@ -817,7 +784,7 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
   .catch((err) => console.log(err));
       limitAdd(sender, limit)
-      addCmd(command, 1, dashboard)
+      addCmd(command.slice(1), 1, dashboard)
  }
 break
 case prefix+'pencil':{
@@ -829,10 +796,10 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
   .catch((err) => console.log(err));
       limitAdd(sender, limit)
-      addCmd(command, 1, dashboard)
+      addCmd(command.slice(1), 1, dashboard)
  }
 break
-            case prefix+'emoji':case prefix+'semoji':{
+            case prefix+'semoji':{
        	if (args.length < 2) return reply(`Kirim perintah ${command} `)
 										let teks1 = await emoji.get(q)
 										let teks = await getBuffer(teks1.images[4].url)
@@ -849,10 +816,10 @@ break
 				.addOutputOptions(["-vcodec", "libwebp", "-vf", "scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse"])
 				.toFormat('webp')
 				.save(`${rand2}`)
-				addCmd(command, 1, dashboard)
+				addCmd(command.slice(1), 1, dashboard)
 									}
 									break
-			case prefix+'sticker': case prefix+'stiker': case prefix+'s':
+			case prefix+'sticker':
 				if (isImage || isQuotedImage) {
 		           var stream = await downloadContentFromMessage(msg.message.imageMessage || msg.message.extendedTextMessage?.contextInfo.quotedMessage.imageMessage, 'image')
 			       var buffer = Buffer.from([])
@@ -894,43 +861,15 @@ break
                 } else {
 			       reply(`Kirim gambar/vidio dengan caption ${command} atau balas gambar/vidio yang sudah dikirim\nNote : Maximal vidio 10 detik!`)
 			    }
-			addCmd(command, 1, dashboard)
+			addCmd(command.slice(1), 1, dashboard)
                 break
-			case prefix+'toimg': case prefix+'toimage':
-			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
-			    if (!isQuotedSticker) return reply(`Reply stikernya!`)
-			   reply(mess.wait)
-			    var stream = await downloadContentFromMessage(msg.message.extendedTextMessage?.contextInfo.quotedMessage.stickerMessage, 'sticker')
-			    var buffer = Buffer.from([])
-			    for await(const chunk of stream) {
-			       buffer = Buffer.concat([buffer, chunk])
-			    }
-			    var rand1 = 'sticker/'+getRandom('.webp')
-			    var rand2 = 'sticker/'+getRandom('.png')
-			    fs.writeFileSync(`./${rand1}`, buffer)
-			    if (isQuotedSticker && msg.message.extendedTextMessage.contextInfo.quotedMessage.stickerMessage.isAnimated !== true) {
-			    exec(`ffmpeg -i ./${rand1} ./${rand2}`, (err) => {
-			      fs.unlinkSync(`./${rand1}`)
-			      if (err) return reply(mess.error.api)
-			      conn.sendMessage(from, { image: fs.readFileSync(`./${rand2}`)}, { quoted: msg })
-			      limitAdd(sender, limit)
-				  fs.unlinkSync(`./${rand2}`)
-			    })
-			    } else {
-			    reply(mess.wait)
-			     let ykj = fs.readFileSync(`./${rand1}`)
-			     let webpToMp4 = await webp2mp4File(ykj)
-			       conn.sendMessage(from, { video: { url: webpToMp4.result }}, { quoted: msg })
-			addCmd(command, 1, dashboard)
-			    }
-			    break
 			case prefix+'emojimix': {
 		let [emoji1, emoji2] = q.split`+`
 		let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(emoji1)}_${encodeURIComponent(emoji2)}`)
 		for (let res of anu.results) {
 		    let encmedia = await conn.sendImageAsSticker(from, res.url, msg, { packname: packnamestick, author: authorstick, categories: res.tags })
 		    await fs.unlinkSync(encmedia)
-		addCmd(command, 1, dashboard)
+		addCmd(command.slice(1), 1, dashboard)
 		}
 	    }
 	    break
@@ -949,7 +888,7 @@ let yu1io = await getBuffer(bko.hd).catch((err) => {
   reply(mess.error.api)
   })
 			       limitAdd(sender, limit)
-			addCmd(command, 1, dashboard)
+			addCmd(command.slice(1), 1, dashboard)
 break
 case prefix+'igstory':{
 if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
@@ -970,7 +909,7 @@ for (let i of yjk.results) {
   }
   }
  limitAdd(sender, limit)
- addCmd(command, 1, dashboard)
+ addCmd(command.slice(1), 1, dashboard)
  }
 break
 case prefix+'twitter':{
@@ -988,7 +927,7 @@ case prefix+'twitter':{
   reply(mess.error.api)
   })
 	         limitAdd(sender, limit)
-             addCmd(command, 1, dashboard)
+             addCmd(command.slice(1), 1, dashboard)
 	}
 	        break
 	        case prefix+'ytmp3':{
@@ -1003,7 +942,7 @@ case prefix+'twitter':{
             conn.send5ButLoc(from, `• Title : ${media.title}\n• File Size : ${media.filesizeF}\n• Url : ${q}\n• Ext : MP3\n• Resolusi : ${args[1] || '128kbps'}`, `•� Z-Bot Whatsapp Multidevice`, `${media.thumb}`, butlink)
             conn.sendMessage(from, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: msg })
 	        limitAdd(sender, limit)
-             addCmd(command, 1, dashboard)
+             addCmd(command.slice(1), 1, dashboard)
 	}
 	        break
 	        case prefix+'ytmp4':{
@@ -1019,7 +958,7 @@ case prefix+'twitter':{
   reply(mess.error.api)
   })
 	         limitAdd(sender, limit)
-             addCmd(command, 1, dashboard)
+             addCmd(command.slice(1), 1, dashboard)
 }
 	        break
 	        case prefix+'mediafire':
@@ -1035,9 +974,9 @@ case prefix+'twitter':{
   reply(mess.error.api)
   })
 					limitAdd(sender, limit)
-                   addCmd(command, 1, dashboard)
+                   addCmd(command.slice(1), 1, dashboard)
 					break
-			case prefix+'gitdownload': case prefix+'gitclone':{
+		case prefix+'gitclone':{
 if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 reply(mess.wait) 
@@ -1050,10 +989,10 @@ reply(mess.wait)
   reply(mess.error.api)
   })
  limitAdd(sender, limit)
- addCmd(command, 1, dashboard)
+ addCmd(command.slice(1), 1, dashboard)
 }
 break
-	        case prefix+'sticktele': case prefix+'telesticker': case prefix+'telestick': case prefix+'stickertele':
+	        case prefix+'stickertele':
 if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 reply(mess.wait)
@@ -1070,7 +1009,7 @@ for (let i = 0; i < gas.result.stickers.length; i++) {
         let media = await getBuffer(stick)
         conn.sendImageAsSticker(from, media, msg, { packname: packnamestick, author: authorstick })}
         limitAdd(sender, limit)
-        addCmd(command, 1, dashboard)
+        addCmd(command.slice(1), 1, dashboard)
 break 
 case prefix+'igfoto':
 if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
@@ -1086,7 +1025,7 @@ if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit
   reply(mess.error.api)
   })
   limitAdd(sender, limit)
-  addCmd(command, 1, dashboard)
+  addCmd(command.slice(1), 1, dashboard)
   break
 case prefix+'igvideo':
 if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
@@ -1102,7 +1041,7 @@ if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit
   reply(mess.error.api)
   })
   limitAdd(sender, limit)
-  addCmd(command, 1, dashboard)
+  addCmd(command.slice(1), 1, dashboard)
   break
 case prefix+'instagram':
   if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
@@ -1122,7 +1061,7 @@ case prefix+'instagram':
   reply(mess.error.api)
   })
   limitAdd(sender, limit)
-  addCmd(command, 1, dashboard)
+  addCmd(command.slice(1), 1, dashboard)
   break 
 			case prefix+'tiktokaudio':
 			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
@@ -1133,7 +1072,7 @@ case prefix+'instagram':
 			    bocil.tiktokdlv3(`${q}`).then( data => {
 			      conn.sendMessage(from, { audio: { url: data.video.no_watermark }, mimetype: 'audio/mp4' }, { quoted: msg })
 			       limitAdd(sender, limit)
-			       addCmd(command, 1, dashboard)
+			       addCmd(command.slice(1), 1, dashboard)
 				}).catch(() => reply(mess.error.api))
 		        break
 		case prefix+'tiktok':
@@ -1150,7 +1089,7 @@ case prefix+'instagram':
 				]
 				conn.sendMessage(from, { caption: anutxt, video: {url: yut.video.no_watermark}, templateButtons: tidtod5, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
 			       limitAdd(sender, limit)
-                   addCmd(command, 1, dashboard)
+                   addCmd(command.slice(1), 1, dashboard)
 				}).catch(() => reply(mess.error.api))
 		        break
 			// Owner Menu
@@ -1159,14 +1098,14 @@ case prefix+'instagram':
  reply(mess.wait)
 let anuu = fs.readFileSync('./kon.json')
 conn.sendMessage(from, {document: anuu, mimetype: 'application/octet-stream', fileName: `kon.json`}, {quoted:msg})  
-addCmd(command, 1, dashboard)
+addCmd(command.slice(1), 1, dashboard)
 }
 break
 			case prefix+'leave':
 			    if (!isOwner) return reply(mess.OnlyOwner)
 				if (!isGroup) return reply(mess.OnlyGrup)
 				conn.groupLeave(from)
-				addCmd(command, 1, dashboard)
+				addCmd(command.slice(1), 1, dashboard)
 			    break
 			case prefix+'join':
 			    if (!isOwner) return reply(mess.OnlyOwner)
@@ -1176,9 +1115,9 @@ break
 			    url = url.split('https://chat.whatsapp.com/')[1]
 				var data = await conn.groupAcceptInvite(url)
 				reply(jsonformat(data))
-				addCmd(command, 1, dashboard)
+				addCmd(command.slice(1), 1, dashboard)
 				break
-                        case prefix+'bc': case prefix+'broadcast':
+                        case prefix+'bc':
 			    if (!isOwner) return reply(mess.OnlyOwner)
 		            if (args.length < 2) return reply(`Masukkan isi pesannya`)
                             var data = await store.chats.all()
@@ -1186,9 +1125,9 @@ break
                                conn.sendMessage(i.id, { text: `${q}` })
                                await sleep(1000)
                             }
-                            addCmd(command, 1, dashboard)
+                            addCmd(command.slice(1), 1, dashboard)
                             break
-			case prefix+'setpp': case prefix+'setppbot':
+			case prefix+'setppbot':
 		        if (!isOwner) return reply(mess.OnlyOwner)
 		        if (isImage || isQuotedImage) {
 				  var media = await downloadAndSaveMediaMessage('image', 'ppbot.jpeg')
@@ -1198,7 +1137,7 @@ break
 				} else {
 				  reply(`Kirim/balas gambar dengan caption ${command} untuk mengubah foto profil bot`)
 				}
-				addCmd(command, 1, dashboard)
+				addCmd(command.slice(1), 1, dashboard)
 				break
 			case prefix+'addprem':
                 if (!isOwner) return reply(mess.OnlyOwner)
@@ -1213,7 +1152,7 @@ break
                     _prem.addPremiumUser(args[1] + '@s.whatsapp.net', args[2], premium)
                     reply('Sukses')
                 }
-                addCmd(command, 1, dashboard)
+                addCmd(command.slice(1), 1, dashboard)
                 break
             case prefix+'delprem':
                 if (!isOwner) return reply(mess.OnlyOwner)
@@ -1229,10 +1168,10 @@ break
                     fs.writeFileSync('./database/premium.json', JSON.stringify(premium))
                     reply('Sukses!')
                 }
-                addCmd(command, 1, dashboard)
+                addCmd(command.slice(1), 1, dashboard)
                 break
 			// Search Menu
-			case prefix+'lirik': case 'liriklagu':
+			case prefix+'lirik':
 			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 				if (args.length < 2) return reply(`Kirim perintah ${command} judul lagu`)
 				reply(mess.wait)
@@ -1241,9 +1180,9 @@ break
 				  conn.sendMessage(from, { image: { url: data.result.thumb }, caption: teks }, { quoted: msg })
 				}).catch(() => reply(`Judul lagu tidak ditemukan`))
 				limitAdd(sender, limit)
-                  addCmd(command, 1, dashboard)
+                  addCmd(command.slice(1), 1, dashboard)
 				break
-			case prefix+'grupwa': case prefix+'searchgrup':
+			case prefix+'searchgrup':
 			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 				if (args.length < 2) return reply(`Kirim perintah ${command} nama grup`)
 				reply(mess.wait)
@@ -1255,10 +1194,10 @@ break
 				  }
 				  reply(teks)
 				  limitAdd(sender, limit)
-                  addCmd(command, 1, dashboard)
+                  addCmd(command.slice(1), 1, dashboard)
 				}).catch(() => reply(mess.error.api))
 			    break
-			case prefix+'play': case prefix+'song':{
+			case prefix+'play':{
 			if (args.length < 2) return reply(`Kirim perintah ${command} query`)
 			reply(mess.wait)
 			let yts = require("yt-search")
@@ -1275,10 +1214,10 @@ break
 🍑 Views : ${search.all[0].views}\n
 _Pilih Media Di Bawah Ini Untuk di Download_`
 			conn.send5ButLoc(from, anu, `© Z-Bot Whatsapp Multidevice`, `${search.all[0].thumbnail}`, btn)
-			addCmd(command, 1, dashboard)
+			addCmd(command.slice(1), 1, dashboard)
 			}
 			break
-			case prefix+'yts': case prefix+'ytsearch':
+			case prefix+'ytsearch':
 			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 			    if (args.length < 2) return reply(`Kirim perintah ${command} query`)
 				reply(mess.wait)
@@ -1301,7 +1240,7 @@ _Pilih Media Di Bawah Ini Untuk di Download_`
 				}
 				conn.sendMessage(from, { image: { url: yt[0].image }, caption: txt }, { quoted: msg })
 				limitAdd(sender, limit)
-                addCmd(command, 1, dashboard)
+                addCmd(command.slice(1), 1, dashboard)
 				}).catch(() => reply(mess.error.api))
 			    break
 			// Game Menu
@@ -1317,20 +1256,20 @@ _Pilih Media Di Bawah Ini Untuk di Download_`
 					var jawab = data.jawaban.toLowerCase()
 					addPlayGame(from, 'Tebak Gambar', jawab, gamewaktu, res, tebakgambar)
 					gameAdd(sender, glimit)
-					addCmd(command, 1, dashboard)
+					addCmd(command.slice(1), 1, dashboard)
 				  })
 				})
 			    break
 			// Group Menu
-			case prefix+'linkgrup': case prefix+'link': case prefix+'linkgc':
+			case prefix+'linkgc':
 			    if (!isGroup) return reply(mess.OnlyGrup)
 				if (!isBotGroupAdmins) return reply(mess.BotAdmin)
 				var url = await conn.groupInviteCode(from).catch(() => reply(mess.error.api))
 			    url = 'https://chat.whatsapp.com/'+url
 				reply(url)
-				addCmd(command, 1, dashboard)
+				addCmd(command.slice(1), 1, dashboard)
 				break
-			case prefix+'setppgrup': case prefix+'setppgc':
+			case prefix+'setppgrup':
 			    if (!isGroup) return reply(mess.OnlyGrup)
 				if (!isGroupAdmins) return reply(mess.GrupAdmin)
 				if (!isBotGroupAdmins) return reply(mess.BotAdmin)
@@ -1344,9 +1283,9 @@ _Pilih Media Di Bawah Ini Untuk di Download_`
 				} else {
 			      reply(`Kirim/balas gambar dengan caption ${command}`)
 				}
-				addCmd(command, 1, dashboard)
+				addCmd(command.slice(1), 1, dashboard)
 				break
-			case prefix+'setnamegrup': case prefix+'setnamegc':
+			case prefix+'setnamegrup':
 			    if (!isGroup) return reply(mess.OnlyGrup)
 				if (!isGroupAdmins) return reply(mess.GrupAdmin)
 				if (!isBotGroupAdmins) return reply(mess.BotAdmin)
@@ -1354,10 +1293,10 @@ _Pilih Media Di Bawah Ini Untuk di Download_`
 				await conn.groupUpdateSubject(from, q)
 			    .then( res => {
 				  reply(`Sukses`)
-				addCmd(command, 1, dashboard)
+				addCmd(command.slice(1), 1, dashboard)
 				}).catch(() => reply(mess.error.api))
 			    break
-			case prefix+'setdesc': case prefix+'setdescription':
+			case prefix+'setdescription':
 			    if (!isGroup) return reply(mess.OnlyGrup)
 				if (!isGroupAdmins) return reply(mess.GrupAdmin)
 				if (!isBotGroupAdmins) return reply(mess.BotAdmin)
@@ -1365,10 +1304,10 @@ _Pilih Media Di Bawah Ini Untuk di Download_`
 				await conn.groupUpdateDescription(from, q)
 			    .then( res => {
 			      reply(`Sukses`)
-			addCmd(command, 1, dashboard)
+			addCmd(command.slice(1), 1, dashboard)
 				}).catch(() => reply(mess.error.api))
 				break
-			case prefix+'group': case prefix+'grup':
+			case prefix+'group': 
 		        if (!isGroup) return reply(mess.OnlyGrup)
 				if (!isGroupAdmins) return reply(mess.GrupAdmin)
 				if (!isBotGroupAdmins) return reply(mess.BotAdmin)
@@ -1382,7 +1321,7 @@ _Pilih Media Di Bawah Ini Untuk di Download_`
 				} else {
 				  reply(`Kirim perintah ${command} _options_\nOptions : close & open\nContoh : ${command} close`)
 				}
-				addCmd(command, 1, dashboard)
+				addCmd(command.slice(1), 1, dashboard)
 			    break
 			case prefix+'revoke':
 			    if (!isGroup) return reply(mess.OnlyGrup)
@@ -1391,7 +1330,7 @@ _Pilih Media Di Bawah Ini Untuk di Download_`
 				await conn.groupRevokeInvite(from)
 			    .then( res => {
 				  reply(`Sukses menyetel tautan undangan grup ini`)
-				addCmd(command, 1, dashboard)
+				addCmd(command.slice(1), 1, dashboard)
 				}).catch(() => reply(mess.error.api))
 				break
 			case prefix+'hidetag':
@@ -1400,7 +1339,7 @@ _Pilih Media Di Bawah Ini Untuk di Download_`
 			    let mem = [];
 		        groupMembers.map( i => mem.push(i.id) )
 				conn.sendMessage(from, { text: q ? q : '', mentions: mem })
-				addCmd(command, 1, dashboard)
+				addCmd(command.slice(1), 1, dashboard)
 			    break
      
 			// Bank & Payment Menu
@@ -1414,21 +1353,25 @@ _Pilih Media Di Bawah Ini Untuk di Download_`
                     top += `${i + 1}. @${balance[i].id.split("@")[0]}\n=> Balance : $${balance[i].balance}\n\n`
                     arrTop.push(balance[i].id)
                 }
-                addCmd(command, 1, dashboard)
+                addCmd(command.slice(1), 1, dashboard)
                 mentions(top, arrTop, true)
             }
                 break
              case prefix+'dashboard':{
                 dashboard.sort((a, b) => (a.dashboard < b.dashboard) ? 1 : -1)
-                let top = '*── 「 Dashboard Z-Bot 」 ──*\n\n'
+                let top = '*── 「 Dashboard Z-Bot Multidevice 」 ──*\n\n'
                 let arrTop = []
 				var total = 10000
 				if (dashboard.length < 10000) total = dashboard.length
                 for (let i = 0; i < total; i ++){
-                    top += `=> Command : *${dashboard[i].id}*\n=> Total Hit : *${dashboard[i].total}* Kali\n\n`
+                    top += `🍓 Command : *${dashboard[i].id}*\n🥑 Telah Di Gunakan Sebanyak *${dashboard[i].total}* Kali\n\n`
                     arrTop.push(dashboard[i].id)
                 }
-                mentions(top, arrTop, true)
+                const btn = [
+			{ urlButton: { displayText: `Instagram`, url : `https://instagram.com/_daaa_1` } }
+		]
+conn.sendMessage(from, { text: top, footer: `Z-Bot Multidevice`, templateButtons: btn, quoted:msg})
+addCmd(command.slice(1), 1, dashboard)
             }
                 break
             case prefix+'buylimit':{
@@ -1440,12 +1383,11 @@ _Pilih Media Di Bawah Ini Untuk di Download_`
                 if (getBalance(sender, balance) < ane) return reply(`Balance kamu tidak mencukupi untuk pembelian ini`)
                 kurangBalance(sender, ane, balance)
                 giveLimit(sender, parseInt(args[1]), limit)
-                addCmd(command, 1, dashboard)
+                addCmd(command.slice(1), 1, dashboard)
                 reply(monospace(`Pembeliaan limit sebanyak ${args[1]} berhasil\n\nSisa Balance : $${getBalance(sender, balance)}\nSisa Limit : ${getLimit(sender, limitCount, limit)}/${limitCount}`))
             }
                 break
-			case prefix+'transfer':
-            case prefix+'tf':{
+			case prefix+'transfer':{
                  if (args.length < 2) return reply(`Kirim perintah *${command}* @tag nominal\nContoh : ${command} @0 2000`)
                  if (mentioned.length == 0) return reply(`Tag orang yang ingin di transfer balance`)
                  if (!args[2]) return reply(`Masukkan nominal nya!`)
@@ -1456,11 +1398,10 @@ _Pilih Media Di Bawah Ini Untuk di Download_`
                  if (anu < args[2] || anu == 'undefined') return reply(`Balance Kamu Tidak Mencukupi Untuk Transfer Sebesar $${args[2]}, Kumpulkan Terlebih Dahulu\nKetik ${prefix}balance, untuk mengecek Balance mu!`)
                  kurangBalance(sender, parseInt(args[2]), balance)
                  addBalance(mentioned[0], parseInt(args[2]), balance)
-                 addCmd(command, 1, dashboard)
+                 addCmd(command.slice(1), 1, dashboard)
                  reply(`Sukses transfer balance sebesar $${args[2]} kepada @${mentioned[0].split("@")[0]}`)
             }
                  break
-            case prefix+'buygamelimit':
             case prefix+'buyglimit':{
                 if (args.length < 2) return reply(`Kirim perintah *${prefix}buyglimit* jumlah game limit yang ingin dibeli\n\nHarga 1 game limit = $150 balance\nPajak $1 / $10`)
                 if (args[1].includes('-')) return reply(`Jangan menggunakan -`)
@@ -1470,12 +1411,12 @@ _Pilih Media Di Bawah Ini Untuk di Download_`
                 if (getBalance(sender, balance) < ane) return reply(`Balance kamu tidak mencukupi untuk pembelian ini`)
                 kurangBalance(sender, ane, balance)
                 givegame(sender, parseInt(args[1]), glimit)
-                addCmd(command, 1, dashboard)
+                addCmd(command.slice(1), 1, dashboard)
                 reply(monospace(`Pembeliaan game limit sebanyak ${args[1]} berhasil\n\nSisa Balance : $${getBalance(sender, balance)}\nSisa Game Limit : ${cekGLimit(sender, gcount, glimit)}/${gcount}`))
             }
                 break
-			case prefix+'limit': case prefix+'balance':
-			case prefix+'ceklimit': case prefix+'cekbalance':
+			case prefix+'limit': 
+			case prefix+'balance':
 			    if (mentioned.length !== 0){
 					var Ystatus = ownerNumber.includes(mentioned[0])
 					var isPrim = Ystatus ? true : _prem.checkPremiumUser(mentioned[0], premium)
@@ -1486,7 +1427,7 @@ _Pilih Media Di Bawah Ini Untuk di Download_`
                     var limitPrib = `${getLimit(sender, limitCount, limit)}/${limitCount}`
                     textImg(`Limit : ${isPremium ? 'Unlimited' : limitPrib}\nLimit Game : ${cekGLimit(sender, gcount, glimit)}/${gcount}\nBalance : $${getBalance(sender, balance)}\n\nKamu dapat membeli limit dengan ${prefix}buylimit dan ${prefix}buyglimit untuk membeli game limit`)
                 }
-                addCmd(command, 1, dashboard)
+                addCmd(command.slice(1), 1, dashboard)
 				break
 			default:
 		}

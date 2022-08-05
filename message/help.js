@@ -64,16 +64,16 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
   *(🌹)  Main Menu*
   ${p+=1}. ${yui}${prefix}menu${yui}
   ${p+=1}. ${yui}${prefix}owner${yui}
+  ${p+=1}. ${yui}${prefix}info${yui}
   ${p+=1}. ${yui}${prefix}speed${yui}
   ${p+=1}. ${yui}${prefix}runtime${yui}
-  ${p+=1}. ${yui}${prefix}cekprem${yui}
-  ${p+=1}. ${yui}${prefix}listprem${yui}
+  ${p+=1}. ${yui}${prefix}cekpremium${yui}
+  ${p+=1}. ${yui}${prefix}listpremium${yui}
   ${p+=1}. ${yui}${prefix}dashboard${yui}
   ${p+=1}. ${yui}${prefix}topbalance${yui}
 
   *(🍉)  Converter/Tools*
   ${p+=1}. ${yui}${prefix}sticker${yui}
-  ${p+=1}. ${yui}${prefix}toimg${yui}
   ${p+=1}. ${yui}${prefix}emojimix 😀+😂${yui}
   ${p+=1}. ${yui}${prefix}emoji 😂${yui}
 
@@ -94,7 +94,7 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
   *(🔎)  Search Menu*
   ${p+=1}. ${yui}${prefix}play${yui} 
   ${p+=1}. ${yui}${prefix}lirik${yui} Ⓛ
-  ${p+=1}. ${yui}${prefix}grupwa${yui} Ⓛ
+  ${p+=1}. ${yui}${prefix}searchgrup${yui} Ⓛ
   ${p+=1}. ${yui}${prefix}ytsearch${yui} Ⓛ
   
   *(🎮)  Game Menu*
@@ -110,8 +110,8 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
   *(👥)  Group Menu*
   ${p+=1}. ${yui}${prefix}linkgrup${yui}
   ${p+=1}. ${yui}${prefix}setppgrup${yui}
-  ${p+=1}. ${yui}${prefix}setnamegc${yui}
-  ${p+=1}. ${yui}${prefix}setdesc${yui}
+  ${p+=1}. ${yui}${prefix}setnamegroup${yui}
+  ${p+=1}. ${yui}${prefix}setdescription${yui}
   ${p+=1}. ${yui}${prefix}group${yui}
   ${p+=1}. ${yui}${prefix}revoke${yui}
   ${p+=1}. ${yui}${prefix}hidetag${yui}
@@ -121,7 +121,7 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
   ${p+=1}. ${yui}x evalcode-2${yui}
   ${p+=1}. ${yui}$ executor${yui}
   ${p+=1}. ${yui}${prefix}join${yui}
-  ${p+=1}. ${yui}${prefix}broadcast${yui}
+  ${p+=1}. ${yui}${prefix}bc${yui}
   ${p+=1}. ${yui}${prefix}setppbot${yui}
   ${p+=1}. ${yui}${prefix}leave${yui}
   ${p+=1}. ${yui}${prefix}addprem${yui}
