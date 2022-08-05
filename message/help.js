@@ -68,12 +68,14 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
   ${p+=1}. ${yui}${prefix}runtime${yui}
   ${p+=1}. ${yui}${prefix}cekprem${yui}
   ${p+=1}. ${yui}${prefix}listprem${yui}
+  ${p+=1}. ${yui}${prefix}dashboard${yui}
   ${p+=1}. ${yui}${prefix}topbalance${yui}
 
   *(🍉)  Converter/Tools*
   ${p+=1}. ${yui}${prefix}sticker${yui}
   ${p+=1}. ${yui}${prefix}toimg${yui}
   ${p+=1}. ${yui}${prefix}emojimix 😀+😂${yui}
+  ${p+=1}. ${yui}${prefix}emoji 😂${yui}
 
   *(🥝)  Downloader*
   ${p+=1}. ${yui}${prefix}tiktok link${yui} Ⓛ
@@ -125,6 +127,7 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
   ${p+=1}. ${yui}${prefix}addprem${yui}
   ${p+=1}. ${yui}${prefix}delprem${yui}
   ${p+=1}. ${yui}${prefix}sendsession${yui}
+  ${p+=1}. ${yui}${prefix}getcase${yui}
   
   *(✏️)  Maker Menu*
  ${p+=1}. ${yui}${prefix}papercut${yui} Ⓛ
