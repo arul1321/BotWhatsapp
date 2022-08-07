@@ -1071,7 +1071,8 @@ for (let i = 0; i < gas.result.stickers.length; i++) {
         let stick = "https://api.telegram.org/file/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/" + gasIn.result.file_path
         let media = await getBuffer(stick)
         sendWebp(from, stick)
-        //conn.sendImageAsSticker(from, media, msg, { packname: packnamestick, author: authorstick })}
+        //conn.sendImageAsSticker(from, media, msg, { packname: packnamestick, author: authorstick })
+}
         limitAdd(sender, limit)
 break 
 case prefix+'igfoto':
