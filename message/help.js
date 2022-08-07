@@ -74,8 +74,10 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
 
   *(🍉)  Converter/Tools*
   ${p+=1}. ${yui}${prefix}sticker${yui}
-  ${p+=1}. ${yui}${prefix}emojimix 😀+😂${yui}
-  ${p+=1}. ${yui}${prefix}emoji 😂${yui}
+  ${p+=1}. ${yui}${prefix}toimg${yui}Ⓛ
+  ${p+=1}. ${yui}${prefix}emojimix 😀+😂${yui}Ⓛ
+  ${p+=1}. ${yui}${prefix}emojimix2 😂${yui}Ⓛ
+  ${p+=1}. ${yui}${prefix}semoji 😂${yui}Ⓛ
 
   *(🥝)  Downloader*
   ${p+=1}. ${yui}${prefix}tiktok link${yui} Ⓛ
@@ -93,6 +95,7 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
   ${readmore}
   *(🔎)  Search Menu*
   ${p+=1}. ${yui}${prefix}play${yui} 
+  ${p+=1}. ${yui}${prefix}joox${yui} 
   ${p+=1}. ${yui}${prefix}lirik${yui} Ⓛ
   ${p+=1}. ${yui}${prefix}searchgrup${yui} Ⓛ
   ${p+=1}. ${yui}${prefix}ytsearch${yui} Ⓛ

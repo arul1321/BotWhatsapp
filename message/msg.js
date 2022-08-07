@@ -30,9 +30,9 @@ const request = require("request");
 const ms = require("parse-ms");
 const thu = fs.readFileSync('./media/thumb.jpg')
 const maker = require('mumaker')
-const { mediafiredl } = require('../lib/mediafiredl')
-const { EmojiAPI } = require("emoji-api");
-const emoji = new EmojiAPI()
+const { mediafiredl, joox, emoji } = require('../lib/mediafiredl')
+//const { EmojiAPI } = require("emoji-api");
+//const emoji = new EmojiAPI()
 // Exif
 const Exif = require("../lib/exif")
 const exif = new Exif()
@@ -769,58 +769,73 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
 	if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
 	reply(mess.wait)
+	addCmd(`#`+command.slice(1), 1, dashboard)
 	maker.textpro("https://textpro.me/natural-leaves-text-effect-931.html", [
     `${q}`,])
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
   .catch((err) => console.log(err));
       limitAdd(sender, limit)
-      addCmd(`#`+command.slice(1), 1, dashboard)
  }
 break
 	case prefix+'carbon':{
 	if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
 	reply(mess.wait)
+	addCmd(`#`+command.slice(1), 1, dashboard)
 	maker.textpro("https://textpro.me/carbon-text-effect-833.html", [
     `${q}`,])
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
   .catch((err) => console.log(err));
       limitAdd(sender, limit)
-      addCmd(`#`+command.slice(1), 1, dashboard)
  }
 break
 case prefix+'pencil':{
 	if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
 	reply(mess.wait)
+	addCmd(`#`+command.slice(1), 1, dashboard)
 	maker.textpro("https://textpro.me/create-a-sketch-text-effect-online-1044.html", [
     `${q}`,])
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
   .catch((err) => console.log(err));
       limitAdd(sender, limit)
-      addCmd(`#`+command.slice(1), 1, dashboard)
  }
 break
             case prefix+'semoji':{
+            if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
        	if (args.length < 2) return reply(`Kirim perintah ${command} `)
            addCmd(`#`+command.slice(1), 1, dashboard)
-										let teks1 = await emoji.get(q)
-										let teks = await getBuffer(teks1.images[4].url)
-				   var rand1 = 'sticker/'+getRandom('.png')
-			       var rand2 = 'sticker/'+getRandom('.webp')
-			       fs.writeFileSync(`./${rand1}`, teks)
-			       ffmpeg(`./${rand1}`)
-				.on("error", console.error)
-				.on("end", () => {
-				    conn.sendMessage(from, { sticker: fs.readFileSync(`./${rand2}`) }, { quoted: msg })
-					fs.unlinkSync(`./${rand1}`)
-			            fs.unlinkSync(`./${rand2}`)          
-				 })
-				.addOutputOptions(["-vcodec", "libwebp", "-vf", "scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse"])
-				.toFormat('webp')
-				.save(`${rand2}`)
+           reply(mess.wait)
+										let teks1 = await emoji(q)
+										console.log(teks1)
+										 let media = await getBuffer(teks1.whatsapp)
+        conn.sendImageAsSticker(from, media, msg, { packname: packnamestick, author: authorstick })
+        limitAdd(sender, limit)
 									}
 									break
+			case prefix+'toimg': case prefix+'toimage':
+			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+			    if (!isQuotedSticker) return reply(`Reply stikernya!`)
+			    addCmd(`#`+command.slice(1), 1, dashboard)
+			   reply(mess.wait)
+			    var stream = await downloadContentFromMessage(msg.message.extendedTextMessage?.contextInfo.quotedMessage.stickerMessage, 'sticker')
+			    var buffer = Buffer.from([])
+			    for await(const chunk of stream) {
+			       buffer = Buffer.concat([buffer, chunk])
+			    }
+			    var rand1 = 'sticker/'+getRandom('.webp')
+			    var rand2 = 'sticker/'+getRandom('.png')
+			    fs.writeFileSync(`./${rand1}`, buffer)
+			    if (isQuotedSticker) {
+			    exec(`ffmpeg -i ./${rand1} ./${rand2}`, (err) => {
+			      fs.unlinkSync(`./${rand1}`)
+			      if (err) return reply(mess.error.api)
+			      conn.sendMessage(from, { image: fs.readFileSync(`./${rand2}`)}, { quoted: msg })
+			      limitAdd(sender, limit)
+				  fs.unlinkSync(`./${rand2}`)
+			    })
+			    }
+			    break
 			case prefix+'sticker':
 			addCmd(`#`+command.slice(1), 1, dashboard)
 				if (isImage || isQuotedImage) {
@@ -864,14 +879,31 @@ break
                 } else {
 			       reply(`Kirim gambar/vidio dengan caption ${command} atau balas gambar/vidio yang sudah dikirim\nNote : Maximal vidio 10 detik!`)
 			    }
-                break
+			    break 
+			case prefix+'emojimix2': {
+if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+if (args.length < 2) return reply(`Kirim perintah ${command} link`)
+addCmd(`#`+command.slice(1), 1, dashboard)
+reply(mess.wait)
+let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(q)}`)
+for (let res of anu.results) {
+let encmedia = await conn.sendImageAsSticker(from, res.url, msg, { packname: packnamestick, author: authorstick, categories: res.tags })
+await fs.unlinkSync(encmedia)
+limitAdd(sender, limit)
+}
+}
+break
 			case prefix+'emojimix': {
+		if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+        if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 		addCmd(`#`+command.slice(1), 1, dashboard)
+		reply(mess.wait)
 		let [emoji1, emoji2] = q.split`+`
 		let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(emoji1)}_${encodeURIComponent(emoji2)}`)
 		for (let res of anu.results) {
 		    let encmedia = await conn.sendImageAsSticker(from, res.url, msg, { packname: packnamestick, author: authorstick, categories: res.tags })
 		    await fs.unlinkSync(encmedia)
+		limitAdd(sender, limit)
 		}
 	    }
 	    break
@@ -970,7 +1002,9 @@ case prefix+'twitter':{
 			    if (!args[1].includes('mediafire')) return reply(mess.error.Iv)
 			addCmd(`#`+command.slice(1), 1, dashboard)
 			    reply(mess.wait)
-			let rescun = await mediafiredl(q)
+			let rescun = await mediafiredl(q).catch((err) => {
+  reply(mess.error.api)
+  })
 let result = `
 *MediaFire Download*
 => Nama : ${rescun[0].nama}
@@ -1203,10 +1237,34 @@ break
                   addCmd(`#`+command.slice(1), 1, dashboard)
 				}).catch(() => reply(mess.error.api))
 			    break
+		case prefix+'joox':{
+		if (args.length < 2) return reply(`Kirim perintah ${command} query`)
+			reply(mess.wait)
+			addCmd(`#`+command.slice(1), 1, dashboard)
+	    joox(q).then(res => {
+        let joox = JSON.stringify(res)
+        let jjson = JSON.parse(joox)
+        let random = Math.floor(Math.random() * jjson.data.length)
+        let hasil = jjson.data[random]
+        let json = hasil
+        let pesan = `*Joox Play Downloader*
+*Author:* ${json.penyanyi}
+*Judul:* ${json.lagu}
+*Album:* ${json.album}
+*Diterbitkan:* ${json.publish}
+*Link:* ${json.mp3}
+*Made by* Z-Bot`
+reply(pesan)
+       // conn.sendFile(m.chat, json.img, 'error.jpg', pesan, m, false, { thumbnail: Buffer.alloc(0) })
+       conn.sendMessage(from, { audio: { url: `${json.mp3}` }, mimetype: 'audio/mpeg', fileName: `${json.lagu}` }, { quoted: msg })
+    })
+    }
+    break
 			case prefix+'play':{
 			if (args.length < 2) return reply(`Kirim perintah ${command} query`)
 			reply(mess.wait)
 			let yts = require("yt-search")
+			addCmd(`#`+command.slice(1), 1, dashboard)
             let search = await yts(`${q}`)
             const btn = [
 			{ quickReplyButton: { displayText: `🎶 Music`, id: `${prefix}ytmp3 ${search.all[0].url}` } },
@@ -1220,13 +1278,13 @@ break
 🍑 Views : ${search.all[0].views}\n
 _Pilih Media Di Bawah Ini Untuk di Download_`
 			conn.send5ButLoc(from, anu, `© Z-Bot Whatsapp Multidevice`, `${search.all[0].thumbnail}`, btn)
-			addCmd(`#`+command.slice(1), 1, dashboard)
 			}
 			break
 			case prefix+'ytsearch':
 			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 			    if (args.length < 2) return reply(`Kirim perintah ${command} query`)
 				reply(mess.wait)
+				addCmd(`#`+command.slice(1), 1, dashboard)
 			    yts(q).then( data => {
 				  let yt = data.videos
 				  var jumlah = 15
@@ -1246,13 +1304,13 @@ _Pilih Media Di Bawah Ini Untuk di Download_`
 				}
 				conn.sendMessage(from, { image: { url: yt[0].image }, caption: txt }, { quoted: msg })
 				limitAdd(sender, limit)
-                addCmd(`#`+command.slice(1), 1, dashboard)
 				}).catch(() => reply(mess.error.api))
 			    break
 			// Game Menu
 			case prefix+'tebakgambar':
 		        if (isGame(sender, isOwner, gcount, glimit)) return reply(`Limit game kamu sudah habis`)
 			    if (isPlayGame(from, tebakgambar)) return conn.reply(from, `Masih ada game yang belum diselesaikan`, tebakgambar[getGamePosi(from, tebakgambar)].msg)
+			    addCmd(`#`+command.slice(1), 1, dashboard)
 				kotz.tebakgambar().then( data => {
 				  data = data[0]
 				  data.jawaban = data.jawaban.split('Jawaban ').join('')
@@ -1262,7 +1320,6 @@ _Pilih Media Di Bawah Ini Untuk di Download_`
 					var jawab = data.jawaban.toLowerCase()
 					addPlayGame(from, 'Tebak Gambar', jawab, gamewaktu, res, tebakgambar)
 					gameAdd(sender, glimit)
-					addCmd(`#`+command.slice(1), 1, dashboard)
 				  })
 				})
 			    break
@@ -1368,10 +1425,11 @@ _Pilih Media Di Bawah Ini Untuk di Download_`
                 dashboard.sort((a, b) => (a.dashboard < b.dashboard) ? 1 : -1)
                 let top = '*── 「 Dashboard Z-Bot Multidevice 」 ──*\n\n'
                 let arrTop = []
+                var p = 0
 				var total = 10000
 				if (dashboard.length < 10000) total = dashboard.length
                 for (let i = 0; i < total; i ++){
-                    top += `🍓 Command : *${dashboard[i].id}*\n🥑 Telah Di Gunakan Sebanyak *${dashboard[i].total}* Kali\n\n`
+                    top += `${p+=1}. Command : *${dashboard[i].id}*\n🥑 Telah Di Gunakan Sebanyak *${dashboard[i].total}* Kali\n\n`
                     arrTop.push(dashboard[i].id)
                 }
                 const btn = [
