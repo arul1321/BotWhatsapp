@@ -36,7 +36,7 @@ let setting = JSON.parse(fs.readFileSync('./config.json'));
 let session = `./${setting.sessionName}.json`
 const { state, saveState } = useSingleFileAuthState(session)
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./message/exif')
-let welcome = JSON.parse(fs.readFileSync('./database/welcome.json'));
+const background = 'https://telegra.ph/file/8edef79b495d60fc6c8b7.jpg'
 
 function title() {
 console.clear()
@@ -109,7 +109,7 @@ browser: ["Z-Bot Multi Device", "Safari", "3.0"]
 		var msg = m.messages[0]
 		msg = serialize(conn, msg)
 		msg.isBaileys = msg.key.id.startsWith('BAE5') || msg.key.id.startsWith('3EB0')
-		require('./message/msg')(conn, msg, m, setting, store, welcome)
+		require('./message/msg')(conn, msg, m, setting, store)
 	})
 	conn.ev.on('connection.update', (update) => {
 		const { connection, lastDisconnect } = update
@@ -206,6 +206,43 @@ conn.reSize = async (image, width, height) => {
         await conn.sendMessage(from, { sticker: { url: buffer }, ...options }, { quoted })
         return buffer
     }
+    
+    conn.ev.on('group-participants.update', async (anu) => {
+        console.log(anu)
+        try {
+            let metadata = await conn.groupMetadata(anu.id)
+            let participants = anu.participants
+            let memeg = metadata.participants.length
+    let num = anu.participants[0]
+    let anu_user = `${num.split("@")[0]}`
+    let time_wel = moment.tz('Asia/Jakarta').format("HH:mm")
+            for (let num of participants) {
+                // Get Profile Picture User
+                try {
+                    var pp_user = await conn.profilePictureUrl(num, 'image')
+                } catch {
+                    var pp_user = 'https://tinyurl.com/yx93l6da'
+                }
+                let buffe = `http://hadi-api.herokuapp.com/api/card/goodbye?nama=${anu_user}&descriminator=${time_wel}&memcount=${memeg}&gcname=${encodeURI(metadata.subject)}&pp=${pp_user}&bg=${background}`
+                let buff = `http://hadi-api.herokuapp.com/api/card/welcome?nama=${anu_user}&descriminator=${time_wel}&memcount=${memeg}&gcname=${encodeURI(metadata.subject)}&pp=${pp_user}&bg=${background}`
+                if (anu.action == 'add') {
+                	const butt = [
+			{ urlButton: { displayText: `Nomor Member`, url : `http://wa.me/${anu_user}?text=Hai+Kak,+Welcome+Di+Group+ya,+Btw+Salken+Kak` } }
+		]
+                	conn.send5ButLoc(anu.id, `*Hallo Kak, Saya ZBot-Whatsapp*\n*Ketik #menu Untuk Melihat Commandnya*`, `Welcome by Z-Bot Whatsapp Multidevice`, `${buff}`, butt)
+                	//conn.sendMessage(anu.id, { image: buff})
+                } else if (anu.action == 'remove') {
+                	const butt = [
+			{ urlButton: { displayText: `Nomor Member`, url : `http://wa.me/${anu_user}?text=Hai+Kak,+Kok+Keluar+Dari+Grup,+Kenapa+?+😊` } }
+		]
+                	conn.send5ButLoc(anu.id, `*Yah Keluar :v*`, `Leave by Z-Bot Whatsapp Multidevice`, `${buffe}`, butt)
+                    //conn.sendMessage(anu.id, { image: buffe})
+                } 
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    })
     
 	conn.reply = (from, content, msg) => conn.sendMessage(from, { text: content }, { quoted: msg })
 
