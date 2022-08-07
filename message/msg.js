@@ -6,7 +6,7 @@ const {
 } = require("@adiwajshing/baileys")
 const { color, bgcolor } = require('../lib/color')
 const { getBuffer, fetchJson, fetchText, getRandom, getGroupAdmins, runtime, sleep, makeid } = require("../lib/myfunc");
-const { webp2mp4File } = require("../lib/convert")
+const { UploadFileUgu, webp2mp4File, TelegraPh } = require('../lib/convert.js')
 const { pinterest } = require("../lib/pinterest")
 const { isLimit, limitAdd, getLimit, giveLimit, addBalance, kurangBalance, getBalance, isGame, gameAdd, givegame, cekGLimit } = require("../lib/limit");
 const { addCmd, AddHituser} = require("../lib/hitbot.js");
@@ -261,6 +261,25 @@ var ucapanWaktu = 'Good morning🌉'
 			+ 'END:VCARD'
 			return conn.sendMessage(from, { contacts: { displayName: name, contacts: [{ vcard }] }, mentions : mn ? mn : []},{ quoted: quoted })
 		}
+		const sendWebp = async(from, url) => {
+                var names = Date.now() / 10000;
+                var download = function (uri, filename, callback) {
+                    request.head(uri, function (err, res, body) {
+                        request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+                    });
+                };
+                download(url, './temp' + names + '.png', async function () {
+                    console.log('selesai');
+                    let ajg = './temp' + names + '.png'
+                    let palak = './temp' + names + '.webp'
+                    exec(`ffmpeg -i ${ajg} -vcodec libwebp -filter:v fps=fps=20 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 512:512 ${palak}`, (err) => {
+                        let media = fs.readFileSync(palak)
+                        conn.sendMessage(from, { sticker: media }, { quoted: msg })
+                        fs.unlinkSync(ajg)
+                        fs.unlinkSync(palak)
+                    });
+                });
+            }
 		
 		const buttonsDefault = [
 			{ callButton: { displayText: `Call Owner!`, phoneNumber: `+6281578859076` } },
@@ -801,15 +820,15 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
       limitAdd(sender, limit)
  }
 break
-            case prefix+'semoji':{
+          case prefix+'emoji': case prefix+'semoji':{
             if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
        	if (args.length < 2) return reply(`Kirim perintah ${command} `)
            addCmd(`#`+command.slice(1), 1, dashboard)
            reply(mess.wait)
 										let teks1 = await emoji(q)
 										console.log(teks1)
-										 let media = await getBuffer(teks1.whatsapp)
-        conn.sendImageAsSticker(from, media, msg, { packname: packnamestick, author: authorstick })
+										 let media = `${teks1.whatsapp}`
+										sendWebp(from, media)
         limitAdd(sender, limit)
 									}
 									break
@@ -836,6 +855,9 @@ break
 			    })
 			    }
 			    break
+			case prefix+'stickerurl':
+			sendWebp(from, q)
+			break
 			case prefix+'sticker':
 			addCmd(`#`+command.slice(1), 1, dashboard)
 				if (isImage || isQuotedImage) {
@@ -850,7 +872,7 @@ break
 			       ffmpeg(`./${rand1}`)
 				.on("error", console.error)
 				.on("end", () => {
-				    conn.sendMessage(from, { sticker: fs.readFileSync(`./${rand2}`) }, { quoted: msg })
+				   conn.sendMessage(from, { sticker: fs.readFileSync(`./${rand2}`) }, { quoted: msg })
 					fs.unlinkSync(`./${rand1}`)
 			            fs.unlinkSync(`./${rand2}`)          
 				 })
@@ -1048,7 +1070,8 @@ for (let i = 0; i < gas.result.stickers.length; i++) {
         let gasIn = await fetchJson(`https://api.telegram.org/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/getFile?file_id=${fileId}`)
         let stick = "https://api.telegram.org/file/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/" + gasIn.result.file_path
         let media = await getBuffer(stick)
-        conn.sendImageAsSticker(from, media, msg, { packname: packnamestick, author: authorstick })}
+        sendWebp(from, stick)
+        //conn.sendImageAsSticker(from, media, msg, { packname: packnamestick, author: authorstick })}
         limitAdd(sender, limit)
 break 
 case prefix+'igfoto':
