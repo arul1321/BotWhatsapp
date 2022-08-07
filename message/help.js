@@ -74,7 +74,10 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
 
   *(🍉)  Converter/Tools*
   ${p+=1}. ${yui}${prefix}sticker${yui}
+  ${p+=1}. ${yui}${prefix}smeme${yui}Ⓛ
+  ${p+=1}. ${yui}${prefix}smeme2 teks|teks${yui}Ⓛ
   ${p+=1}. ${yui}${prefix}toimg${yui}Ⓛ
+  ${p+=1}. ${yui}${prefix}swm${yui}Ⓛ
   ${p+=1}. ${yui}${prefix}emojimix 😀+😂${yui}Ⓛ
   ${p+=1}. ${yui}${prefix}emojimix2 😂${yui}Ⓛ
   ${p+=1}. ${yui}${prefix}semoji 😂${yui}Ⓛ

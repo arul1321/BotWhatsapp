@@ -6,7 +6,7 @@ const {
 } = require("@adiwajshing/baileys")
 const { color, bgcolor } = require('../lib/color')
 const { getBuffer, fetchJson, fetchText, getRandom, getGroupAdmins, runtime, sleep, makeid } = require("../lib/myfunc");
-const { UploadFileUgu, webp2mp4File, TelegraPh } = require('../lib/convert.js')
+const { floNime, toAudio } = require('../lib/convert.js')
 const { pinterest } = require("../lib/pinterest")
 const { isLimit, limitAdd, getLimit, giveLimit, addBalance, kurangBalance, getBalance, isGame, gameAdd, givegame, cekGLimit } = require("../lib/limit");
 const { addCmd, AddHituser} = require("../lib/hitbot.js");
@@ -30,9 +30,9 @@ const request = require("request");
 const ms = require("parse-ms");
 const thu = fs.readFileSync('./media/thumb.jpg')
 const maker = require('mumaker')
-const { mediafiredl, joox, emoji } = require('../lib/mediafiredl')
-//const { EmojiAPI } = require("emoji-api");
-//const emoji = new EmojiAPI()
+const { mediafiredl } = require('../lib/mediafiredl')
+const { EmojiAPI } = require("emoji-api");
+const emoji = new EmojiAPI()
 // Exif
 const Exif = require("../lib/exif")
 const exif = new Exif()
@@ -823,19 +823,92 @@ break
           case prefix+'emoji': case prefix+'semoji':{
             if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
        	if (args.length < 2) return reply(`Kirim perintah ${command} `)
-           addCmd(`#`+command.slice(1), 1, dashboard)
+           addCmd(`#`+`semoji`, 1, dashboard)
            reply(mess.wait)
-										let teks1 = await emoji(q)
-										console.log(teks1)
-										 let media = `${teks1.whatsapp}`
-										sendWebp(from, media)
+										emoji.get(`${q}`).then(emoji => {
+										let teks = `${emoji.images[4].url}`
+										sendWebp(from, teks)
+									}).catch((err) => {
+  reply(`Mohon Maaf Emoji ${q} Belum Tersedia di Emoji-Api\nCoba Lagi Dalam Beberapa Hari Kedepan`)
+  })
         limitAdd(sender, limit)
 									}
 									break
+			case prefix+'smeme':
+			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+			    if (!isQuotedSticker) return reply(`Reply stikernya!`)
+			    if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
+			    addCmd(`#`+`smeme`, 1, dashboard)
+			    //const imgbb = require('imgbb-uploader')
+			    var stream = await downloadContentFromMessage(msg.message.extendedTextMessage?.contextInfo.quotedMessage.stickerMessage, 'sticker')
+			    var buffer = Buffer.from([])
+			    for await(const chunk of stream) {
+			       buffer = Buffer.concat([buffer, chunk])
+			    }
+			      let qbc = await floNime(buffer)
+			      let back = `${qbc.result.url}`
+			      let [emoji1, emoji2] = q.split`|`
+			      let smeme = `https://api.memegen.link/images/custom/${encodeURIComponent(` `)}/${encodeURIComponent(emoji1)}.png?background=${back}`
+	              sendWebp(from, smeme).catch((err) => {
+  reply(mess.error.api)
+  })
+			      //conn.sendImageAsSticker(from, sft, msg, { packname: emoji1, author: emoji2})
+			      //conn.sendMessage(from, { image: fs.readFileSync(`./${rand2}`)}, { quoted: msg })
+			      limitAdd(sender, limit)
+			break
+			case prefix+'smeme2':{
+			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+			    if (!isQuotedSticker) return reply(`Reply stikernya!`)
+			    if (args.length < 2) return reply(`Kirim perintah ${command} Teks|Teks`)
+			    addCmd(`#`+`smeme2`, 1, dashboard)
+			    //const imgbb = require('imgbb-uploader')
+			    var stream = await downloadContentFromMessage(msg.message.extendedTextMessage?.contextInfo.quotedMessage.stickerMessage, 'sticker')
+			    var buffer = Buffer.from([])
+			    for await(const chunk of stream) {
+			       buffer = Buffer.concat([buffer, chunk])
+			    }
+			      let qbc = await floNime(buffer)
+			      let back = `${qbc.result.url}`
+			      let [emoji1, emoji2] = q.split`|`
+			      let smeme = `https://api.memegen.link/images/custom/${encodeURIComponent(emoji1)}/${encodeURIComponent(emoji2)}.png?background=${back}`
+	              sendWebp(from, smeme).catch((err) => {
+  reply(mess.error.api)
+  })
+			      //conn.sendImageAsSticker(from, sft, msg, { packname: emoji1, author: emoji2})
+			      //conn.sendMessage(from, { image: fs.readFileSync(`./${rand2}`)}, { quoted: msg })
+			      limitAdd(sender, limit)
+			}
+			break
+			case prefix+'wm': case prefix+'swm':
+			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+			    if (!isQuotedSticker) return reply(`Reply stikernya!`)
+			    if (args.length < 2) return reply(`Kirim perintah ${command} packname|author`)
+			    addCmd(`#`+`swm`, 1, dashboard)
+			     var stream = await downloadContentFromMessage(msg.message.extendedTextMessage?.contextInfo.quotedMessage.stickerMessage, 'sticker')
+			    var buffer = Buffer.from([])
+			    for await(const chunk of stream) {
+			       buffer = Buffer.concat([buffer, chunk])
+			    }
+			    var rand1 = 'sticker/'+getRandom('.webp')
+			    var rand2 = 'sticker/'+getRandom('.png')
+			    fs.writeFileSync(`./${rand1}`, buffer)
+			    if (isQuotedSticker) {
+			    exec(`ffmpeg -i ./${rand1} ./${rand2}`, (err) => {
+			      fs.unlinkSync(`./${rand1}`)
+			      if (err) return reply(mess.error.api)
+			      let sft = fs.readFileSync(`./${rand2}`)
+			      let [emoji1, emoji2] = q.split`|`
+			      conn.sendImageAsSticker(from, sft, msg, { packname: emoji1, author: emoji2})
+			      //conn.sendMessage(from, { image: fs.readFileSync(`./${rand2}`)}, { quoted: msg })
+			      limitAdd(sender, limit)
+				  fs.unlinkSync(`./${rand2}`)
+			    })
+			    }
+			break
 			case prefix+'toimg': case prefix+'toimage':
 			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 			    if (!isQuotedSticker) return reply(`Reply stikernya!`)
-			    addCmd(`#`+command.slice(1), 1, dashboard)
+			    addCmd(`#`+`toimg`, 1, dashboard)
 			   reply(mess.wait)
 			    var stream = await downloadContentFromMessage(msg.message.extendedTextMessage?.contextInfo.quotedMessage.stickerMessage, 'sticker')
 			    var buffer = Buffer.from([])
@@ -858,8 +931,8 @@ break
 			case prefix+'stickerurl':
 			sendWebp(from, q)
 			break
-			case prefix+'sticker':
-			addCmd(`#`+command.slice(1), 1, dashboard)
+			case prefix+'s': case prefix+'sticker':
+			addCmd(`#`+`sticker`, 1, dashboard)
 				if (isImage || isQuotedImage) {
 		           var stream = await downloadContentFromMessage(msg.message.imageMessage || msg.message.extendedTextMessage?.contextInfo.quotedMessage.imageMessage, 'image')
 			       var buffer = Buffer.from([])
@@ -907,7 +980,9 @@ if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit 
 if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 addCmd(`#`+command.slice(1), 1, dashboard)
 reply(mess.wait)
-let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(q)}`)
+let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(q)}`).catch((err) => {
+  reply(mess.error.api)
+  })
 for (let res of anu.results) {
 let encmedia = await conn.sendImageAsSticker(from, res.url, msg, { packname: packnamestick, author: authorstick, categories: res.tags })
 await fs.unlinkSync(encmedia)
@@ -921,7 +996,9 @@ break
 		addCmd(`#`+command.slice(1), 1, dashboard)
 		reply(mess.wait)
 		let [emoji1, emoji2] = q.split`+`
-		let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(emoji1)}_${encodeURIComponent(emoji2)}`)
+		let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(emoji1)}_${encodeURIComponent(emoji2)}`).catch((err) => {
+  reply(mess.error.api)
+  })
 		for (let res of anu.results) {
 		    let encmedia = await conn.sendImageAsSticker(from, res.url, msg, { packname: packnamestick, author: authorstick, categories: res.tags })
 		    await fs.unlinkSync(encmedia)
