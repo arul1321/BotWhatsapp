@@ -95,7 +95,6 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
   ${readmore}
   *(🔎)  Search Menu*
   ${p+=1}. ${yui}${prefix}play${yui} 
-  ${p+=1}. ${yui}${prefix}joox${yui} 
   ${p+=1}. ${yui}${prefix}lirik${yui} Ⓛ
   ${p+=1}. ${yui}${prefix}searchgrup${yui} Ⓛ
   ${p+=1}. ${yui}${prefix}ytsearch${yui} Ⓛ

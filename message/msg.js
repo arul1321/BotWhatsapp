@@ -1237,29 +1237,6 @@ break
                   addCmd(`#`+command.slice(1), 1, dashboard)
 				}).catch(() => reply(mess.error.api))
 			    break
-		case prefix+'joox':{
-		if (args.length < 2) return reply(`Kirim perintah ${command} query`)
-			reply(mess.wait)
-			addCmd(`#`+command.slice(1), 1, dashboard)
-	    joox(q).then(res => {
-        let joox = JSON.stringify(res)
-        let jjson = JSON.parse(joox)
-        let random = Math.floor(Math.random() * jjson.data.length)
-        let hasil = jjson.data[random]
-        let json = hasil
-        let pesan = `*Joox Play Downloader*
-*Author:* ${json.penyanyi}
-*Judul:* ${json.lagu}
-*Album:* ${json.album}
-*Diterbitkan:* ${json.publish}
-*Link:* ${json.mp3}
-*Made by* Z-Bot`
-reply(pesan)
-       // conn.sendFile(m.chat, json.img, 'error.jpg', pesan, m, false, { thumbnail: Buffer.alloc(0) })
-       conn.sendMessage(from, { audio: { url: `${json.mp3}` }, mimetype: 'audio/mpeg', fileName: `${json.lagu}` }, { quoted: msg })
-    })
-    }
-    break
 			case prefix+'play':{
 			if (args.length < 2) return reply(`Kirim perintah ${command} query`)
 			reply(mess.wait)
