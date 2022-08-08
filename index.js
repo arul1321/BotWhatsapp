@@ -223,19 +223,62 @@ conn.reSize = async (image, width, height) => {
                 } catch {
                     var pp_user = 'https://tinyurl.com/yx93l6da'
                 }
-                let buffe = `http://hadi-api.herokuapp.com/api/card/goodbye?nama=${anu_user}&descriminator=${time_wel}&memcount=${memeg}&gcname=${encodeURI(metadata.subject)}&pp=${pp_user}&bg=${background}`
-                let buff = `http://hadi-api.herokuapp.com/api/card/welcome?nama=${anu_user}&descriminator=${time_wel}&memcount=${memeg}&gcname=${encodeURI(metadata.subject)}&pp=${pp_user}&bg=${background}`
+                let buffe = await getBuffer(`http://hadi-api.herokuapp.com/api/card/goodbye?nama=${anu_user}&descriminator=${time_wel}&memcount=${memeg}&gcname=${encodeURI(metadata.subject)}&pp=${pp_user}&bg=${background}`)
+                let buff = await getBuffer(`http://hadi-api.herokuapp.com/api/card/welcome?nama=${anu_user}&descriminator=${time_wel}&memcount=${memeg}&gcname=${encodeURI(metadata.subject)}&pp=${pp_user}&bg=${background}`)
                 if (anu.action == 'add') {
-                	const butt = [
-			{ urlButton: { displayText: `Nomor Member`, url : `http://wa.me/${anu_user}?text=Hai+Kak,+Welcome+Di+Group+ya,+Btw+Salken+Kak` } }
-		]
-                	conn.send5ButLoc(anu.id, `*Hallo Kak, Saya ZBot-Whatsapp*\n*Ketik #menu Untuk Melihat Commandnya*`, `Welcome by Z-Bot Whatsapp Multidevice`, `${buff}`, butt)
-                	//conn.sendMessage(anu.id, { image: buff})
+                let buttons = [
+{buttonId: `#owner`, buttonText: {displayText: 'Welcome'}, type: 1}
+]
+let buttonMessage = {
+document: fs.readFileSync('./media/tes.xlsx'),
+mimetype: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+fileName: `Z-Bot Whatsapp MD`,
+fileLength: 99999999999999,
+mentions:[num],
+caption: `Hai Kak @${num.split("@")[0]},\nSaya *Z-Bot Multidevice*, Selamat Datang Di ${metadata.subject}.`,
+footer: `Welcome Message by Z-Bot Multidevice`,
+buttons: buttons,
+headerType: 4,
+contextInfo:{
+"forwardingScore": 1000000000,
+ isForwarded: true,
+externalAdReply:{
+title:`Ulangi Command 2 - 3x Jika Bot Tidak Merespon`,
+body:`Follow Instagram @_daaa_1`,
+thumbnail: buff,
+mediaType:2,
+mediaUrl: `https://youtu.be/x-O0WHkv3uc`,
+sourceUrl: `https://instagram.com/_daaa_1`,
+}}
+}
+conn.sendMessage(anu.id, buttonMessage)
                 } else if (anu.action == 'remove') {
-                	const butt = [
-			{ urlButton: { displayText: `Nomor Member`, url : `http://wa.me/${anu_user}?text=Hai+Kak,+Kok+Keluar+Dari+Grup,+Kenapa+?+😊` } }
-		]
-                	conn.send5ButLoc(anu.id, `*Yah Keluar :v*`, `Leave by Z-Bot Whatsapp Multidevice`, `${buffe}`, butt)
+                	let buttons = [
+{buttonId: `#owner`, buttonText: {displayText: 'Good Bye'}, type: 1}
+]
+let buttonMessage = {
+document: fs.readFileSync('./media/tes.xlsx'),
+mimetype: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+fileName: `Z-Bot Whatsapp MD`,
+fileLength: 99999999999999,
+mentions:[num],
+caption: `@${num.split("@")[0]} Keluar Dari ${metadata.subject}.`,
+footer: `Leave Message by Z-Bot Multidevice`,
+buttons: buttons,
+headerType: 4,
+contextInfo:{
+"forwardingScore": 1000000000,
+ isForwarded: true,
+externalAdReply:{
+title:`Ulangi Command 2 - 3x Jika Bot Tidak Merespon`,
+body:`Follow Instagram @_daaa_1`,
+thumbnail: buffe,
+mediaType:2,
+mediaUrl: `https://youtu.be/x-O0WHkv3uc`,
+sourceUrl: `https://instagram.com/_daaa_1`,
+}}
+}
+conn.sendMessage(anu.id, buttonMessage)
                     //conn.sendMessage(anu.id, { image: buffe})
                 } 
             }
