@@ -253,12 +253,17 @@ var ucapanWaktu = 'Good morning🌉'
 		}
 		const sendContact = (jid, numbers, name, quoted, mn) => {
 			let number = numbers.replace(/[^0-9]/g, '')
-			const vcard = 'BEGIN:VCARD\n' 
-			+ 'VERSION:3.0\n' 
-			+ 'FN:' + name + '\n'
-			+ 'ORG:;\n'
-			+ 'TEL;type=CELL;type=VOICE;waid=' + number + ':+' + number + '\n'
-			+ 'END:VCARD'
+	    const vcard = 'BEGIN:VCARD\n' +
+        'VERSION:3.0\n' +
+        'FN:Owner Z-Bot Multidevice\n' +
+        'ORG:\n' +
+        'item1.TEL;waid=6281578859076:+62 815-7885-9076\n' +
+        'item1.X-ABLabel:📌 𝑫𝒆𝒗𝒆𝒍𝒐𝒑𝒆𝒓 𝑩𝒐𝒕\n' +
+        'item2.EMAIL;type=INTERNET:https://instagram.com/_daaa_1\n' +
+        'item2.X-ABLabel:✉️ Email\n' +
+        'X-WA-BIZ-DESCRIPTION:Lapor Ke Owner Jika Ada Yang Eror\n' +
+        'X-WA-BIZ-NAME:Z-Bot Multidevice\n' +
+        'END:VCARD'
 			return conn.sendMessage(from, { contacts: { displayName: name, contacts: [{ vcard }] }, mentions : mn ? mn : []},{ quoted: quoted })
 		}
 		const sendWebp = async(from, url) => {
