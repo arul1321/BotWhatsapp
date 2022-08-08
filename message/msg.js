@@ -1082,6 +1082,7 @@ case prefix+'twitter':{
 	        if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 			if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			addCmd(`#`+command.slice(1), 1, dashboard)
+			reply(mess.wait)
 			let { ytv } = require('../lib/y2mate')
             let quality = args[1] ? args[1] : '480p'
             let media = await ytv(q).catch((err) => {
