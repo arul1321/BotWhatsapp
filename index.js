@@ -239,16 +239,16 @@ caption: `Hai Kak @${num.split("@")[0]},\nSaya *Z-Bot Multidevice*, Selamat Data
 footer: `Welcome Message by Z-Bot Multidevice`,
 buttons: buttons,
 headerType: 4,
-contextInfo:{
-"forwardingScore": 1000000000,
- isForwarded: true,
-externalAdReply:{
+contextInfo:{externalAdReply:{
 title:`Ulangi Command 2 - 3x Jika Bot Tidak Merespon`,
 body:`Follow Instagram @_daaa_1`,
+mediaType: 1,
+renderLargerThumbnail: true , 
+showAdAttribution: true, 
+jpegThumbnail: buff,
+mediaUrl: `github.com/arulganz`,
 thumbnail: buff,
-mediaType:2,
-mediaUrl: `https://youtu.be/x-O0WHkv3uc`,
-sourceUrl: `https://instagram.com/_daaa_1`,
+sourceUrl: ` `
 }}
 }
 conn.sendMessage(anu.id, buttonMessage)
@@ -266,16 +266,16 @@ caption: `@${num.split("@")[0]} Keluar Dari ${metadata.subject}.`,
 footer: `Leave Message by Z-Bot Multidevice`,
 buttons: buttons,
 headerType: 4,
-contextInfo:{
-"forwardingScore": 1000000000,
- isForwarded: true,
-externalAdReply:{
+contextInfo:{externalAdReply:{
 title:`Ulangi Command 2 - 3x Jika Bot Tidak Merespon`,
 body:`Follow Instagram @_daaa_1`,
+mediaType: 1,
+renderLargerThumbnail: true , 
+showAdAttribution: true, 
+jpegThumbnail: buffe,
+mediaUrl: `github.com/arulganz`,
 thumbnail: buffe,
-mediaType:2,
-mediaUrl: `https://youtu.be/x-O0WHkv3uc`,
-sourceUrl: `https://instagram.com/_daaa_1`,
+sourceUrl: ` `
 }}
 }
 conn.sendMessage(anu.id, buttonMessage)
