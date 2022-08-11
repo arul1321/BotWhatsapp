@@ -380,17 +380,33 @@ var ucapanWaktu = 'Good morning🌉'
 		switch(command) {
 			// Main Menu
 			case 'sc': {
-		let buttons = [
-                    {buttonId: `#runtime`, buttonText: {displayText: 'Back to Menu'}, type: 1},
-                ]
-                let buttonMessage = {
-                    text: `tes`,
-                    footer: `tes`,
-                    buttons: buttons,
-                    headerType: 4
-                }
-           conn.sendMessage(from, buttonMessage)
-                }
+		let butts = [
+{buttonId: '.owner', buttonText: {displayText: 'Owner'}, type: 1},
+{buttonId: '.rules', buttonText: {displayText: 'Rules'}, type: 1}
+]
+let buttonMessage = {
+document: thu,
+mimetype: 'audio/mpeg',
+fileName: `tes`,
+fileLength: 99999999999,
+caption: `anu`,
+footer: `wm`,
+buttons: butts,
+headerType: 4,
+contextInfo:{externalAdReply:{
+title:`Miku - Chan`,
+body: `Create By Sanzz`,
+mediaType: 1,
+renderLargerThumbnail: true , 
+showAdAttribution: true, 
+jpegThumbnail: thu,
+mediaUrl: "https://github.com/Fxc4Sanz", 
+thumbnail: thu,
+sourceUrl: "https://youtu.be/Z8do88vD6nc"
+}}
+}
+conn.sendMessage(from, buttonMessage, { quoted: msg })
+}
                 break
 			case prefix+'getcase':
 if (!isOwner) return reply(mess.OnlyOwner)
@@ -1092,12 +1108,12 @@ case prefix+'twitter':{
   })
             if (media.filesize >= 100000) return reply('File Melebihi Batas ')
             let med = await getBuffer(`${media.thumb}`)
-            let anu = `: ${media.title}\n• File Size : ${media.filesizeF}\n• Url : ${q}\n• Ext : MP3\n• Resolusi : ${args[1] || '128kbps'}`
+            let anu = `� Judul: ${media.title}\n• File Size : ${media.filesizeF}\n• Url : ${q}\n• Ext : MP3\n• Resolusi : ${args[1] || '128kbps'}`
             let buttons = [
 {buttonId: `${prefix}owner`, buttonText: {displayText: '�Owner'}, type: 1}
 ]
 let buttonMessage = {
-document: fs.readFileSync('./media/tes.xlsx'),
+document: thu,
 mimetype: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
 fileName: `Z-Bot Whatsapp MD`,
 fileLength: 99999999999999,
@@ -1105,16 +1121,16 @@ caption: anu,
 footer: `Z-Bot Multidevice`,
 buttons: buttons,
 headerType: 4,
-contextInfo:{
-"forwardingScore": 1000000000,
- isForwarded: true,
-externalAdReply:{
+contextInfo:{externalAdReply:{
 title:`Ulangi Command 2 - 3x Jika Bot Tidak Merespon`,
 body:`Follow Instagram @_daaa_1`,
+mediaType: 1,
+renderLargerThumbnail: true , 
+showAdAttribution: true, 
+jpegThumbnail: med,
+mediaUrl: `${q}`,
 thumbnail: med,
-mediaType:2,
-mediaUrl: `https://youtu.be/x-O0WHkv3uc`,
-sourceUrl: `https://instagram.com/_daaa_1`,
+sourceUrl: ` `
 }}
 }
 conn.sendMessage(from, buttonMessage, { quoted: msg })
@@ -1394,30 +1410,30 @@ break
 🍉 Durasi : ${search.all[0].timestamp}
 🍇 Upload : ${search.all[0].ago}
 🍑 Views : ${search.all[0].views}\n
-_Pilih Media Di Bawah Ini Untuk di Download_`
+_Pilih Media Di Bawah Ini Untuk di Download_ \n`
 			let buffe = await getBuffer(`${search.all[0].thumbnail}`)
-			let buttons = [
+			let butts = [
 {buttonId: `${prefix}ytmp3 ${search.all[0].url}`, buttonText: {displayText: '�Music'}, type: 1},{buttonId: `${prefix}ytmp4 ${search.all[0].url}`, buttonText: {displayText: '�Video'}, type: 1}
 ]
 let buttonMessage = {
-document: fs.readFileSync('./media/tes.xlsx'),
+document: thu,
 mimetype: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-fileName: `Z-Bot Whatsapp MD`,
-fileLength: 99999999999999,
+fileName: `Z-Bot Multidevice`,
+fileLength: 99999999999,
 caption: anu,
 footer: `Z-Bot Multidevice`,
-buttons: buttons,
+buttons: butts,
 headerType: 4,
-contextInfo:{
-"forwardingScore": 1000000000,
- isForwarded: true,
-externalAdReply:{
+contextInfo:{externalAdReply:{
 title:`Ulangi Command 2 - 3x Jika Bot Tidak Merespon`,
 body:`Follow Instagram @_daaa_1`,
+mediaType: 1,
+renderLargerThumbnail: true , 
+showAdAttribution: true, 
+jpegThumbnail: buffe,
+mediaUrl: `${search.all[0].url}`,
 thumbnail: buffe,
-mediaType:2,
-mediaUrl: `https://youtu.be/x-O0WHkv3uc`,
-sourceUrl: `https://instagram.com/_daaa_1`,
+sourceUrl: ` `
 }}
 }
 conn.sendMessage(from, buttonMessage, { quoted: msg })
