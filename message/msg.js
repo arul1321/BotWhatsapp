@@ -1,5 +1,3 @@
-
-
 "use strict";
 const {
 	downloadContentFromMessage
@@ -379,35 +377,6 @@ var ucapanWaktu = 'Good morning🌉'
 
 		switch(command) {
 			// Main Menu
-			case 'sc': {
-		let butts = [
-{buttonId: '.owner', buttonText: {displayText: 'Owner'}, type: 1},
-{buttonId: '.rules', buttonText: {displayText: 'Rules'}, type: 1}
-]
-let buttonMessage = {
-document: thu,
-mimetype: 'audio/mpeg',
-fileName: `tes`,
-fileLength: 99999999999,
-caption: `anu`,
-footer: `wm`,
-buttons: butts,
-headerType: 4,
-contextInfo:{externalAdReply:{
-title:`Miku - Chan`,
-body: `Create By Sanzz`,
-mediaType: 1,
-renderLargerThumbnail: true , 
-showAdAttribution: true, 
-jpegThumbnail: thu,
-mediaUrl: "https://github.com/Fxc4Sanz", 
-thumbnail: thu,
-sourceUrl: "https://youtu.be/Z8do88vD6nc"
-}}
-}
-conn.sendMessage(from, buttonMessage, { quoted: msg })
-}
-                break
 			case prefix+'getcase':
 if (!isOwner) return reply(mess.OnlyOwner)
 addCmd(`#`+command.slice(1), 1, dashboard)
@@ -965,7 +934,7 @@ break
 			case prefix+'stickerurl':
 			sendWebp(from, q)
 			break
-			case prefix+'s': case prefix+'sticker':
+			case prefix+'stiker': case prefix+'s': case prefix+'sticker':
 			addCmd(`#`+`sticker`, 1, dashboard)
 				if (isImage || isQuotedImage) {
 		           var stream = await downloadContentFromMessage(msg.message.imageMessage || msg.message.extendedTextMessage?.contextInfo.quotedMessage.imageMessage, 'image')
@@ -1018,33 +987,37 @@ let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAy
   reply(mess.error.api)
   })
 for (let res of anu.results) {
-let encmedia = await conn.sendImageAsSticker(from, res.url, msg, { packname: packnamestick, author: authorstick, categories: res.tags })
+let encmedia = await conn.sendImageAsSticker(from, res.url, msg, { packname: packnamestick, author: authorstick, categories: res.tags }).catch((err) => {
+  reply(mess.error.api)
+  })
 await fs.unlinkSync(encmedia)
 limitAdd(sender, limit)
 }
 }
 break
-			case prefix+'emojimix': {
+			case prefix+'mix': case prefix+'emojimix': {
 		if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
         if (args.length < 2) return reply(`Kirim perintah ${command} link`)
-		addCmd(`#`+command.slice(1), 1, dashboard)
+		addCmd(`#`+`emojimix`, 1, dashboard)
 		reply(mess.wait)
 		let [emoji1, emoji2] = q.split`+`
 		let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(emoji1)}_${encodeURIComponent(emoji2)}`).catch((err) => {
   reply(mess.error.api)
   })
 		for (let res of anu.results) {
-		    let encmedia = await conn.sendImageAsSticker(from, res.url, msg, { packname: packnamestick, author: authorstick, categories: res.tags })
+		    let encmedia = await conn.sendImageAsSticker(from, res.url, msg, { packname: packnamestick, author: authorstick, categories: res.tags }).catch((err) => {
+  reply(mess.error.api)
+  })
 		    await fs.unlinkSync(encmedia)
 		limitAdd(sender, limit)
 		}
 	    }
 	    break
 	        // Downloader Menu
-	        case prefix+'facebook':
+	        case prefix+'fb': case prefix+'facebook':
 if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 if (args.length < 2) return reply(`Kirim perintah ${command} link`)
-addCmd(`#`+command.slice(1), 1, dashboard)
+addCmd(`#`+`facebook`, 1, dashboard)
 reply(mess.wait)
 let bko = await xfar.downloader.facebook(`${q}`).catch((err) => {
   reply(mess.error.api)
@@ -1097,20 +1070,20 @@ case prefix+'twitter':{
 	         limitAdd(sender, limit)
 	}
 	        break
-	        case prefix+'ytmp3':{
+	        case prefix+'yt': case prefix+'ytmp3':{
 	        if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply(`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 			if (args.length < 2) return reply(`Kirim perintah ${command} link`)
-			addCmd(`#`+command.slice(1), 1, dashboard)
+			addCmd(`#`+`ytmp3`, 1, dashboard)
 	        let { yta } = require('../lib/y2mate')
             let quality = '128kbps'
             let media = await yta(q).catch((err) => {
   reply(mess.error.api)
   })
-            if (media.filesize >= 100000) return reply('File Melebihi Batas ')
+            if (media.filesize >= 100000) return reply('File Melebihi Batas Silahkan Download Sendiri ')
             let med = await getBuffer(`${media.thumb}`)
-            let anu = `� Judul: ${media.title}\n• File Size : ${media.filesizeF}\n• Url : ${q}\n• Ext : MP3\n• Resolusi : ${args[1] || '128kbps'}`
+            let anu = `� Judul: ${media.title}\n• File Size : ${media.filesizeF}\n• Url : ${q}\n• Ext : MP3\n• Resolusi : ${args[1] || '128kbps'}`
             let buttons = [
-{buttonId: `${prefix}owner`, buttonText: {displayText: '�Owner'}, type: 1}
+{buttonId: `${prefix}ytmp4 ${q}`, buttonText: {displayText: '� Video'}, type: 1}
 ]
 let buttonMessage = {
 document: thu,
@@ -1122,8 +1095,7 @@ footer: `Z-Bot Multidevice`,
 buttons: buttons,
 headerType: 4,
 contextInfo:{externalAdReply:{
-title:`Ulangi Command 2 - 3x Jika Bot Tidak Merespon`,
-body:`Follow Instagram @_daaa_1`,
+title:`Play Youtube Mp3 Downloader`,
 mediaType: 1,
 renderLargerThumbnail: true , 
 showAdAttribution: true, 
@@ -1192,10 +1164,10 @@ reply(mess.wait)
  limitAdd(sender, limit)
 }
 break
-	        case prefix+'stickertele':
+	       case prefix+'telestik': case prefix+'telestick': case prefix+'stickertele':
 if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 if (args.length < 2) return reply(`Kirim perintah ${command} link`)
-addCmd(`#`+command.slice(1), 1, dashboard)
+addCmd(`#`+`stickertele`, 1, dashboard)
 reply(mess.wait)
 let packName = args[1].replace("https://t.me/addstickers/", "")
 let gas = await fetchJson(`https://api.telegram.org/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/getStickerSet?name=${encodeURIComponent(packName)}`, { method: "GET", headers: { "User-Agent": "GoogleBot" } }).catch((err) => {
@@ -1245,11 +1217,11 @@ addCmd(`#`+command.slice(1), 1, dashboard)
   })
   limitAdd(sender, limit)
   break
-case prefix+'instagram':
+case prefix+'ig':case prefix+'instagram':
   if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
-addCmd(`#`+command.slice(1), 1, dashboard)
+addCmd(`#`+`instagram`, 1, dashboard)
   reply(mess.wait)
   bocil.instagramdlv3(q).then(data => {
   for (let i of data) {
@@ -1277,12 +1249,12 @@ addCmd(`#`+command.slice(1), 1, dashboard)
 			       limitAdd(sender, limit)
 				}).catch(() => reply(mess.error.api))
 		        break
-		case prefix+'tiktok':
+		case prefix+'ttmp4': case prefix+'tt': case prefix+'tiktok':
 			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
 			    if (!args[1].includes('tiktok')) return reply(mess.error.Iv)
-			addCmd(`#`+command.slice(1), 1, dashboard)
+			addCmd(`#`+`tiktok`, 1, dashboard)
 			    reply(mess.wait)
 			    bocil.tiktokdlv3(`${q}`).then( yut => {
 				  let anutxt = `• Author : ${yut.author.nickname}\n• Description : ${yut.description}\n• Avatar : ${yut.author.avatar}`
@@ -1413,7 +1385,7 @@ break
 _Pilih Media Di Bawah Ini Untuk di Download_ \n`
 			let buffe = await getBuffer(`${search.all[0].thumbnail}`)
 			let butts = [
-{buttonId: `${prefix}ytmp3 ${search.all[0].url}`, buttonText: {displayText: '�Music'}, type: 1},{buttonId: `${prefix}ytmp4 ${search.all[0].url}`, buttonText: {displayText: '�Video'}, type: 1}
+{buttonId: `${prefix}ytmp3 ${search.all[0].url}`, buttonText: {displayText: '�Music'}, type: 1},{buttonId: `${prefix}ytmp4 ${search.all[0].url}`, buttonText: {displayText: '�Video'}, type: 1}
 ]
 let buttonMessage = {
 document: thu,
@@ -1425,8 +1397,7 @@ footer: `Z-Bot Multidevice`,
 buttons: butts,
 headerType: 4,
 contextInfo:{externalAdReply:{
-title:`Ulangi Command 2 - 3x Jika Bot Tidak Merespon`,
-body:`Follow Instagram @_daaa_1`,
+title:`Play Music/Video Downloader`,
 mediaType: 1,
 renderLargerThumbnail: true , 
 showAdAttribution: true, 
