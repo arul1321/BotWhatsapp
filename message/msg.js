@@ -1092,7 +1092,7 @@ case prefix+'twitter':{
   })
             if (media.filesize >= 100000) return reply('File Melebihi Batas ')
             let med = await getBuffer(`${media.thumb}`)
-            let anu = `: ${media.title}\n• File Size : ${media.filesizeF}\n• Url : ${q}\n• Ext : MP3\n• Resolusi : ${args[1] || '128kbps'}`, `•� Z-Bot Whatsapp Multidevice`
+            let anu = `: ${media.title}\n• File Size : ${media.filesizeF}\n• Url : ${q}\n• Ext : MP3\n• Resolusi : ${args[1] || '128kbps'}`
             let buttons = [
 {buttonId: `${prefix}owner`, buttonText: {displayText: '�Owner'}, type: 1}
 ]
