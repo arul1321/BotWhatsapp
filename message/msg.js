@@ -379,6 +379,19 @@ var ucapanWaktu = 'Good morning🌉'
 
 		switch(command) {
 			// Main Menu
+			case 'sc': {
+		let buttons = [
+                    {buttonId: `#runtime`, buttonText: {displayText: 'Back to Menu'}, type: 1},
+                ]
+                let buttonMessage = {
+                    text: `tes`,
+                    footer: `tes`,
+                    buttons: buttons,
+                    headerType: 4
+                }
+           conn.sendMessage(from, buttonMessage)
+                }
+                break
 			case prefix+'getcase':
 if (!isOwner) return reply(mess.OnlyOwner)
 addCmd(`#`+command.slice(1), 1, dashboard)
@@ -1350,18 +1363,39 @@ break
 			let yts = require("yt-search")
 			addCmd(`#`+command.slice(1), 1, dashboard)
             let search = await yts(`${q}`)
-            const btn = [
-			{ quickReplyButton: { displayText: `🎶 Music`, id: `${prefix}ytmp3 ${search.all[0].url}` } },
-			{ quickReplyButton: { displayText: `📽 Video`, id: `${prefix}ytmp4 ${search.all[0].url}` } },
-			{ urlButton: { displayText: `Url Video`, url : `${search.all[0].url}` } },
-		]
             let anu = `             *Data Berhasil Di Dapatkan*\n
 🥝 Judul : ${search.all[0].title}
 🍉 Durasi : ${search.all[0].timestamp}
 🍇 Upload : ${search.all[0].ago}
 🍑 Views : ${search.all[0].views}\n
 _Pilih Media Di Bawah Ini Untuk di Download_`
-			conn.send5ButLoc(from, anu, `© Z-Bot Whatsapp Multidevice`, `${search.all[0].thumbnail}`, btn)
+			let buffe = await getBuffer(`${search.all[0].thumbnail}`)
+			let buttons = [
+{buttonId: `${prefix}ytmp3 ${search.all[0].url}`, buttonText: {displayText: '�Music'}, type: 1},{buttonId: `${prefix}ytmp4 ${search.all[0].url}`, buttonText: {displayText: '�Video'}, type: 1}
+]
+let buttonMessage = {
+document: fs.readFileSync('./media/tes.xlsx'),
+mimetype: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+fileName: `Z-Bot Whatsapp MD`,
+fileLength: 99999999999999,
+mentions:[num],
+caption: anu,
+footer: `Z-Bot Multidevice`,
+buttons: buttons,
+headerType: 4,
+contextInfo:{
+"forwardingScore": 1000000000,
+ isForwarded: true,
+externalAdReply:{
+title:`Ulangi Command 2 - 3x Jika Bot Tidak Merespon`,
+body:`Follow Instagram @_daaa_1`,
+thumbnail: buffe,
+mediaType:2,
+mediaUrl: `https://youtu.be/x-O0WHkv3uc`,
+sourceUrl: `https://instagram.com/_daaa_1`,
+}}
+}
+conn.sendMessage(from, buttonMessage, { quoted: msg })
 			}
 			break
 			case prefix+'ytsearch':
