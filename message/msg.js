@@ -1091,7 +1091,32 @@ case prefix+'twitter':{
   reply(mess.error.api)
   })
             if (media.filesize >= 100000) return reply('File Melebihi Batas ')
-            conn.send5ButLoc(from, `• Title : ${media.title}\n• File Size : ${media.filesizeF}\n• Url : ${q}\n• Ext : MP3\n• Resolusi : ${args[1] || '128kbps'}`, `•� Z-Bot Whatsapp Multidevice`, `${media.thumb}`, butlink)
+            let med = await getBuffer(`${media.thumb}`)
+            let buttons = [
+{buttonId: `${prefix}owner`, buttonText: {displayText: '�Owner'}, type: 1}
+]
+let buttonMessage = {
+document: fs.readFileSync('./media/tes.xlsx'),
+mimetype: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+fileName: `Z-Bot Whatsapp MD`,
+fileLength: 99999999999999,
+caption: `${media.title}\n• File Size : ${media.filesizeF}\n• Url : ${q}\n• Ext : MP3\n• Resolusi : ${args[1] || '128kbps'}`, `•� Z-Bot Whatsapp Multidevice`,
+footer: `Z-Bot Multidevice`,
+buttons: buttons,
+headerType: 4,
+contextInfo:{
+"forwardingScore": 1000000000,
+ isForwarded: true,
+externalAdReply:{
+title:`Ulangi Command 2 - 3x Jika Bot Tidak Merespon`,
+body:`Follow Instagram @_daaa_1`,
+thumbnail: med,
+mediaType:2,
+mediaUrl: `https://youtu.be/x-O0WHkv3uc`,
+sourceUrl: `https://instagram.com/_daaa_1`,
+}}
+}
+conn.sendMessage(from, buttonMessage, { quoted: msg })
             conn.sendMessage(from, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: msg })
 	        limitAdd(sender, limit)
 	}
@@ -1378,7 +1403,6 @@ document: fs.readFileSync('./media/tes.xlsx'),
 mimetype: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
 fileName: `Z-Bot Whatsapp MD`,
 fileLength: 99999999999999,
-mentions:[num],
 caption: anu,
 footer: `Z-Bot Multidevice`,
 buttons: buttons,
