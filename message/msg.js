@@ -1237,7 +1237,7 @@ addCmd(`#`+`instagram`, 1, dashboard)
   })
   limitAdd(sender, limit)
   break 
-			case prefix+'tiktokaudio':
+			case prefix+'ttmp3': case prefix+'tiktokaudio':
 			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
@@ -1259,8 +1259,7 @@ addCmd(`#`+`instagram`, 1, dashboard)
 			    bocil.tiktokdlv3(`${q}`).then( yut => {
 				  let anutxt = `• Author : ${yut.author.nickname}\n• Description : ${yut.description}\n• Avatar : ${yut.author.avatar}`
 			      var tidtod5 = [
-						{ urlButton: { displayText: `Link`, url : `${q}` } },
-			{ quickReplyButton: { displayText: `Ubah Ke Audio`, id: `${prefix}tiktokaudio ${q}` } },
+						{ urlButton: { displayText: `Link`, url : `${q}` } }
 				]
 				conn.sendMessage(from, { caption: anutxt, video: {url: yut.video.no_watermark}, templateButtons: tidtod5, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
 			       limitAdd(sender, limit)
