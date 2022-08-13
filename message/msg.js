@@ -823,7 +823,7 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
  }
 break
           case prefix+'emoji': case prefix+'semoji':{
-            if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+            
        	if (args.length < 2) return reply(`Kirim perintah ${command} `)
            addCmd(`#`+`semoji`, 1, dashboard)
            reply(mess.wait)
@@ -837,7 +837,7 @@ break
 									}
 									break
 			case prefix+'smeme':
-			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+			    
 			    if (!isQuotedSticker) return reply(`Reply stikernya!`)
 			    if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
 			    addCmd(`#`+`smeme`, 1, dashboard)
@@ -859,7 +859,7 @@ break
 			      
 			break
 			case prefix+'smeme2':{
-			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+			    
 			    if (!isQuotedSticker) return reply(`Reply stikernya!`)
 			    if (args.length < 2) return reply(`Kirim perintah ${command} Teks|Teks`)
 			    addCmd(`#`+`smeme2`, 1, dashboard)
@@ -882,7 +882,7 @@ break
 			}
 			break
 			case prefix+'wm': case prefix+'swm':
-			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+			    
 			    if (!isQuotedSticker) return reply(`Reply stikernya!`)
 			    if (args.length < 2) return reply(`Kirim perintah ${command} packname|author`)
 			    addCmd(`#`+`swm`, 1, dashboard)
@@ -908,7 +908,7 @@ break
 			    }
 			break
 			case prefix+'toimg': case prefix+'toimage':
-			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+			    
 			    if (!isQuotedSticker) return reply(`Reply stikernya!`)
 			    addCmd(`#`+`toimg`, 1, dashboard)
 			   reply(mess.wait)
@@ -1163,7 +1163,6 @@ reply(mess.wait)
 }
 break
 	       case prefix+'telestik': case prefix+'telestick': case prefix+'stickertele':
-if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 addCmd(`#`+`stickertele`, 1, dashboard)
 reply(mess.wait)
@@ -1184,7 +1183,7 @@ for (let i = 0; i < gas.result.stickers.length; i++) {
         
 break 
 case prefix+'igfoto':
-if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
 addCmd(`#`+command.slice(1), 1, dashboard)
@@ -1200,7 +1199,7 @@ addCmd(`#`+command.slice(1), 1, dashboard)
   
   break
 case prefix+'igvideo':
-if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
 addCmd(`#`+command.slice(1), 1, dashboard)
@@ -1216,7 +1215,7 @@ addCmd(`#`+command.slice(1), 1, dashboard)
   
   break
 case prefix+'ig':case prefix+'instagram':
-  if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+  
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
 addCmd(`#`+`instagram`, 1, dashboard)
@@ -1236,7 +1235,7 @@ addCmd(`#`+`instagram`, 1, dashboard)
   
   break 
 			case prefix+'ttmp3': case prefix+'tiktokaudio':
-			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+			    
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
 			    if (!args[1].includes('tiktok')) return reply(mess.error.Iv)
@@ -1248,7 +1247,7 @@ addCmd(`#`+`instagram`, 1, dashboard)
 				}).catch(() => reply(mess.error.api))
 		        break
 		case prefix+'ttmp4': case prefix+'tt': case prefix+'tiktok':
-			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
+			    
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
 			    if (!args[1].includes('tiktok')) return reply(mess.error.Iv)
