@@ -54,12 +54,7 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
 👥Total User Z-Bot : ${pendaftar.length}
 🕙Runtime : ${runtime(process.uptime())}
 ⏳Speed : ${latensi.toFixed(4)} Second
-    
-*── 「  INFO User Z-Bot Multidevice  」 ──*
-🦄Status : ${isOwner ? 'Owner' : isPremium ? 'Premium' : 'Free'}
-🐯Limit : ${isOwner ? 'Infinity' : isPremium ? 'Unlimited' : getLimit(sender, limitCount, limit)}
-🐼Limit Game : ${isOwner ? 'Infinity' : cekGLimit(sender, gcount, glimit)}
-🐮Balance : $${toCommas(getBalance(sender, balance))}
+ 
 
   *(🌹)  Main Menu*
   ${p+=1}. ${yui}${prefix}menu${yui}

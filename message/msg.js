@@ -236,6 +236,10 @@ var ucapanWaktu = 'Good morning🌉'
 		      return res
  		    }
 		}
+		const sticEror = (hehe) => {
+			let ano = fs.readFileSync('./media/anime/kaget.webp')
+			conn.sendImageAsSticker(hehe, ano, msg, { packname: packnamestick, author: authorstick})
+		}
 		const sticOwner = (hehe) => {
 			let ano = fs.readFileSync('./media/anime/owner.webp')
 			conn.sendImageAsSticker(hehe, ano, msg, { packname: packnamestick, author: authorstick})
@@ -848,7 +852,7 @@ break
 			      let [emoji1, emoji2] = q.split`|`
 			      let smeme = `https://api.memegen.link/images/custom/${encodeURIComponent(` `)}/${encodeURIComponent(emoji1)}.png?background=${back}`
 	              sendWebp(from, smeme).catch((err) => {
-  reply(mess.error.api)
+  sticEror(from)
   })
 			      //conn.sendImageAsSticker(from, sft, msg, { packname: emoji1, author: emoji2})
 			      //conn.sendMessage(from, { image: fs.readFileSync(`./${rand2}`)}, { quoted: msg })
@@ -869,7 +873,7 @@ break
 			      let [emoji1, emoji2] = q.split`|`
 			      let smeme = `https://api.memegen.link/images/custom/${encodeURIComponent(emoji1)}/${encodeURIComponent(emoji2)}.png?background=${back}`
 	              sendWebp(from, smeme).catch((err) => {
-  reply(mess.error.api)
+  sticEror(from)
   })
 			      //conn.sendImageAsSticker(from, sft, msg, { packname: emoji1, author: emoji2})
 			      //conn.sendMessage(from, { image: fs.readFileSync(`./${rand2}`)}, { quoted: msg })
@@ -891,7 +895,7 @@ break
 			    if (isQuotedSticker) {
 			    exec(`ffmpeg -i ./${rand1} ./${rand2}`, (err) => {
 			      fs.unlinkSync(`./${rand1}`)
-			      if (err) return reply(mess.error.api)
+			      if (err) return sticEror(from)
 			      let sft = fs.readFileSync(`./${rand2}`)
 			      let [emoji1, emoji2] = q.split`|`
 			      conn.sendImageAsSticker(from, sft, msg, { packname: emoji1, author: emoji2})
@@ -916,7 +920,7 @@ break
 			    if (isQuotedSticker) {
 			    exec(`ffmpeg -i ./${rand1} ./${rand2}`, (err) => {
 			      fs.unlinkSync(`./${rand1}`)
-			      if (err) return reply(mess.error.api)
+			      if (err) return sticEror(from)
 			      conn.sendMessage(from, { image: fs.readFileSync(`./${rand2}`)}, { quoted: msg })
 			      
 				  fs.unlinkSync(`./${rand2}`)
@@ -975,11 +979,11 @@ if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 addCmd(`#`+command.slice(1), 1, dashboard)
 sticWait(from)
 let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(q)}`).catch((err) => {
-  reply(mess.error.api)
+  sticEror(from)
   })
 for (let res of anu.results) {
 let encmedia = await conn.sendImageAsSticker(from, res.url, msg, { packname: packnamestick, author: authorstick, categories: res.tags }).catch((err) => {
-  reply(mess.error.api)
+  sticEror(from)
   })
 await fs.unlinkSync(encmedia)
 
@@ -992,11 +996,11 @@ break
 		sticWait(from)
 		let [emoji1, emoji2] = q.split`+`
 		let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(emoji1)}_${encodeURIComponent(emoji2)}`).catch((err) => {
-  reply(mess.error.api)
+  sticEror(from)
   })
 		for (let res of anu.results) {
 		    let encmedia = await conn.sendImageAsSticker(from, res.url, msg, { packname: packnamestick, author: authorstick, categories: res.tags }).catch((err) => {
-  reply(mess.error.api)
+  sticEror(from)
   })
 		    await fs.unlinkSync(encmedia)
 		
@@ -1009,13 +1013,13 @@ if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 addCmd(`#`+`facebook`, 1, dashboard)
 sticWait(from)
 let bko = await xfar.downloader.facebook(`${q}`).catch((err) => {
-  reply(mess.error.api)
+  sticEror(from)
   })
 let yu1io = await getBuffer(bko.hd).catch((err) => {
-  reply(mess.error.api)
+  sticEror(from)
   })
 			      conn.sendMessage(from, { caption: ` Success Download Video Facebook`, video: yu1io, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} ).catch((err) => {
-  reply(mess.error.api)
+  sticEror(from)
   })
 			       
 break
@@ -1026,7 +1030,7 @@ const btn = [
 			{ urlButton: { displayText: `Instagram`, url : `https://instagram.com/_daaa_1` } }
 		]
 let yjk = await bocil.instagramStory(`${q}`).catch((err) => {
-  reply(mess.error.api)
+  sticEror(from)
   })
 console.log(yjk)
 sticWait(from)
@@ -1044,15 +1048,15 @@ case prefix+'twitter':{
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			addCmd(`#`+command.slice(1), 1, dashboard)
 	        let gut = await xfar.downloader.twitter(q).catch((err) => {
-  reply(mess.error.api)
+  sticEror(from)
   })
 	        console.log(gut)
 	         sticWait(from)
              let yuio = await getBuffer(gut.quality_720).catch((err) => {
-  reply(mess.error.api)
+  sticEror(from)
   })
 	        conn.sendMessage(from, { caption: ` Success Download Video Twitter`, video: yuio, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} ).catch((err) => {
-  reply(mess.error.api)
+  sticEror(from)
   })
 	         
 	}
@@ -1063,7 +1067,7 @@ case prefix+'twitter':{
 	        let { yta } = require('../lib/y2mate')
             let quality = '128kbps'
             let media = await yta(q).catch((err) => {
-  reply(mess.error.api)
+  sticEror(from)
   })
             if (media.filesize >= 100000) return reply(`File Melebihi Batas Silahkan Download Sendiri\n *Link :* ${media.dl_link}`)
             let med = await getBuffer(`${media.thumb}`)
@@ -1103,11 +1107,11 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 			let { ytv } = require('../lib/y2mate')
             let quality = args[1] ? args[1] : '480p'
             let media = await ytv(q).catch((err) => {
-  reply(mess.error.api)
+  sticEror(from)
   })
             if (media.filesize >= 100000) return reply(`File Melebihi Batas Silahkan Download Sendiri\n *Link :* ${media.dl_link}`)
             conn.sendMessage(from, { caption: `• Title : ${media.title}\n• File Size : ${media.filesizeF}\n• Url : ${q}\n• Ext : MP3\n• Resolusi : ${args[1] || '480p'}`, video: { url: media.dl_link }, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} ).catch((err) => {
-  reply(mess.error.api)
+  sticEror(from)
   })
 	         
 }
@@ -1119,7 +1123,7 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 			addCmd(`#`+command.slice(1), 1, dashboard)
 			    sticWait(from)
 			let rescun = await mediafiredl(q).catch((err) => {
-  reply(mess.error.api)
+  sticEror(from)
   })
 let result = `
 *MediaFire Download*
@@ -1128,7 +1132,7 @@ let result = `
 => Link : ${rescun[0].link}`
 reply(result)
 conn.sendMessage(from, { document: { url: `${rescun[0].link}`}, fileName: `${rescun[0].nama}`, mimetype: 'zip' }, { quoted: msg }).catch((err) => {
-  reply(mess.error.api)
+  sticEror(from)
   })
 					
 					break
@@ -1142,7 +1146,7 @@ sticWait(from)
     let url = `https://api.github.com/repos/${user}/${repo}/zipball`
     let filename = `${repo}`
     conn.sendMessage(from, {document: {url: `${url}`}, mimetype: 'application/zip', fileName: `${filename}`}, { quoted : msg }).catch((err) => {
-  reply(mess.error.api)
+  sticEror(from)
   })
  
 }
@@ -1153,7 +1157,7 @@ addCmd(`#`+`stickertele`, 1, dashboard)
 sticWait(from)
 let packName = args[1].replace("https://t.me/addstickers/", "")
 let gas = await fetchJson(`https://api.telegram.org/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/getStickerSet?name=${encodeURIComponent(packName)}`, { method: "GET", headers: { "User-Agent": "GoogleBot" } }).catch((err) => {
-  reply(mess.error.api)
+  sticEror(from)
   })
 reply(`*Total stiker:* ${gas.result.stickers.length}
 *Estimasi selesai:* ${gas.result.stickers.length * 1.5} detik`.trim())
@@ -1178,7 +1182,7 @@ addCmd(`#`+command.slice(1), 1, dashboard)
   }
   })
   .catch((err) => {
-  reply(mess.error.api)
+  sticEror(from)
   })
   
   break
@@ -1193,7 +1197,7 @@ addCmd(`#`+command.slice(1), 1, dashboard)
   }
   })
   .catch((err) => {
-  reply(mess.error.api)
+  sticEror(from)
   })
   
   break
@@ -1212,7 +1216,7 @@ addCmd(`#`+`instagram`, 1, dashboard)
   }
   })
   .catch((err) => {
-  reply(mess.error.api)
+  sticEror(from)
   })
   
   break 
@@ -1225,7 +1229,7 @@ addCmd(`#`+`instagram`, 1, dashboard)
 			    hxz.ttdownloader(`${q}`).then( data => {
 			      conn.sendMessage(from, { audio: { url: data.nowm }, mimetype: 'audio/mp4' }, { quoted: msg })
 			       
-				}).catch(() => reply(mess.error.api))
+				}).catch(() => sticEror(from))
 		        break
 		case prefix+'ttmp4': case prefix+'tt': case prefix+'tiktok':
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
@@ -1240,7 +1244,7 @@ addCmd(`#`+`instagram`, 1, dashboard)
 				]
 				conn.sendMessage(from, { caption: anutxt, video: {url: yut.nowm}, templateButtons: tidtod5, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
 			       
-				}).catch(() => reply(mess.error.api))
+				}).catch(() => sticEror(from))
 		        break
 			// Owner Menu
 		    case  prefix+'sendsession':{
@@ -1344,7 +1348,7 @@ break
 				  reply(teks)
 				  
                   addCmd(`#`+command.slice(1), 1, dashboard)
-				}).catch(() => reply(mess.error.api))
+				}).catch(() => sticEror(from))
 			    break
 			case prefix+'play':{
 			if (args.length < 2) return reply(`Kirim perintah ${command} query`)
@@ -1408,7 +1412,7 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 				}
 				conn.sendMessage(from, { image: { url: yt[0].image }, caption: txt }, { quoted: msg })
 				
-				}).catch(() => reply(mess.error.api))
+				}).catch(() => sticEror(from))
 			    break
 			// Game Menu
 			case prefix+'tebakgambar':
@@ -1432,7 +1436,7 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 			    if (!isGroup) return reply(mess.OnlyGrup)
 				if (!isBotGroupAdmins) return reply(mess.BotAdmin)
 				addCmd(`#`+command.slice(1), 1, dashboard)
-				var url = await conn.groupInviteCode(from).catch(() => reply(mess.error.api))
+				var url = await conn.groupInviteCode(from).catch(() => sticEror(from))
 			    url = 'https://chat.whatsapp.com/'+url
 				reply(url)
 				break
@@ -1447,7 +1451,7 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 				  .then( res => {
 					reply(`Sukses`)
 					fs.unlinkSync(media)
-				  }).catch(() => reply(mess.error.api))
+				  }).catch(() => sticEror(from))
 				} else {
 			      reply(`Kirim/balas gambar dengan caption ${command}`)
 				}
@@ -1461,7 +1465,7 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 				await conn.groupUpdateSubject(from, q)
 			    .then( res => {
 				  reply(`Sukses`)
-				}).catch(() => reply(mess.error.api))
+				}).catch(() => sticEror(from))
 			    break
 			case prefix+'setdescription':
 			    if (!isGroup) return reply(mess.OnlyGrup)
@@ -1472,7 +1476,7 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 				await conn.groupUpdateDescription(from, q)
 			    .then( res => {
 			      reply(`Sukses`)
-				}).catch(() => reply(mess.error.api))
+				}).catch(() => sticEror(from))
 				break
 			case prefix+'group': 
 		        if (!isGroup) return reply(mess.OnlyGrup)
@@ -1498,7 +1502,7 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 				await conn.groupRevokeInvite(from)
 			    .then( res => {
 				  reply(`Sukses menyetel tautan undangan grup ini`)
-				}).catch(() => reply(mess.error.api))
+				}).catch(() => sticEror(from))
 				break
 			case prefix+'hidetag':
 		        if (!isGroup) return reply(mess.OnlyGrup)
