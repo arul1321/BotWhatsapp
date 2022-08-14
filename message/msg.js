@@ -236,6 +236,26 @@ var ucapanWaktu = 'Good morning🌉'
 		      return res
  		    }
 		}
+		const sticOwner = (hehe) => {
+			let ano = fs.readFileSync('./media/anime/owner.webp')
+			conn.sendImageAsSticker(hehe, ano, msg, { packname: packnamestick, author: authorstick})
+		}
+		const sticNotAdmin = (hehe) => {
+			let ano = fs.readFileSync('./media/anime/notadmin.webp')
+			conn.sendImageAsSticker(hehe, ano, msg, { packname: packnamestick, author: authorstick})
+		}
+		const sticAdmin = (hehe) => {
+			let ano = fs.readFileSync('./media/anime/admin.webp')
+			conn.sendImageAsSticker(hehe, ano, msg, { packname: packnamestick, author: authorstick})
+		}
+		const sticWait = (hehe) => {
+			let ano = fs.readFileSync('./media/anime/wait.webp')
+			conn.sendImageAsSticker(hehe, ano, msg, { packname: packnamestick, author: authorstick})
+		}
+		const sticOk = (hehe) => {
+			let ano = fs.readFileSync('./media/anime/ok.webp')
+			conn.sendImageAsSticker(hehe, ano, msg, { packname: packnamestick, author: authorstick})
+		}
 		const reply = (teks) => {
 			conn.sendMessage(from, { text: teks }, { quoted: msg })
 		}
@@ -503,10 +523,9 @@ case prefix+'sand':
 case prefix+'glue':
 case prefix+'1917':
 case prefix+'leaves':{
-	
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
 addCmd(`#`+command.slice(1), 1, dashboard)
-	  reply(mess.wait)
+	  sticWait(from)
              	let link
              	if (/candy/.test(command)) link = 'https://textpro.me/create-christmas-candy-cane-text-effect-1056.html'
              	if (/christmas/.test(command)) link = 'https://textpro.me/christmas-tree-text-effect-online-free-1057.html'
@@ -571,10 +590,9 @@ addCmd(`#`+command.slice(1), 1, dashboard)
              }
              break
 case prefix+'papercut':{
-	      
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
 addCmd(`#`+command.slice(1), 1, dashboard)
-	      reply(mess.wait)
+	      sticWait(from)
 	
 	      maker.textpro("https://textpro.me/create-art-paper-cut-text-effect-online-1022.html", [
 `${q}`,])
@@ -583,10 +601,9 @@ addCmd(`#`+command.slice(1), 1, dashboard)
  }
 break
 case prefix+'transformer':{
-	      
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
 addCmd(`#`+command.slice(1), 1, dashboard)
-	      reply(mess.wait)
+	      sticWait(from)
 	      maker.textpro("https://textpro.me/create-a-transformer-text-effect-online-1035.html", [
 `${q}`,])
 .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
@@ -595,10 +612,9 @@ addCmd(`#`+command.slice(1), 1, dashboard)
  }
 break
 case prefix+'neondevil':{
-	      
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
 addCmd(`#`+command.slice(1), 1, dashboard)
-	      reply(mess.wait)
+	      sticWait(from)
 	      maker.textpro("https://textpro.me/create-neon-devil-wings-text-effect-online-free-1014.html", [
 `${q}`,])
          .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
@@ -607,10 +623,9 @@ addCmd(`#`+command.slice(1), 1, dashboard)
  }
 break
 case prefix+'3dstone':{
-	
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
 addCmd(`#`+command.slice(1), 1, dashboard)
-	reply(mess.wait)
+	sticWait(from)
 	maker.textpro("https://textpro.me/3d-stone-cracked-cool-text-effect-1029.html", [
     `${q}`,])
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
@@ -619,10 +634,9 @@ addCmd(`#`+command.slice(1), 1, dashboard)
  }
 break
 case prefix+'3davengers':{
-	
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
 addCmd(`#`+command.slice(1), 1, dashboard)
-	reply(mess.wait)
+	sticWait(from)
 	maker.textpro("https://textpro.me/create-3d-avengers-logo-online-974.html", [
     `${q}`,])
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
@@ -631,10 +645,9 @@ addCmd(`#`+command.slice(1), 1, dashboard)
  }
 break
 case prefix+'thunder':{
-	
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
 addCmd(`#`+command.slice(1), 1, dashboard)
-	reply(mess.wait)
+	sticWait(from)
 	maker.textpro("https://textpro.me/online-thunder-text-effect-generator-1031.html", [
     `${q}`,])
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
@@ -643,10 +656,9 @@ addCmd(`#`+command.slice(1), 1, dashboard)
  }
 break
 case prefix+'window':{
-	
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
 addCmd(`#`+command.slice(1), 1, dashboard)
-	reply(mess.wait)
+	sticWait(from)
 	maker.textpro("https://textpro.me/write-text-on-foggy-window-online-free-1015.html", [
     `${q}`,])
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
@@ -655,10 +667,9 @@ addCmd(`#`+command.slice(1), 1, dashboard)
  }
 break
 case prefix+'blackpink':{
-	
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
 addCmd(`#`+command.slice(1), 1, dashboard)
-	reply(mess.wait)
+	sticWait(from)
 	maker.textpro("https://textpro.me/create-blackpink-logo-style-online-1001.html", [
     `${q}`,])
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
@@ -667,10 +678,9 @@ addCmd(`#`+command.slice(1), 1, dashboard)
  }
 break
 	case prefix+'glitch':{
-	
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
 addCmd(`#`+command.slice(1), 1, dashboard)
-	reply(mess.wait)
+	sticWait(from)
 	maker.textpro("https://textpro.me/create-impressive-glitch-text-effects-online-1027.html", [
     `${q}`,])
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
@@ -679,9 +689,8 @@ addCmd(`#`+command.slice(1), 1, dashboard)
  }
 break
 	case prefix+'3dneon':{
-	
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
-	reply(mess.wait)
+	sticWait(from)
 	maker.textpro("https://textpro.me/create-3d-neon-light-text-effect-online-1028.html", [
     `${q}`,])
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
@@ -691,9 +700,8 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
  }
 break
 	case prefix+'neon':{
-	
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
-	reply(mess.wait)
+	sticWait(from)
 	maker.textpro("https://textpro.me/neon-text-effect-online-879.html", [
     `${q}`,])
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
@@ -703,9 +711,8 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
  }
 break
 	case prefix+'greenneon':{
-	
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
-	reply(mess.wait)
+	sticWait(from)
 	maker.textpro("https://textpro.me/green-neon-text-effect-874.html", [
     `${q}`,])
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
@@ -715,9 +722,8 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
  }
 break
   case prefix+'bokeh':{
-	
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
-	reply(mess.wait)
+	sticWait(from)
 	maker.textpro("https://textpro.me/bokeh-text-effect-876.html", [
     `${q}`,])
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
@@ -727,9 +733,8 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
  }
 break
    case prefix+'hollographic':{
-	
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
-	reply(mess.wait)
+	sticWait(from)
 	maker.textpro("https://textpro.me/holographic-3d-text-effect-975.html", [
     `${q}`,])
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
@@ -739,9 +744,8 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
  }
 break
 	case prefix+'joker':{
-	
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
-	reply(mess.wait)
+	sticWait(from)
 	maker.textpro("https://textpro.me/create-logo-joker-online-934.html", [
     `${q}`,])
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
@@ -751,9 +755,8 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
  }
 break
 	case prefix+'dropwater':{
-	
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
-	reply(mess.wait)
+	sticWait(from)
 	maker.textpro("https://textpro.me/dropwater-text-effect-872.html", [
     `${q}`,])
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
@@ -763,9 +766,8 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
  }
 break
 	case prefix+'neonlight':{
-	
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
-	reply(mess.wait)
+	sticWait(from)
 	maker.textpro("https://textpro.me/neon-light-text-effect-with-galaxy-style-981.html", [
     `${q}`,])
   .then((data) => conn.sendMessage(from, { image: { url: data }, caption: `Success`}, { quoted: msg }))
@@ -775,9 +777,8 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
  }
 break
 	case prefix+'thewall':{
-	
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
-	reply(mess.wait)
+	sticWait(from)
 	
 	addCmd(`#`+command.slice(1), 1, dashboard)
 	maker.textpro("https://textpro.me/break-wall-text-effect-871.html", [
@@ -787,9 +788,8 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
   }
    break
 	case prefix+'natural':{
-	
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
-	reply(mess.wait)
+	sticWait(from)
 	addCmd(`#`+command.slice(1), 1, dashboard)
 	maker.textpro("https://textpro.me/natural-leaves-text-effect-931.html", [
     `${q}`,])
@@ -799,9 +799,8 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
  }
 break
 	case prefix+'carbon':{
-	
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
-	reply(mess.wait)
+	sticWait(from)
 	addCmd(`#`+command.slice(1), 1, dashboard)
 	maker.textpro("https://textpro.me/carbon-text-effect-833.html", [
     `${q}`,])
@@ -811,9 +810,8 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
  }
 break
 case prefix+'pencil':{
-	
 if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
-	reply(mess.wait)
+	sticWait(from)
 	addCmd(`#`+command.slice(1), 1, dashboard)
 	maker.textpro("https://textpro.me/create-a-sketch-text-effect-online-1044.html", [
     `${q}`,])
@@ -823,10 +821,9 @@ if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
  }
 break
           case prefix+'emoji': case prefix+'semoji':{
-            
        	if (args.length < 2) return reply(`Kirim perintah ${command} `)
            addCmd(`#`+`semoji`, 1, dashboard)
-           reply(mess.wait)
+           sticWait(from)
 										emoji.get(`${q}`).then(emoji => {
 										let teks = `${emoji.images[4].url}`
 										sendWebp(from, teks)
@@ -837,7 +834,6 @@ break
 									}
 									break
 			case prefix+'smeme':
-			    
 			    if (!isQuotedSticker) return reply(`Reply stikernya!`)
 			    if (args.length < 2) return reply(`Kirim perintah ${command} Teksnya`)
 			    addCmd(`#`+`smeme`, 1, dashboard)
@@ -859,7 +855,6 @@ break
 			      
 			break
 			case prefix+'smeme2':{
-			    
 			    if (!isQuotedSticker) return reply(`Reply stikernya!`)
 			    if (args.length < 2) return reply(`Kirim perintah ${command} Teks|Teks`)
 			    addCmd(`#`+`smeme2`, 1, dashboard)
@@ -882,7 +877,6 @@ break
 			}
 			break
 			case prefix+'wm': case prefix+'swm':
-			    
 			    if (!isQuotedSticker) return reply(`Reply stikernya!`)
 			    if (args.length < 2) return reply(`Kirim perintah ${command} packname|author`)
 			    addCmd(`#`+`swm`, 1, dashboard)
@@ -908,10 +902,9 @@ break
 			    }
 			break
 			case prefix+'toimg': case prefix+'toimage':
-			    
 			    if (!isQuotedSticker) return reply(`Reply stikernya!`)
 			    addCmd(`#`+`toimg`, 1, dashboard)
-			   reply(mess.wait)
+			   sticWait(from)
 			    var stream = await downloadContentFromMessage(msg.message.extendedTextMessage?.contextInfo.quotedMessage.stickerMessage, 'sticker')
 			    var buffer = Buffer.from([])
 			    for await(const chunk of stream) {
@@ -978,10 +971,9 @@ break
 			    }
 			    break 
 			case prefix+'emojimix2': {
-
 if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 addCmd(`#`+command.slice(1), 1, dashboard)
-reply(mess.wait)
+sticWait(from)
 let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(q)}`).catch((err) => {
   reply(mess.error.api)
   })
@@ -995,10 +987,9 @@ await fs.unlinkSync(encmedia)
 }
 break
 			case prefix+'mix': case prefix+'emojimix': {
-		
         if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 		addCmd(`#`+`emojimix`, 1, dashboard)
-		reply(mess.wait)
+		sticWait(from)
 		let [emoji1, emoji2] = q.split`+`
 		let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(emoji1)}_${encodeURIComponent(emoji2)}`).catch((err) => {
   reply(mess.error.api)
@@ -1014,10 +1005,9 @@ break
 	    break
 	        // Downloader Menu
 	        case prefix+'fb': case prefix+'facebook':
-
 if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 addCmd(`#`+`facebook`, 1, dashboard)
-reply(mess.wait)
+sticWait(from)
 let bko = await xfar.downloader.facebook(`${q}`).catch((err) => {
   reply(mess.error.api)
   })
@@ -1030,7 +1020,6 @@ let yu1io = await getBuffer(bko.hd).catch((err) => {
 			       
 break
 case prefix+'igstory':{
-
 if (args.length < 2) return reply(`Kirim perintah ${command} username`)
 addCmd(`#`+command.slice(1), 1, dashboard)
 const btn = [
@@ -1040,7 +1029,7 @@ let yjk = await bocil.instagramStory(`${q}`).catch((err) => {
   reply(mess.error.api)
   })
 console.log(yjk)
-reply(mess.wait)
+sticWait(from)
 for (let i of yjk.results) {
   if (i.url.includes('mp4')) {
   conn.sendMessage(from, { caption: ` Succes Download Video Instagram, Thanks For Using zBot`, video:{url:i.url}, templateButtons: btn, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
@@ -1052,14 +1041,13 @@ for (let i of yjk.results) {
  }
 break
 case prefix+'twitter':{
-	        
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			addCmd(`#`+command.slice(1), 1, dashboard)
 	        let gut = await xfar.downloader.twitter(q).catch((err) => {
   reply(mess.error.api)
   })
 	        console.log(gut)
-	         reply(mess.wait)
+	         sticWait(from)
              let yuio = await getBuffer(gut.quality_720).catch((err) => {
   reply(mess.error.api)
   })
@@ -1109,10 +1097,9 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 	}
 	        break
 	        case prefix+'ytmp4':{
-	        
 			if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			addCmd(`#`+command.slice(1), 1, dashboard)
-			reply(mess.wait)
+			sticWait(from)
 			let { ytv } = require('../lib/y2mate')
             let quality = args[1] ? args[1] : '480p'
             let media = await ytv(q).catch((err) => {
@@ -1126,12 +1113,11 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 }
 	        break
 	        case prefix+'mediafire':
-					
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
 			    if (!args[1].includes('mediafire')) return reply(mess.error.Iv)
 			addCmd(`#`+command.slice(1), 1, dashboard)
-			    reply(mess.wait)
+			    sticWait(from)
 			let rescun = await mediafiredl(q).catch((err) => {
   reply(mess.error.api)
   })
@@ -1147,10 +1133,9 @@ conn.sendMessage(from, { document: { url: `${rescun[0].link}`}, fileName: `${res
 					
 					break
 		case prefix+'gitclone':{
-
 if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 addCmd(`#`+command.slice(1), 1, dashboard)
-reply(mess.wait) 
+sticWait(from) 
 	const regex = /(?:https|git)(?::\/\/|@)github\.com[\/:]([^\/:]+)\/(.+)/i
     let [_, user, repo] = args[1].match(regex) || []
     repo = repo.replace(/.git$/, "")
@@ -1165,7 +1150,7 @@ break
 	       case prefix+'telestik': case prefix+'telestick': case prefix+'stickertele':
 if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 addCmd(`#`+`stickertele`, 1, dashboard)
-reply(mess.wait)
+sticWait(from)
 let packName = args[1].replace("https://t.me/addstickers/", "")
 let gas = await fetchJson(`https://api.telegram.org/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/getStickerSet?name=${encodeURIComponent(packName)}`, { method: "GET", headers: { "User-Agent": "GoogleBot" } }).catch((err) => {
   reply(mess.error.api)
@@ -1183,11 +1168,10 @@ for (let i = 0; i < gas.result.stickers.length; i++) {
         
 break 
 case prefix+'igfoto':
-
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
 addCmd(`#`+command.slice(1), 1, dashboard)
-  reply(mess.wait)
+  sticWait(from)
   bocil.instagramdl(q).then(data => {
   for (let i of data) {
   conn.sendMessage(from, { caption: ` Succes Download Image Instagram, Thanks For Using zBot`, image:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
@@ -1199,11 +1183,10 @@ addCmd(`#`+command.slice(1), 1, dashboard)
   
   break
 case prefix+'igvideo':
-
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
 addCmd(`#`+command.slice(1), 1, dashboard)
-  reply(mess.wait)
+  sticWait(from)
   bocil.instagramdl(q).then(data => {
   for (let i of data) {
   conn.sendMessage(from, { caption: ` Succes Download Video Instagram, Thanks For Using zBot`, video:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
@@ -1215,11 +1198,10 @@ addCmd(`#`+command.slice(1), 1, dashboard)
   
   break
 case prefix+'ig':case prefix+'instagram':
-  
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
 addCmd(`#`+`instagram`, 1, dashboard)
-  reply(mess.wait)
+  sticWait(from)
   bocil.instagramdlv3(q).then(data => {
   for (let i of data) {
   if (i.url.includes('mp4')) {
@@ -1234,38 +1216,36 @@ addCmd(`#`+`instagram`, 1, dashboard)
   })
   
   break 
-			case prefix+'ttmp3': case prefix+'tiktokaudio':
-			    
+			case prefix+'ttmp3': case prefix+'tiktokaudio':    
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
 			    if (!args[1].includes('tiktok')) return reply(mess.error.Iv)
 			addCmd(`#`+command.slice(1), 1, dashboard)
-			    reply(mess.wait)
-			    bocil.tiktokdlv3(`${q}`).then( data => {
-			      conn.sendMessage(from, { audio: { url: data.video.no_watermark }, mimetype: 'audio/mp4' }, { quoted: msg })
+			    sticWait(from)
+			    hxz.ttdownloader(`${q}`).then( data => {
+			      conn.sendMessage(from, { audio: { url: data.nowm }, mimetype: 'audio/mp4' }, { quoted: msg })
 			       
 				}).catch(() => reply(mess.error.api))
 		        break
 		case prefix+'ttmp4': case prefix+'tt': case prefix+'tiktok':
-			    
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
 			    if (!args[1].includes('tiktok')) return reply(mess.error.Iv)
 			addCmd(`#`+`tiktok`, 1, dashboard)
-			    reply(mess.wait)
-			    bocil.tiktokdlv3(`${q}`).then( yut => {
-				  let anutxt = `• Author : ${yut.author.nickname}\n• Description : ${yut.description}\n• Avatar : ${yut.author.avatar}`
+			    sticWait(from)
+			    hxz.ttdownloader(`${q}`).then( yut => {
+				  let anutxt = `TikTok Downloader by Z-Bot`
 			      var tidtod5 = [
 						{ urlButton: { displayText: `Link`, url : `${q}` } }
 				]
-				conn.sendMessage(from, { caption: anutxt, video: {url: yut.video.no_watermark}, templateButtons: tidtod5, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
+				conn.sendMessage(from, { caption: anutxt, video: {url: yut.nowm}, templateButtons: tidtod5, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
 			       
 				}).catch(() => reply(mess.error.api))
 		        break
 			// Owner Menu
 		    case  prefix+'sendsession':{
  if (!isOwner) return reply(mess.OnlyOwner)
- reply(mess.wait)
+ sticWait(from)
 let anuu = fs.readFileSync('./kon.json')
 conn.sendMessage(from, {document: anuu, mimetype: 'application/octet-stream', fileName: `kon.json`}, {quoted:msg})  
 addCmd(`#`+command.slice(1), 1, dashboard)
@@ -1342,9 +1322,8 @@ break
                 break
 			// Search Menu
 			case prefix+'lirik':
-			    
 				if (args.length < 2) return reply(`Kirim perintah ${command} judul lagu`)
-				reply(mess.wait)
+				sticWait(from)
 			    ra.Musikmatch(q).then(async(data) => {
 				  var teks = `*${data.result.judul} - ${data.result.penyanyi}*\n\n${data.result.lirik}`
 				  conn.sendMessage(from, { image: { url: data.result.thumb }, caption: teks }, { quoted: msg })
@@ -1355,7 +1334,7 @@ break
 			case prefix+'searchgrup':
 			    
 				if (args.length < 2) return reply(`Kirim perintah ${command} nama grup`)
-				reply(mess.wait)
+				sticWait(from)
 			    hxz.linkwa(q).then(async(data) => {
 				  if (data.length == 0) return reply(`Grup ${q} tidak ditemukan`)
 				  var teks = `*Hasil Pencarian Dari ${q}*\n\n`
@@ -1369,7 +1348,7 @@ break
 			    break
 			case prefix+'play':{
 			if (args.length < 2) return reply(`Kirim perintah ${command} query`)
-			reply(mess.wait)
+			sticWait(from)
 			let yts = require("yt-search")
 			addCmd(`#`+command.slice(1), 1, dashboard)
             let search = await yts(`${q}`)
@@ -1406,10 +1385,9 @@ sourceUrl: ` `
 conn.sendMessage(from, buttonMessage, { quoted: msg })
 			}
 			break
-			case prefix+'ytsearch':
-			    
+			case prefix+'ytsearch':    
 			    if (args.length < 2) return reply(`Kirim perintah ${command} query`)
-				reply(mess.wait)
+				sticWait(from)
 				addCmd(`#`+command.slice(1), 1, dashboard)
 			    yts(q).then( data => {
 				  let yt = data.videos
