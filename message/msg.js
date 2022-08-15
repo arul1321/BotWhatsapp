@@ -8,6 +8,7 @@ const { floNime, toAudio } = require('../lib/convert.js')
 const { pinterest } = require("../lib/pinterest")
 const { isLimit, limitAdd, getLimit, giveLimit, addBalance, kurangBalance, getBalance, isGame, gameAdd, givegame, cekGLimit } = require("../lib/limit");
 const { addCmd, AddHituser} = require("../lib/hitbot.js");
+const { addCommands, checkCommands, deleteCommands } = require('../lib/autoresp')
 const { addPlayGame, getJawabanGame, isPlayGame, cekWaktuGame, getGamePosi } = require("../lib/game");
 const _prem = require("../lib/premium");
 const fs = require ("fs");
@@ -48,7 +49,7 @@ let limit = JSON.parse(fs.readFileSync('./database/limit.json'));
 let glimit = JSON.parse(fs.readFileSync('./database/glimit.json'));
 let dashboard = JSON.parse(fs.readFileSync('./database/dashboard/datacmd.json'));
 let userhit = JSON.parse(fs.readFileSync('./database/dashboard/userhit.json'));
-
+let commandsDB = JSON.parse(fs.readFileSync('./database/commands.json'))
 moment.tz.setDefault("Asia/Jakarta").locale("id");
 
 module.exports = async(conn, msg, m, setting, store, ) => {
@@ -400,6 +401,28 @@ var ucapanWaktu = 'Good morning🌉'
 
 		switch(command) {
 			// Main Menu
+			case prefix+'addrespon':
+			   let [emoji1, emoji2] = q.split`.`
+				if (args.length < 2) return reply(`Penggunaan ${prefix}addrespon hai|hai juga`)
+				if (checkCommands(emoji1, commandsDB) === true) return reply(`Udah ada`)
+				addCommands(emoji1, emoji2, sender, commandsDB)
+				reply(`Sukses menambahkan respon ${emoji1}`)
+				break
+			case prefix+'delrespon':
+				if (args.length < 2) return reply(`Penggunaan ${prefix}delrespon hai`)
+				if (!checkCommands(body.slice(11), commandsDB)) return reply(`Ga ada di database`)
+                deleteCommands(body.slice(11), commandsDB)
+				reply(`Sukses menghapus respon ${body.slice(11)}`)
+				break
+				case prefix+'listrespon':
+teks = `\`\`\` LIST RESPON  \`\`\`\n\n`
+for (let i = 0; i < commandsDB.length; i ++){
+teks += ` *Tanya:* ${commandsDB[i].pesan}\n`
+teks += ` *Balasan:* ${commandsDB[i].balasan}\n`
+teks += ` *Creator:* ${commandsDB[i].creator}\n\n`
+}
+reply(teks)
+break
 			case prefix+'getcase':
 if (!isOwner) return reply(mess.OnlyOwner)
 addCmd(`#`+command.slice(1), 1, dashboard)
