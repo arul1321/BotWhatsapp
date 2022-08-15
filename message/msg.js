@@ -401,12 +401,13 @@ var ucapanWaktu = 'Good morning🌉'
 
 		switch(command) {
 			// Main Menu
-			case prefix+'addrespon':
+			case prefix+'addrespon':{
 			   let [emoji1, emoji2] = q.split`.`
 				if (args.length < 2) return reply(`Penggunaan ${prefix}addrespon hai|hai juga`)
 				if (checkCommands(emoji1, commandsDB) === true) return reply(`Udah ada`)
 				addCommands(emoji1, emoji2, sender, commandsDB)
 				reply(`Sukses menambahkan respon ${emoji1}`)
+				}
 				break
 			case prefix+'delrespon':
 				if (args.length < 2) return reply(`Penggunaan ${prefix}delrespon hai`)
