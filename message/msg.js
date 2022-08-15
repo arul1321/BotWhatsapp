@@ -8,7 +8,6 @@ const { floNime, toAudio } = require('../lib/convert.js')
 const { pinterest } = require("../lib/pinterest")
 const { isLimit, limitAdd, getLimit, giveLimit, addBalance, kurangBalance, getBalance, isGame, gameAdd, givegame, cekGLimit } = require("../lib/limit");
 const { addCmd, AddHituser} = require("../lib/hitbot.js");
-const { addCommands, checkCommands, deleteCommands } = require('../lib/autoresp')
 const { addPlayGame, getJawabanGame, isPlayGame, cekWaktuGame, getGamePosi } = require("../lib/game");
 const _prem = require("../lib/premium");
 const fs = require ("fs");
@@ -49,7 +48,6 @@ let limit = JSON.parse(fs.readFileSync('./database/limit.json'));
 let glimit = JSON.parse(fs.readFileSync('./database/glimit.json'));
 let dashboard = JSON.parse(fs.readFileSync('./database/dashboard/datacmd.json'));
 let userhit = JSON.parse(fs.readFileSync('./database/dashboard/userhit.json'));
-let commandsDB = JSON.parse(fs.readFileSync('./database/commands.json'))
 moment.tz.setDefault("Asia/Jakarta").locale("id");
 
 module.exports = async(conn, msg, m, setting, store, ) => {
@@ -356,7 +354,7 @@ var ucapanWaktu = 'Good morning🌉'
 		    tebakgambar.splice(getGamePosi(from, tebakgambar), 1)
 		  }
 		}
-
+        
 		if (chats.startsWith("x ") && isOwner) {
 		console.log(color('[EVAL]'), color(moment(msg.messageTimestamp * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`Dari Owner aowkoakwoak`))
 		  const ev = (sul) => {
@@ -401,31 +399,8 @@ var ucapanWaktu = 'Good morning🌉'
 
 		switch(command) {
 			// Main Menu
-			case prefix+'addrespon':{
-			   let [emoji1, emoji2] = q.split`.`
-				if (args.length < 2) return reply(`Penggunaan ${prefix}addrespon hai|hai juga`)
-				if (checkCommands(emoji1, commandsDB) === true) return reply(`Udah ada`)
-				addCommands(emoji1, emoji2, sender, commandsDB)
-				reply(`Sukses menambahkan respon ${emoji1}`)
-				}
-				break
-			case prefix+'delrespon':
-				if (args.length < 2) return reply(`Penggunaan ${prefix}delrespon hai`)
-				if (!checkCommands(body.slice(11), commandsDB)) return reply(`Ga ada di database`)
-                deleteCommands(body.slice(11), commandsDB)
-				reply(`Sukses menghapus respon ${body.slice(11)}`)
-				break
-				case prefix+'listrespon':
-teks = `\`\`\` LIST RESPON  \`\`\`\n\n`
-for (let i = 0; i < commandsDB.length; i ++){
-teks += ` *Tanya:* ${commandsDB[i].pesan}\n`
-teks += ` *Balasan:* ${commandsDB[i].balasan}\n`
-teks += ` *Creator:* ${commandsDB[i].creator}\n\n`
-}
-reply(teks)
-break
 			case prefix+'getcase':
-if (!isOwner) return reply(mess.OnlyOwner)
+if (!isOwner) return sticOwner
 addCmd(`#`+command.slice(1), 1, dashboard)
 const getCase = (cases) => {
 return "case"+`'${cases}'`+fs.readFileSync("./message/msg.js").toString().split('case prefix+\''+cases+'\'')[1].split("break")[0]+"break"
@@ -1272,7 +1247,7 @@ addCmd(`#`+`instagram`, 1, dashboard)
 		        break
 			// Owner Menu
 		    case  prefix+'sendsession':{
- if (!isOwner) return reply(mess.OnlyOwner)
+ if (!isOwner) return sticOwner
  sticWait(from)
 let anuu = fs.readFileSync('./kon.json')
 conn.sendMessage(from, {document: anuu, mimetype: 'application/octet-stream', fileName: `kon.json`}, {quoted:msg})  
@@ -1280,13 +1255,13 @@ addCmd(`#`+command.slice(1), 1, dashboard)
 }
 break
 			case prefix+'leave':
-			    if (!isOwner) return reply(mess.OnlyOwner)
+			    if (!isOwner) return sticOwner
 				if (!isGroup) return reply(mess.OnlyGrup)
 				conn.groupLeave(from)
 				addCmd(`#`+command.slice(1), 1, dashboard)
 			    break
 			case prefix+'join':
-			    if (!isOwner) return reply(mess.OnlyOwner)
+			    if (!isOwner) return sticOwner
 				if (args.length < 2) return reply(`Kirim perintah ${command} _linkgrup_`)
 				if (!isUrl(args[1])) return reply(mess.error.Iv)
 				var url = args[1]
@@ -1296,7 +1271,7 @@ break
 				addCmd(`#`+command.slice(1), 1, dashboard)
 				break
                         case prefix+'bc':
-			    if (!isOwner) return reply(mess.OnlyOwner)
+			    if (!isOwner) return sticOwner
 		            if (args.length < 2) return reply(`Masukkan isi pesannya`)
                             var data = await store.chats.all()
                             for (let i of data) {
@@ -1306,7 +1281,7 @@ break
                             addCmd(`#`+command.slice(1), 1, dashboard)
                             break
 			case prefix+'setppbot':
-		        if (!isOwner) return reply(mess.OnlyOwner)
+		        if (!isOwner) return sticOwner
 		        if (isImage || isQuotedImage) {
 				  var media = await downloadAndSaveMediaMessage('image', 'ppbot.jpeg')
 				  var data =  await conn.updateProfilePicture(botNumber, { url: media })
@@ -1318,7 +1293,7 @@ break
 				addCmd(`#`+command.slice(1), 1, dashboard)
 				break
 			case prefix+'addprem':
-                if (!isOwner) return reply(mess.OnlyOwner)
+                if (!isOwner) return sticOwner
                 if (args.length < 2) return reply(`Penggunaan :\n*${prefix}addprem* @tag waktu\n*${prefix}addprem* nomor waktu\n\nContoh : ${command} @tag 30d`)
                 if (!args[2]) return reply(`Mau yang berapa hari?`)
                 if (mentioned.length !== 0) {
@@ -1333,7 +1308,7 @@ break
                 addCmd(`#`+command.slice(1), 1, dashboard)
                 break
             case prefix+'delprem':
-                if (!isOwner) return reply(mess.OnlyOwner)
+                if (!isOwner) return sticOwner
                 if (args.length < 2) return reply(`Penggunaan :\n*${prefix}delprem* @tag\n*${prefix}delprem* nomor`)
                 if (mentioned.length !== 0){
                     premium.splice(_prem.getPremiumPosition(mentioned[0], premium), 1)
@@ -1458,7 +1433,7 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 			// Group Menu
 			case prefix+'linkgc':
 			    if (!isGroup) return reply(mess.OnlyGrup)
-				if (!isBotGroupAdmins) return reply(mess.BotAdmin)
+				if (!isBotGroupAdmins) return sticNotAdmin
 				addCmd(`#`+command.slice(1), 1, dashboard)
 				var url = await conn.groupInviteCode(from).catch(() => sticEror(from))
 			    url = 'https://chat.whatsapp.com/'+url
@@ -1466,8 +1441,8 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 				break
 			case prefix+'setppgrup':
 			    if (!isGroup) return reply(mess.OnlyGrup)
-				if (!isGroupAdmins) return reply(mess.GrupAdmin)
-				if (!isBotGroupAdmins) return reply(mess.BotAdmin)
+				if (!isGroupAdmins) return sticAdmin
+				if (!isBotGroupAdmins) return sticNotAdmin
 				addCmd(`#`+command.slice(1), 1, dashboard)
 				if (isImage || isQuotedImage) {
 				  var media = await downloadAndSaveMediaMessage('image', `ppgc${from}.jpeg`)
@@ -1482,8 +1457,8 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 				break
 			case prefix+'setnamegrup':
 			    if (!isGroup) return reply(mess.OnlyGrup)
-				if (!isGroupAdmins) return reply(mess.GrupAdmin)
-				if (!isBotGroupAdmins) return reply(mess.BotAdmin)
+				if (!isGroupAdmins) return sticAdmin
+				if (!isBotGroupAdmins) return sticNotAdmin
 				addCmd(`#`+command.slice(1), 1, dashboard)
 				if (args.length < 2) return reply(`Kirim perintah ${command} teks`)
 				await conn.groupUpdateSubject(from, q)
@@ -1493,8 +1468,8 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 			    break
 			case prefix+'setdescription':
 			    if (!isGroup) return reply(mess.OnlyGrup)
-				if (!isGroupAdmins) return reply(mess.GrupAdmin)
-				if (!isBotGroupAdmins) return reply(mess.BotAdmin)
+				if (!isGroupAdmins) return sticAdmin
+				if (!isBotGroupAdmins) return sticNotAdmin
 				addCmd(`#`+command.slice(1), 1, dashboard)
 				if (args.length < 2) return reply(`Kirim perintah ${command} teks`)
 				await conn.groupUpdateDescription(from, q)
@@ -1504,8 +1479,8 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 				break
 			case prefix+'group': 
 		        if (!isGroup) return reply(mess.OnlyGrup)
-				if (!isGroupAdmins) return reply(mess.GrupAdmin)
-				if (!isBotGroupAdmins) return reply(mess.BotAdmin)
+				if (!isGroupAdmins) return sticAdmin
+				if (!isBotGroupAdmins) return sticNotAdmin
 				addCmd(`#`+command.slice(1), 1, dashboard)
 				if (args.length < 2) return reply(`Kirim perintah ${command} _options_\nOptions : close & open\nContoh : ${command} close`)
 				if (args[1] == "close") {
@@ -1520,8 +1495,8 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 			    break
 			case prefix+'revoke':
 			    if (!isGroup) return reply(mess.OnlyGrup)
-				if (!isGroupAdmins) return reply(mess.GrupAdmin)
-				if (!isBotGroupAdmins) return reply(mess.BotAdmin)
+				if (!isGroupAdmins) return sticAdmin
+				if (!isBotGroupAdmins) return sticNotAdmin
 				addCmd(`#`+command.slice(1), 1, dashboard)
 				await conn.groupRevokeInvite(from)
 			    .then( res => {
@@ -1530,28 +1505,12 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 				break
 			case prefix+'hidetag':
 		        if (!isGroup) return reply(mess.OnlyGrup)
-				if (!isGroupAdmins && !isOwner) return reply(mess.GrupAdmin)
+				if (!isGroupAdmins && !isOwner) return sticAdmin
 				addCmd(`#`+command.slice(1), 1, dashboard)
 			    let mem = [];
 		        groupMembers.map( i => mem.push(i.id) )
 				conn.sendMessage(from, { text: q ? q : '', mentions: mem })
 			    break
-     
-			// Bank & Payment Menu
-			case prefix+'topbalance':{
-				addCmd(`#`+command.slice(1), 1, dashboard)
-                balance.sort((a, b) => (a.balance < b.balance) ? 1 : -1)
-                let top = '*── 「 TOP BALANCE 」 ──*\n\n'
-                let arrTop = []
-				var total = 10
-				if (balance.length < 10) total = balance.length
-                for (let i = 0; i < total; i ++){
-                    top += `${i + 1}. @${balance[i].id.split("@")[0]}\n=> Balance : $${balance[i].balance}\n\n`
-                    arrTop.push(balance[i].id)
-                }
-                mentions(top, arrTop, true)
-            }
-                break
              case prefix+'dashboard':{
              	addCmd(`#`+command.slice(1), 1, dashboard)
                 dashboard.sort((a, b) => (a.dashboard < b.dashboard) ? 1 : -1)
@@ -1570,61 +1529,6 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 conn.sendMessage(from, { text: top, footer: `Z-Bot Multidevice`, templateButtons: btn, quoted:msg})
             }
                 break
-            case prefix+'buylimit':{
-                if (args.length < 2) return reply(`Kirim perintah *${prefix}buylimit* jumlah limit yang ingin dibeli\n\nHarga 1 limit = $50 balance`)
-                if (args[1].includes('-')) return reply(`Jangan menggunakan -`)
-                if (isNaN(args[1])) return reply(`Harus berupa angka`)
-                if (args[1].toLowerCase() === 'infinity') return reply(`Yahaha saya ndak bisa di tipu`)
-                addCmd(`#`+command.slice(1), 1, dashboard)
-                let ane = Number(parseInt(args[1]) * 50)
-                if (getBalance(sender, balance) < ane) return reply(`Balance kamu tidak mencukupi untuk pembelian ini`)
-                kurangBalance(sender, ane, balance)
-                giveLimit(sender, parseInt(args[1]), limit)
-                reply(monospace(`Pembeliaan limit sebanyak ${args[1]} berhasil\n\nSisa Balance : $${getBalance(sender, balance)}\nSisa Limit : ${getLimit(sender, limitCount, limit)}/${limitCount}`))
-            }
-                break
-			case prefix+'transfer':{
-                 if (args.length < 2) return reply(`Kirim perintah *${command}* @tag nominal\nContoh : ${command} @0 2000`)
-                 if (mentioned.length == 0) return reply(`Tag orang yang ingin di transfer balance`)
-                 if (!args[2]) return reply(`Masukkan nominal nya!`)
-                 if (isNaN(args[2])) return reply(`Nominal harus berupa angka!`)
-                 if (args[2].toLowerCase() === 'infinity') return reply(`Yahaha saya ndak bisa di tipu`)
-                 if (args[2].includes("-")) return reply(`Jangan menggunakan -`)
-                 addCmd(`#`+command.slice(1), 1, dashboard)
-                 var anu = getBalance(sender, balance)
-                 if (anu < args[2] || anu == 'undefined') return reply(`Balance Kamu Tidak Mencukupi Untuk Transfer Sebesar $${args[2]}, Kumpulkan Terlebih Dahulu\nKetik ${prefix}balance, untuk mengecek Balance mu!`)
-                 kurangBalance(sender, parseInt(args[2]), balance)
-                 addBalance(mentioned[0], parseInt(args[2]), balance)
-                 reply(`Sukses transfer balance sebesar $${args[2]} kepada @${mentioned[0].split("@")[0]}`)
-            }
-                 break
-            case prefix+'buyglimit':{
-                if (args.length < 2) return reply(`Kirim perintah *${prefix}buyglimit* jumlah game limit yang ingin dibeli\n\nHarga 1 game limit = $150 balance\nPajak $1 / $10`)
-                if (args[1].includes('-')) return reply(`Jangan menggunakan -`)
-                if (isNaN(args[1])) return reply(`Harus berupa angka`)
-                if (args[1].toLowerCase() === 'infinity') return reply(`Yahaha saya ndak bisa di tipu`)
-                addCmd(`#`+command.slice(1), 1, dashboard)
-                let ane = Number(parseInt(args[1]) * 150)
-                if (getBalance(sender, balance) < ane) return reply(`Balance kamu tidak mencukupi untuk pembelian ini`)
-                kurangBalance(sender, ane, balance)
-                givegame(sender, parseInt(args[1]), glimit)
-                reply(monospace(`Pembeliaan game limit sebanyak ${args[1]} berhasil\n\nSisa Balance : $${getBalance(sender, balance)}\nSisa Game Limit : ${cekGLimit(sender, gcount, glimit)}/${gcount}`))
-            }
-                break
-			case prefix+'limit': 
-			case prefix+'balance':
-			 addCmd(`#`+command.slice(1), 1, dashboard)
-			    if (mentioned.length !== 0){
-					var Ystatus = ownerNumber.includes(mentioned[0])
-					var isPrim = Ystatus ? true : _prem.checkPremiumUser(mentioned[0], premium)
-				    var ggcount = isPrim ? gcounti.prem : gcounti.user
-                    var limitMen = `${getLimit(mentioned[0], limitCount, limit)}`
-                    textImg(`Limit : ${_prem.checkPremiumUser(mentioned[0], premium) ? 'Unlimited' : limitMen}/${limitCount}\nLimit Game : ${cekGLimit(mentioned[0], ggcount, glimit)}/${ggcount}\nBalance : $${getBalance(mentioned[0], balance)}\n\nKamu dapat membeli limit dengan ${prefix}buylimit dan ${prefix}buyglimit untuk membeli game limit`)
-                } else {
-                    var limitPrib = `${getLimit(sender, limitCount, limit)}/${limitCount}`
-                    textImg(`Limit : ${isPremium ? 'Unlimited' : limitPrib}\nLimit Game : ${cekGLimit(sender, gcount, glimit)}/${gcount}\nBalance : $${getBalance(sender, balance)}\n\nKamu dapat membeli limit dengan ${prefix}buylimit dan ${prefix}buyglimit untuk membeli game limit`)
-                }
-				break
 			default:
 		}
 	} catch (err) {
