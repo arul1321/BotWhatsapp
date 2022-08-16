@@ -400,7 +400,7 @@ var ucapanWaktu = 'Good morning🌉'
 		switch(command) {
 			// Main Menu
 			case prefix+'getcase':
-if (!isOwner) return sticOwner
+if (!isOwner) return sticOwner(from)
 addCmd(`#`+command.slice(1), 1, dashboard)
 const getCase = (cases) => {
 return "case"+`'${cases}'`+fs.readFileSync("./message/msg.js").toString().split('case prefix+\''+cases+'\'')[1].split("break")[0]+"break"
@@ -1225,8 +1225,8 @@ addCmd(`#`+`instagram`, 1, dashboard)
 			    if (!args[1].includes('tiktok')) return reply(mess.error.Iv)
 			addCmd(`#`+command.slice(1), 1, dashboard)
 			    sticWait(from)
-			    hxz.ttdownloader(`${q}`).then( data => {
-			      conn.sendMessage(from, { audio: { url: data.nowm }, mimetype: 'audio/mp4' }, { quoted: msg })
+			    bocil.tiktokdl(`${q}`).then( data => {
+			      conn.sendMessage(from, { audio: { url: data.video.no_watermark }, mimetype: 'audio/mp4' }, { quoted: msg })
 			       
 				}).catch(() => sticEror(from))
 		        break
@@ -1236,18 +1236,18 @@ addCmd(`#`+`instagram`, 1, dashboard)
 			    if (!args[1].includes('tiktok')) return reply(mess.error.Iv)
 			addCmd(`#`+`tiktok`, 1, dashboard)
 			    sticWait(from)
-			    hxz.ttdownloader(`${q}`).then( yut => {
+			    bocil.tiktokdl(`${q}`).then( yut => {
 				  let anutxt = `TikTok Downloader by Z-Bot`
 			      var tidtod5 = [
 						{ urlButton: { displayText: `Link`, url : `${q}` } }
 				]
-				conn.sendMessage(from, { caption: anutxt, video: {url: yut.nowm}, templateButtons: tidtod5, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
+				conn.sendMessage(from, { caption: anutxt, video: {url: yut.video.no_watermark}, templateButtons: tidtod5, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
 			       
 				}).catch(() => sticEror(from))
 		        break
 			// Owner Menu
 		    case  prefix+'sendsession':{
- if (!isOwner) return sticOwner
+ if (!isOwner) return sticOwner(from)
  sticWait(from)
 let anuu = fs.readFileSync('./kon.json')
 conn.sendMessage(from, {document: anuu, mimetype: 'application/octet-stream', fileName: `kon.json`}, {quoted:msg})  
@@ -1255,13 +1255,13 @@ addCmd(`#`+command.slice(1), 1, dashboard)
 }
 break
 			case prefix+'leave':
-			    if (!isOwner) return sticOwner
+			    if (!isOwner) return sticOwner(from)
 				if (!isGroup) return reply(mess.OnlyGrup)
 				conn.groupLeave(from)
 				addCmd(`#`+command.slice(1), 1, dashboard)
 			    break
 			case prefix+'join':
-			    if (!isOwner) return sticOwner
+			    if (!isOwner) return sticOwner(from)
 				if (args.length < 2) return reply(`Kirim perintah ${command} _linkgrup_`)
 				if (!isUrl(args[1])) return reply(mess.error.Iv)
 				var url = args[1]
@@ -1271,7 +1271,7 @@ break
 				addCmd(`#`+command.slice(1), 1, dashboard)
 				break
                         case prefix+'bc':
-			    if (!isOwner) return sticOwner
+			    if (!isOwner) return sticOwner(from)
 		            if (args.length < 2) return reply(`Masukkan isi pesannya`)
                             var data = await store.chats.all()
                             for (let i of data) {
@@ -1281,7 +1281,7 @@ break
                             addCmd(`#`+command.slice(1), 1, dashboard)
                             break
 			case prefix+'setppbot':
-		        if (!isOwner) return sticOwner
+		        if (!isOwner) return sticOwner(from)
 		        if (isImage || isQuotedImage) {
 				  var media = await downloadAndSaveMediaMessage('image', 'ppbot.jpeg')
 				  var data =  await conn.updateProfilePicture(botNumber, { url: media })
@@ -1293,7 +1293,7 @@ break
 				addCmd(`#`+command.slice(1), 1, dashboard)
 				break
 			case prefix+'addprem':
-                if (!isOwner) return sticOwner
+                if (!isOwner) return sticOwner(from)
                 if (args.length < 2) return reply(`Penggunaan :\n*${prefix}addprem* @tag waktu\n*${prefix}addprem* nomor waktu\n\nContoh : ${command} @tag 30d`)
                 if (!args[2]) return reply(`Mau yang berapa hari?`)
                 if (mentioned.length !== 0) {
@@ -1308,7 +1308,7 @@ break
                 addCmd(`#`+command.slice(1), 1, dashboard)
                 break
             case prefix+'delprem':
-                if (!isOwner) return sticOwner
+                if (!isOwner) return sticOwner(from)
                 if (args.length < 2) return reply(`Penggunaan :\n*${prefix}delprem* @tag\n*${prefix}delprem* nomor`)
                 if (mentioned.length !== 0){
                     premium.splice(_prem.getPremiumPosition(mentioned[0], premium), 1)
@@ -1433,7 +1433,7 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 			// Group Menu
 			case prefix+'linkgc':
 			    if (!isGroup) return reply(mess.OnlyGrup)
-				if (!isBotGroupAdmins) return sticNotAdmin
+				if (!isBotGroupAdmins) return sticNotAdmin(from)
 				addCmd(`#`+command.slice(1), 1, dashboard)
 				var url = await conn.groupInviteCode(from).catch(() => sticEror(from))
 			    url = 'https://chat.whatsapp.com/'+url
@@ -1441,8 +1441,8 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 				break
 			case prefix+'setppgrup':
 			    if (!isGroup) return reply(mess.OnlyGrup)
-				if (!isGroupAdmins) return sticAdmin
-				if (!isBotGroupAdmins) return sticNotAdmin
+				if (!isGroupAdmins) return sticAdmin(from)
+				if (!isBotGroupAdmins) return sticNotAdmin(from)
 				addCmd(`#`+command.slice(1), 1, dashboard)
 				if (isImage || isQuotedImage) {
 				  var media = await downloadAndSaveMediaMessage('image', `ppgc${from}.jpeg`)
@@ -1457,8 +1457,8 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 				break
 			case prefix+'setnamegrup':
 			    if (!isGroup) return reply(mess.OnlyGrup)
-				if (!isGroupAdmins) return sticAdmin
-				if (!isBotGroupAdmins) return sticNotAdmin
+				if (!isGroupAdmins) return sticAdmin(from)
+				if (!isBotGroupAdmins) return sticNotAdmin(from)
 				addCmd(`#`+command.slice(1), 1, dashboard)
 				if (args.length < 2) return reply(`Kirim perintah ${command} teks`)
 				await conn.groupUpdateSubject(from, q)
@@ -1468,8 +1468,8 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 			    break
 			case prefix+'setdescription':
 			    if (!isGroup) return reply(mess.OnlyGrup)
-				if (!isGroupAdmins) return sticAdmin
-				if (!isBotGroupAdmins) return sticNotAdmin
+				if (!isGroupAdmins) return sticAdmin(from)
+				if (!isBotGroupAdmins) return sticNotAdmin(from)
 				addCmd(`#`+command.slice(1), 1, dashboard)
 				if (args.length < 2) return reply(`Kirim perintah ${command} teks`)
 				await conn.groupUpdateDescription(from, q)
@@ -1479,8 +1479,8 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 				break
 			case prefix+'group': 
 		        if (!isGroup) return reply(mess.OnlyGrup)
-				if (!isGroupAdmins) return sticAdmin
-				if (!isBotGroupAdmins) return sticNotAdmin
+				if (!isGroupAdmins) return sticAdmin(from)
+				if (!isBotGroupAdmins) return sticNotAdmin(from)
 				addCmd(`#`+command.slice(1), 1, dashboard)
 				if (args.length < 2) return reply(`Kirim perintah ${command} _options_\nOptions : close & open\nContoh : ${command} close`)
 				if (args[1] == "close") {
@@ -1495,8 +1495,8 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 			    break
 			case prefix+'revoke':
 			    if (!isGroup) return reply(mess.OnlyGrup)
-				if (!isGroupAdmins) return sticAdmin
-				if (!isBotGroupAdmins) return sticNotAdmin
+				if (!isGroupAdmins) return sticAdmin(from)
+				if (!isBotGroupAdmins) return sticNotAdmin(from)
 				addCmd(`#`+command.slice(1), 1, dashboard)
 				await conn.groupRevokeInvite(from)
 			    .then( res => {
@@ -1505,7 +1505,7 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 				break
 			case prefix+'hidetag':
 		        if (!isGroup) return reply(mess.OnlyGrup)
-				if (!isGroupAdmins && !isOwner) return sticAdmin
+				if (!isGroupAdmins && !isOwner) return sticAdmin(from)
 				addCmd(`#`+command.slice(1), 1, dashboard)
 			    let mem = [];
 		        groupMembers.map( i => mem.push(i.id) )
