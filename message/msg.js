@@ -1225,7 +1225,7 @@ addCmd(`#`+`instagram`, 1, dashboard)
 			    if (!args[1].includes('tiktok')) return reply(mess.error.Iv)
 			addCmd(`#`+command.slice(1), 1, dashboard)
 			    sticWait(from)
-			    bocil.tiktokdl(`${q}`).then( data => {
+			    bocil.tiktokdlv3(`${q}`).then( data => {
 			      conn.sendMessage(from, { audio: { url: data.video.no_watermark }, mimetype: 'audio/mp4' }, { quoted: msg })
 			       
 				}).catch(() => sticEror(from))
@@ -1236,7 +1236,7 @@ addCmd(`#`+`instagram`, 1, dashboard)
 			    if (!args[1].includes('tiktok')) return reply(mess.error.Iv)
 			addCmd(`#`+`tiktok`, 1, dashboard)
 			    sticWait(from)
-			    bocil.tiktokdl(`${q}`).then( yut => {
+			    bocil.tiktokdlv3(`${q}`).then( yut => {
 				  let anutxt = `TikTok Downloader by Z-Bot`
 			      var tidtod5 = [
 						{ urlButton: { displayText: `Link`, url : `${q}` } }
