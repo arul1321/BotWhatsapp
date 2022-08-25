@@ -1226,7 +1226,7 @@ addCmd(`#`+`instagram`, 1, dashboard)
 			addCmd(`#`+command.slice(1), 1, dashboard)
 			    sticWait(from)
 			    bocil.tiktokdlv3(`${q}`).then( data => {
-			      conn.sendMessage(from, { audio: { url: data.video.no_watermark }, mimetype: 'audio/mp4' }, { quoted: msg })
+			      conn.sendMessage(from, { audio: { url: data.music }, mimetype: 'audio/mp3' }, { quoted: msg })
 			       
 				}).catch(() => sticEror(from))
 		        break
