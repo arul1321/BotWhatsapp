@@ -62,29 +62,29 @@ module.exports = async(conn, msg, m, setting, store, ) => {
 const time2 = moment.tz('Asia/Jakarta').format('HH:mm:ss')
 const time = moment().tz('Asia/Jakarta').format('HH:mm:ss')
 if(time2 < "23:59:00"){
-var ucapanWaktu = 'Good night🌃'
+var ucapanWaktu = 'Good night'
 }
 if(time2 < "19:00:00"){
-var ucapanWaktu = 'Good afternoon🌆'
+var ucapanWaktu = 'Good afternoon'
 }
 if(time2 < "18:00:00"){
-var ucapanWaktu = 'Good afternoon🌅'
+var ucapanWaktu = 'Good afternoon'
 }
 if(time2 < "15:00:00"){
-var ucapanWaktu = 'Good day🏙'
+var ucapanWaktu = 'Good day'
 }
 if(time2 < "11:00:00"){
-var ucapanWaktu = 'Good morning🌁'
+var ucapanWaktu = 'Good morning'
 }
 if(time2 < "05:00:00"){
-var ucapanWaktu = 'Good morning🌉'
+var ucapanWaktu = 'Good morning'
 }
 		const content = JSON.stringify(msg.message)
 		const from = msg.key.remoteJid
 		const chats = (type === 'conversation' && msg.message.conversation) ? msg.message.conversation : (type === 'imageMessage') && msg.message.imageMessage.caption ? msg.message.imageMessage.caption : (type === 'videoMessage') && msg.message.videoMessage.caption ? msg.message.videoMessage.caption : (type === 'extendedTextMessage') && msg.message.extendedTextMessage.text ? msg.message.extendedTextMessage.text : (type === 'buttonsResponseMessage') && quotedMsg.fromMe && msg.message.buttonsResponseMessage.selectedButtonId ? msg.message.buttonsResponseMessage.selectedButtonId : (type === 'templateButtonReplyMessage') && quotedMsg.fromMe && msg.message.templateButtonReplyMessage.selectedId ? msg.message.templateButtonReplyMessage.selectedId : (type === 'messageContextInfo') ? (msg.message.buttonsResponseMessage?.selectedButtonId || msg.message.listResponseMessage?.singleSelectReply.selectedRowId) : (type == 'listResponseMessage') && quotedMsg.fromMe && msg.message.listResponseMessage.singleSelectReply.selectedRowId ? msg.message.listResponseMessage.singleSelectReply.selectedRowId : ""
                 const toJSON = j => JSON.stringify(j, null,'\t')
 		if (conn.multi) {
-			var prefix = /^[°•π÷×¶∆£¢€¥®™✓_=|~!?#%^&.+-,\/\\©^]/.test(chats) ? chats.match(/^[°•π÷×¶∆£¢€¥®™✓_=|~!?#$%^&.+-,\/\\©^]/gi) : '#'
+			var prefix = /^[���׶������_=|~!?#%^&.+-,\/\\�^]/.test(chats) ? chats.match(/^[���׶������_=|~!?#$%^&.+-,\/\\�^]/gi) : '#'
 		} else {
 			if (conn.nopref) {
 				prefix = ''
@@ -198,8 +198,8 @@ var ucapanWaktu = 'Good morning🌉'
            var url = await yts(query)
            url = url.videos[0].url
            hxz.youtube(url).then(async(data) => {
-             var button = [{ buttonId: `!ytmp3 ${url}`, buttonText: { displayText: `🎵 Audio (${data.size_mp3})` }, type: 1 }, { buttonId: `!ytmp4 ${url}`, buttonText: { displayText: `🎥 Video (${data.size})` }, type: 1 }]
-             conn.sendMessage(from, { caption: `*Title :* ${data.title}\n*Quality :* ${data.quality}\n*Url :* https://youtu.be/${data.id}`, location: { jpegThumbnail: await getBuffer(data.thumb) }, buttons: button, footer: 'Pilih Salah Satu Button Dibawah⬇️', mentions: [sender] })
+             var button = [{ buttonId: `!ytmp3 ${url}`, buttonText: { displayText: ` Audio (${data.size_mp3})` }, type: 1 }, { buttonId: `!ytmp4 ${url}`, buttonText: { displayText: ` Video (${data.size})` }, type: 1 }]
+             conn.sendMessage(from, { caption: `*Title :* ${data.title}\n*Quality :* ${data.quality}\n*Url :* https://youtu.be/${data.id}`, location: { jpegThumbnail: await getBuffer(data.thumb) }, buttons: button, footer: 'Pilih Salah Satu Button Dibawah', mentions: [sender] })
            }).catch((e) => {
              conn.sendMessage(from, { text: mess.error.api }, { quoted: msg })
                ownerNumber.map( i => conn.sendMessage(from, { text: `Send Play Error : ${e}` }))
@@ -278,9 +278,9 @@ var ucapanWaktu = 'Good morning🌉'
         'FN:Owner Z-Bot Multidevice\n' +
         'ORG:\n' +
         'item1.TEL;waid=6281578859076:+62 815-7885-9076\n' +
-        'item1.X-ABLabel:📌 𝑫𝒆𝒗𝒆𝒍𝒐𝒑𝒆𝒓 𝑩𝒐𝒕\n' +
+        'item1.X-ABLabel:  \n' +
         'item2.EMAIL;type=INTERNET:https://instagram.com/_daaa_1\n' +
-        'item2.X-ABLabel:✉️ Email\n' +
+        'item2.X-ABLabel: Email\n' +
         'X-WA-BIZ-DESCRIPTION:Lapor Ke Owner Jika Ada Yang Eror\n' +
         'X-WA-BIZ-NAME:Z-Bot Multidevice\n' +
         'END:VCARD'
@@ -309,8 +309,8 @@ var ucapanWaktu = 'Good morning🌉'
 		const buttonsDefault = [
 			{ callButton: { displayText: `Call Owner!`, phoneNumber: `+6281578859076` } },
 			{ urlButton: { displayText: `Instagram`, url : `https://instagram.com/_daaa_1` } },
-			{ quickReplyButton: { displayText: `• Dashboard`, id: `${prefix}dashboard` } },
-			{ quickReplyButton: { displayText: `• Rules`, id: `${prefix}info` } }
+			{ quickReplyButton: { displayText: `� Dashboard`, id: `${prefix}dashboard` } },
+			{ quickReplyButton: { displayText: `� Rules`, id: `${prefix}info` } }
 		]
         
 		const isImage = (type == 'imageMessage')
@@ -346,9 +346,9 @@ var ucapanWaktu = 'Good morning🌉'
 		  if (chats.toLowerCase() == getJawabanGame(from, tebakgambar)) {
 		    var htgm = randomNomor(400, 500)
 			addBalance(sender, htgm, balance)
-		    var polo= `*Selamat Jawaban Kamu Benar 🎉*\n\nJawaban : ${getJawabanGame(from, tebakgambar)}\nHadiah : ${htgm} balance\n\nIngin bermain lagi? tekan tombol dibawah`
+		    var polo= `*Selamat Jawaban Kamu Benar *\n\nJawaban : ${getJawabanGame(from, tebakgambar)}\nHadiah : ${htgm} balance\n\nIngin bermain lagi? tekan tombol dibawah`
 		    const btn = [
-			{ quickReplyButton: { displayText: `• Tebak Gambar`, id: `${prefix}tebakgambar` } }
+			{ quickReplyButton: { displayText: `� Tebak Gambar`, id: `${prefix}tebakgambar` } }
 		]
 		    conn.sendMessage(from, { text: polo, footer: `Z-Bot Multidevice`, templateButtons: btn, quoted:msg})
 		    tebakgambar.splice(getGamePosi(from, tebakgambar), 1)
@@ -399,6 +399,18 @@ var ucapanWaktu = 'Good morning🌉'
 
 		switch(command) {
 			// Main Menu
+			case prefix+'rumussegitiga':
+			if (args.length < 2) return reply(`Kirim perintah ${command} Alas|Tinggi`)
+			addCmd(`#`+command.slice(1), 1, dashboard)
+			let [a1, a2] = q.split`|`
+			let rumus = 0.5 * a1 * a2
+			let tks1 = `
+Luas Segitiga Dari :
+Alas : ${a1}
+Tinggi : ${a2}
+Luasnya Adalah *${rumus}*`
+reply(tks1)
+			break
 			case prefix+'getcase':
 if (!isOwner) return sticOwner(from)
 addCmd(`#`+command.slice(1), 1, dashboard)
@@ -1070,9 +1082,9 @@ case prefix+'twitter':{
   })
             if (media.filesize >= 100000) return reply(`File Melebihi Batas Silahkan Download Sendiri\n *Link :* ${media.dl_link}`)
             let med = await getBuffer(`${media.thumb}`)
-            let anu = `� Judul: ${media.title}\n• File Size : ${media.filesizeF}\n• Url : ${q}\n• Ext : MP3\n• Resolusi : ${args[1] || '128kbps'}`
+            let anu = ` Judul: ${media.title}\n� File Size : ${media.filesizeF}\n� Url : ${q}\n� Ext : MP3\n� Resolusi : ${args[1] || '128kbps'}`
             let buttons = [
-{buttonId: `${prefix}ytmp4 ${q}`, buttonText: {displayText: '� Video'}, type: 1}
+{buttonId: `${prefix}ytmp4 ${q}`, buttonText: {displayText: ' Video'}, type: 1}
 ]
 let buttonMessage = {
 document: thu,
@@ -1109,7 +1121,7 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
   sticEror(from)
   })
             if (media.filesize >= 100000) return reply(`File Melebihi Batas Silahkan Download Sendiri\n *Link :* ${media.dl_link}`)
-            conn.sendMessage(from, { caption: `• Title : ${media.title}\n• File Size : ${media.filesizeF}\n• Url : ${q}\n• Ext : MP3\n• Resolusi : ${args[1] || '480p'}`, video: { url: media.dl_link }, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} ).catch((err) => {
+            conn.sendMessage(from, { caption: `� Title : ${media.title}\n� File Size : ${media.filesizeF}\n� Url : ${q}\n� Ext : MP3\n� Resolusi : ${args[1] || '480p'}`, video: { url: media.dl_link }, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} ).catch((err) => {
   sticEror(from)
   })
 	         
@@ -1356,14 +1368,14 @@ break
 			addCmd(`#`+command.slice(1), 1, dashboard)
             let search = await yts(`${q}`)
             let anu = `             *Data Berhasil Di Dapatkan*\n
-🥝 Judul : ${search.all[0].title}
-🍉 Durasi : ${search.all[0].timestamp}
-🍇 Upload : ${search.all[0].ago}
-🍑 Views : ${search.all[0].views}\n
+ Judul : ${search.all[0].title}
+ Durasi : ${search.all[0].timestamp}
+ Upload : ${search.all[0].ago}
+ Views : ${search.all[0].views}\n
 _Pilih Media Di Bawah Ini Untuk di Download_ \n`
 			let buffe = await getBuffer(`${search.all[0].thumbnail}`)
 			let butts = [
-{buttonId: `${prefix}ytmp3 ${search.all[0].url}`, buttonText: {displayText: '�Music'}, type: 1},{buttonId: `${prefix}ytmp4 ${search.all[0].url}`, buttonText: {displayText: '�Video'}, type: 1}
+{buttonId: `${prefix}ytmp3 ${search.all[0].url}`, buttonText: {displayText: 'Music'}, type: 1},{buttonId: `${prefix}ytmp4 ${search.all[0].url}`, buttonText: {displayText: 'Video'}, type: 1}
 ]
 let buttonMessage = {
 document: thu,
@@ -1407,7 +1419,7 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
  Untuk mengambil Audio/Video dari hasil pencarian`
                 for (let i = 0; i < jumlah; i++) {
 				  no += 1
-				  txt += `\n─────────────────\n\n*No Urutan : ${no.toString()}*\n*▢ Judul :* ${yt[i].title}\n*▢ ID :* ${yt[i].videoId}\n*▢ Channel :* ${yt[i].author.name}\n*▢ Upload :* ${yt[i].ago}\n*▢ Ditonton :* ${yt[i].views}\n*▢ Duration :* ${yt[i].timestamp}\n*▢ URL :* ${yt[i].url}\n`
+				  txt += `\n\n\n*No Urutan : ${no.toString()}*\n* Judul :* ${yt[i].title}\n* ID :* ${yt[i].videoId}\n* Channel :* ${yt[i].author.name}\n* Upload :* ${yt[i].ago}\n* Ditonton :* ${yt[i].views}\n* Duration :* ${yt[i].timestamp}\n* URL :* ${yt[i].url}\n`
 				}
 				conn.sendMessage(from, { image: { url: yt[0].image }, caption: txt }, { quoted: msg })
 				
@@ -1514,13 +1526,13 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
              case prefix+'dashboard':{
              	addCmd(`#`+command.slice(1), 1, dashboard)
                 dashboard.sort((a, b) => (a.dashboard < b.dashboard) ? 1 : -1)
-                let top = '*── 「 Dashboard Z-Bot Multidevice 」 ──*\n\n'
+                let top = '*  Dashboard Z-Bot Multidevice  *\n\n'
                 let arrTop = []
                 var p = 0
 				var total = 10000
 				if (dashboard.length < 10000) total = dashboard.length
                 for (let i = 0; i < total; i ++){
-                    top += `${p+=1}. Command : *${dashboard[i].id}*\n🥑 Telah Di Gunakan Sebanyak *${dashboard[i].total}* Kali\n\n`
+                    top += `${p+=1}. Command : *${dashboard[i].id}*\n Telah Di Gunakan Sebanyak *${dashboard[i].total}* Kali\n\n`
                     arrTop.push(dashboard[i].id)
                 }
                 const btn = [
