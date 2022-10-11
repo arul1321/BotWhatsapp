@@ -434,6 +434,35 @@ Melanggar ?  *Block*
 conn.sendMessage(from, { text: rules, footer: `Z-Bot Multidevice`, templateButtons: btn, quoted:msg})
 			break
 			case prefix+'menu':
+			let riy =`
+Hallo Kak, Berikut Menu Es Jeruk Sunat
+Barang                               Harga
+
+Es Jeruk Sunat            Rp.8.000
+
+Manfaat Es Jeruk : 
+_Menyegarkan, Menghilangkan Dahaga, Menjaga Daya Tahan Tubuh, Mencegah Rawannya Terkena Penyakit_
+
+Kalau Ada Yang Murah,
+Kenapa Harus Yang Mahal ?
+`
+const buttonsDefaultt = [
+			{ quickReplyButton: { displayText: `• Beli`, id: `${prefix}beli` } }
+		]
+			conn.sendMessage(from, { text: riy, footer: `Mau Beli ?, Tekan Tombol Dibawah`, templateButtons: buttonsDefaultt, quoted:msg})
+			break
+			case prefix+'beli':
+			var try = `Pembayaran :
+1. ShopeePay
+2. Cash
+
+Pembelian dengan jumlah di atas 5 Diskon 10%`
+const buttonsDefaulttt = [
+			{ quickReplyButton: { displayText: `• Kembali Ke Menu`, id: `${prefix}menu` } }
+		]
+			conn.sendMessage(from, { text: try, footer: `Terimakasih Telah Membeli Produk Kami`, templateButtons: buttonsDefaulttt, quoted:msg})
+			break
+			case prefix+'menu1':
 			   addCmd(`#`+command.slice(1), 1, dashboard)
 			    var teks = allmenu(speed, runtime, sender, prefix, pushname, isOwner, isPremium, balance, limit, limitCount, glimit, gcount, pendaftar)
 			    conn.sendMessage(from, { text: teks, footer: `Z-Bot Multidevice`, templateButtons: buttonsDefault, quoted:msg})
@@ -1242,7 +1271,7 @@ addCmd(`#`+`instagram`, 1, dashboard)
 			       
 				}).catch(() => sticEror(from))
 		        break
-		case prefix+'ttmp4': case prefix+'tt': case prefix+'tiktok':
+		case prefix+'ttmp4': case prefix+'tt': case prefix+'tiktok1':
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
 			    if (!args[1].includes('tiktok')) return reply(mess.error.Iv)
