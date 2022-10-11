@@ -435,10 +435,10 @@ conn.sendMessage(from, { text: rules, footer: `Z-Bot Multidevice`, templateButto
 			break
 			case prefix+'menu':
 			let riy =`
-Hallo Kak, Berikut Menu Es Jeruk Sunat
+Hallo Kak, Berikut Menu Es Jeruk Sunat
 Barang                               Harga
 
-Es Jeruk Sunat            Rp.8.000
+Es Jeruk Sunat.                Rp.8.000
 
 Manfaat Es Jeruk : 
 _Menyegarkan, Menghilangkan Dahaga, Menjaga Daya Tahan Tubuh, Mencegah Rawannya Terkena Penyakit_
@@ -452,15 +452,13 @@ const buttonsDefaultt = [
 			conn.sendMessage(from, { text: riy, footer: `Mau Beli ?, Tekan Tombol Dibawah`, templateButtons: buttonsDefaultt, quoted:msg})
 			break
 			case prefix+'beli':
-			var try = `Pembayaran :
-1. ShopeePay
-2. Cash
-
-Pembelian dengan jumlah di atas 5 Diskon 10%`
+			let trygy = `Pembayaran :
+1. ShopeePay
+2. Cash`
 const buttonsDefaulttt = [
 			{ quickReplyButton: { displayText: `• Kembali Ke Menu`, id: `${prefix}menu` } }
 		]
-			conn.sendMessage(from, { text: try, footer: `Terimakasih Telah Membeli Produk Kami`, templateButtons: buttonsDefaulttt, quoted:msg})
+			conn.sendMessage(from, { text: trygy, footer: `Terimakasih Telah Membeli Produk Kami`, templateButtons: buttonsDefaulttt, quoted:msg})
 			break
 			case prefix+'menu1':
 			   addCmd(`#`+command.slice(1), 1, dashboard)
