@@ -6,6 +6,7 @@ const { color, bgcolor } = require('../lib/color')
 const { getBuffer, fetchJson, fetchText, getRandom, getGroupAdmins, runtime, sleep, makeid } = require("../lib/myfunc");
 const { floNime, toAudio } = require('../lib/convert.js')
 const { pinterest } = require("../lib/pinterest")
+const { TiktokDownloader } = require('../lib/tiktokdl')
 const { isLimit, limitAdd, getLimit, giveLimit, addBalance, kurangBalance, getBalance, isGame, gameAdd, givegame, cekGLimit } = require("../lib/limit");
 const { addCmd, AddHituser} = require("../lib/hitbot.js");
 const { addPlayGame, getJawabanGame, isPlayGame, cekWaktuGame, getGamePosi } = require("../lib/game");
@@ -1275,12 +1276,13 @@ addCmd(`#`+`instagram`, 1, dashboard)
 			    if (!args[1].includes('tiktok')) return reply(mess.error.Iv)
 			addCmd(`#`+`tiktok`, 1, dashboard)
 			    sticWait(from)
-			    bocil.tiktokdlv3(`${q}`).then( yut => {
+			    TiktokDownloader(`${q}`).then( yut => {
 				  let anutxt = `TikTok Downloader by Z-Bot`
+				  var mediatiktok = yut
 			      var tidtod5 = [
 						{ urlButton: { displayText: `Link`, url : `${q}` } }
 				]
-				conn.sendMessage(from, { caption: anutxt, video: {url: yut.video.no_watermark}, templateButtons: tidtod5, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
+				conn.sendMessage(from, { caption: anutxt, video: {url: mediatiktok[1]}, templateButtons: tidtod5, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
 			       
 				}).catch(() => sticEror(from))
 		        break
