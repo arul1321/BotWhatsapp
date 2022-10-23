@@ -6,7 +6,7 @@ const { color, bgcolor } = require('../lib/color')
 const { getBuffer, fetchJson, fetchText, getRandom, getGroupAdmins, runtime, sleep, makeid } = require("../lib/myfunc");
 const { floNime, toAudio } = require('../lib/convert.js')
 const { pinterest } = require("../lib/pinterest")
-const { TiktokDownloader } = require('../lib/tiktokdl')
+const { Tiktok } = require('../lib/tiktokdl.js')
 const { isLimit, limitAdd, getLimit, giveLimit, addBalance, kurangBalance, getBalance, isGame, gameAdd, givegame, cekGLimit } = require("../lib/limit");
 const { addCmd, AddHituser} = require("../lib/hitbot.js");
 const { addPlayGame, getJawabanGame, isPlayGame, cekWaktuGame, getGamePosi } = require("../lib/game");
@@ -435,33 +435,6 @@ Melanggar ?  *Block*
 conn.sendMessage(from, { text: rules, footer: `Z-Bot Multidevice`, templateButtons: btn, quoted:msg})
 			break
 			case prefix+'menu':
-			let riy =`
-Hallo Kak, Berikut Menu Es Jeruk Sunat
-Barang                               Harga
-
-Es Jeruk Sunat.                Rp.8.000
-
-Manfaat Es Jeruk : 
-_Menyegarkan, Menghilangkan Dahaga, Menjaga Daya Tahan Tubuh, Mencegah Rawannya Terkena Penyakit_
-
-Kalau Ada Yang Murah,
-Kenapa Harus Yang Mahal ?
-`
-const buttonsDefaultt = [
-			{ quickReplyButton: { displayText: `• Beli`, id: `${prefix}beli` } }
-		]
-			conn.sendMessage(from, { text: riy, footer: `Mau Beli ?, Tekan Tombol Dibawah`, templateButtons: buttonsDefaultt, quoted:msg})
-			break
-			case prefix+'beli':
-			let trygy = `Pembayaran :
-1. ShopeePay
-2. Cash`
-const buttonsDefaulttt = [
-			{ quickReplyButton: { displayText: `• Kembali Ke Menu`, id: `${prefix}menu` } }
-		]
-			conn.sendMessage(from, { text: trygy, footer: `Terimakasih Telah Membeli Produk Kami`, templateButtons: buttonsDefaulttt, quoted:msg})
-			break
-			case prefix+'menu1':
 			   addCmd(`#`+command.slice(1), 1, dashboard)
 			    var teks = allmenu(speed, runtime, sender, prefix, pushname, isOwner, isPremium, balance, limit, limitCount, glimit, gcount, pendaftar)
 			    conn.sendMessage(from, { text: teks, footer: `Z-Bot Multidevice`, templateButtons: buttonsDefault, quoted:msg})
@@ -1258,31 +1231,31 @@ addCmd(`#`+`instagram`, 1, dashboard)
   sticEror(from)
   })
   
-  break 
+  break
 			case prefix+'ttmp3': case prefix+'tiktokaudio':    
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
 			    if (!args[1].includes('tiktok')) return reply(mess.error.Iv)
 			addCmd(`#`+command.slice(1), 1, dashboard)
 			    sticWait(from)
-			    bocil.tiktokdlv3(`${q}`).then( data => {
+			    bocil.tiktokdl(`${q}`).then( data => {
 			      conn.sendMessage(from, { audio: { url: data.video.no_watermark }, mimetype: 'audio/mp4' }, { quoted: msg })
 			       
 				}).catch(() => sticEror(from))
 		        break
-		case prefix+'ttmp4': case prefix+'tt': case prefix+'tiktok1':
+		case prefix+'ttmp4': case prefix+'tt': case prefix+'tiktok':
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
 			    if (!args[1].includes('tiktok')) return reply(mess.error.Iv)
 			addCmd(`#`+`tiktok`, 1, dashboard)
 			    sticWait(from)
-			    TiktokDownloader(`${q}`).then( yut => {
+			    bocil.tiktokdl(`${q}`).then( yut => {
 				  let anutxt = `TikTok Downloader by Z-Bot`
-				  var mediatiktok = yut
+				 // let vm = await getBuffer(`yut.no_watermak_hd`)
 			      var tidtod5 = [
 						{ urlButton: { displayText: `Link`, url : `${q}` } }
 				]
-				conn.sendMessage(from, { caption: anutxt, video: {url: mediatiktok[1]}, templateButtons: tidtod5, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
+				conn.sendMessage(from, { caption: anutxt, video: {url: yut.video.no_watermark}, templateButtons: tidtod5, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
 			       
 				}).catch(() => sticEror(from))
 		        break
