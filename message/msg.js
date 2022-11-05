@@ -1023,21 +1023,19 @@ break
 			if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			addCmd(`#`+`ytmp3`, 1, dashboard)
 			sticWait(from)
-	        let { yta } = require('../lib/y2mate')
+	        let { yta } = require('../lib/y2mate.js')
             let quality = '128kbps'
             let media = await yta(q).catch((err) => {
             sticEror(from)
              })
-            let med = await getBuffer(`${media.thumb}`)
-            let anu = ` Judul: ${media.title}\n• File Size : ${media.filesizeF}\n• Url : ${q}\n• Ext : MP3\n• Resolusi : ${args[1] || '128kbps'}`
             let aud = {
             audio: {url: media.dl_link},      
             mimetype: 'audio/mp4',
             contextInfo:{
             externalAdReply:{
-             title: `${media.title}`,
+             title: `media.title`,
              body: `Downloader by Z-Bot`,
-             thumbnail: med,
+             thumbnail: thu,
              sourceUrl: "https://instagram.com/_daaa_1",
              mediaUrl: "https://instagram.com/_daaa_1",
              //renderLargerThumbnail: true,
@@ -1053,7 +1051,7 @@ break
 			if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			addCmd(`#`+command.slice(1), 1, dashboard)
 			sticWait(from)
-			let { ytv } = require('../lib/y2mate')
+			let { ytv } = require('../lib/y2mate.js')
             let quality = args[1] ? args[1] : '480p'
             let media = await ytv(q).catch((err) => {
   sticEror(from)
