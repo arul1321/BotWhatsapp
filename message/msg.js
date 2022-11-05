@@ -1028,7 +1028,6 @@ break
             let media = await yta(q).catch((err) => {
             sticEror(from)
              })
-            if (media.filesize >= 100000) return reply(`File Melebihi Batas Silahkan Download Sendiri\n *Link :* ${media.dl_link}`)
             let med = await getBuffer(`${media.thumb}`)
             let anu = ` Judul: ${media.title}\n• File Size : ${media.filesizeF}\n• Url : ${q}\n• Ext : MP3\n• Resolusi : ${args[1] || '128kbps'}`
             let aud = {
@@ -1059,7 +1058,6 @@ break
             let media = await ytv(q).catch((err) => {
   sticEror(from)
   })
-            if (media.filesize >= 100000) return reply(`File Melebihi Batas Silahkan Download Sendiri\n *Link :* ${media.dl_link}`)
             let vid = {
           video: {
            url: media.dl_link
