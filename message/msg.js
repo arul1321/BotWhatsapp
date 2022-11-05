@@ -308,10 +308,9 @@ var ucapanWaktu = 'Good morning'
             }
 		
 		const buttonsDefault = [
-			{ callButton: { displayText: `Call Owner!`, phoneNumber: `+6281578859076` } },
-			{ urlButton: { displayText: `Instagram`, url : `https://instagram.com/_daaa_1` } },
-			{ quickReplyButton: { displayText: `• Dashboard`, id: `${prefix}dashboard` } },
-			{ quickReplyButton: { displayText: `• Rules`, id: `${prefix}info` } }
+			{ urlButton: { displayText: ` INSTAGRAM `, url : `https://instagram.com/_daaa_1` } },
+			{ quickReplyButton: { displayText: `Owner`, id: `${prefix}owner` } },
+			{ quickReplyButton: { displayText: `Rules`, id: `${prefix}info` } }
 		]
         
 		const isImage = (type == 'imageMessage')
@@ -1020,96 +1019,35 @@ break
 	    }
 	    break
 	        // Downloader Menu
-	        case prefix+'fb': case prefix+'facebook':
-if (args.length < 2) return reply(`Kirim perintah ${command} link`)
-addCmd(`#`+`facebook`, 1, dashboard)
-sticWait(from)
-let bko = await xfar.downloader.facebook(`${q}`).catch((err) => {
-  sticEror(from)
-  })
-let yu1io = await getBuffer(bko.hd).catch((err) => {
-  sticEror(from)
-  })
-			      conn.sendMessage(from, { caption: ` Success Download Video Facebook`, video: yu1io, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} ).catch((err) => {
-  sticEror(from)
-  })
-			       
-break
-case prefix+'igstory':{
-if (args.length < 2) return reply(`Kirim perintah ${command} username`)
-addCmd(`#`+command.slice(1), 1, dashboard)
-const btn = [
-			{ urlButton: { displayText: `Instagram`, url : `https://instagram.com/_daaa_1` } }
-		]
-let yjk = await bocil.instagramStory(`${q}`).catch((err) => {
-  sticEror(from)
-  })
-console.log(yjk)
-sticWait(from)
-for (let i of yjk.results) {
-  if (i.url.includes('mp4')) {
-  conn.sendMessage(from, { caption: ` Succes Download Video Instagram, Thanks For Using zBot`, video:{url:i.url}, templateButtons: btn, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
-  } else {
-  conn.sendMessage(from, { caption: ` Succes Download Image Instagram, Thanks For Using zBot`, image:{url:i.url}, templateButtons: btn, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
-  }
-  }
- 
- }
-break
-case prefix+'twitter':{
-			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
-			addCmd(`#`+command.slice(1), 1, dashboard)
-	        let gut = await xfar.downloader.twitter(q).catch((err) => {
-  sticEror(from)
-  })
-	        console.log(gut)
-	         sticWait(from)
-             let yuio = await getBuffer(gut.quality_720).catch((err) => {
-  sticEror(from)
-  })
-	        conn.sendMessage(from, { caption: ` Success Download Video Twitter`, video: yuio, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} ).catch((err) => {
-  sticEror(from)
-  })
-	         
-	}
-	        break
 	        case prefix+'yt': case prefix+'ytmp3':{        
 			if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			addCmd(`#`+`ytmp3`, 1, dashboard)
+			sticWait(from)
 	        let { yta } = require('../lib/y2mate')
             let quality = '128kbps'
             let media = await yta(q).catch((err) => {
-  sticEror(from)
-  })
+            sticEror(from)
+             })
             if (media.filesize >= 100000) return reply(`File Melebihi Batas Silahkan Download Sendiri\n *Link :* ${media.dl_link}`)
             let med = await getBuffer(`${media.thumb}`)
             let anu = ` Judul: ${media.title}\n• File Size : ${media.filesizeF}\n• Url : ${q}\n• Ext : MP3\n• Resolusi : ${args[1] || '128kbps'}`
-            let buttons = [
-{buttonId: `${prefix}ytmp4 ${q}`, buttonText: {displayText: ' Video'}, type: 1}
-]
-let buttonMessage = {
-document: thu,
-mimetype: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-fileName: `Z-Bot Whatsapp MD`,
-fileLength: 99999999999999,
-caption: anu,
-footer: `Z-Bot Multidevice`,
-buttons: buttons,
-headerType: 4,
-contextInfo:{externalAdReply:{
-title:`Play Youtube Mp3 Downloader`,
-mediaType: 1,
-renderLargerThumbnail: true , 
-showAdAttribution: true, 
-jpegThumbnail: med,
-mediaUrl: `${q}`,
-thumbnail: med,
-sourceUrl: ` `
-}}
-}
-conn.sendMessage(from, buttonMessage, { quoted: msg })
-            conn.sendMessage(from, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: msg })
-	        
+            let aud = {
+            audio: {url: media.dl_link},      
+            mimetype: 'audio/mp4',
+            contextInfo:{
+            externalAdReply:{
+             title: `${media.title}`,
+             body: `Downloader by Z-Bot`,
+             thumbnail: med,
+             sourceUrl: "https://instagram.com/_daaa_1",
+             mediaUrl: "https://instagram.com/_daaa_1",
+             //renderLargerThumbnail: true,
+             showAdAttribution: true,
+             mediaType: 1
+            }
+           }
+         }
+            conn.sendMessage(from, aud, { quoted : msg })
 	}
 	        break
 	        case prefix+'ytmp4':{
@@ -1122,7 +1060,19 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
   sticEror(from)
   })
             if (media.filesize >= 100000) return reply(`File Melebihi Batas Silahkan Download Sendiri\n *Link :* ${media.dl_link}`)
-            conn.sendMessage(from, { caption: `• Title : ${media.title}\n• File Size : ${media.filesizeF}\n• Url : ${q}\n• Ext : MP3\n• Resolusi : ${args[1] || '480p'}`, video: { url: media.dl_link }, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} ).catch((err) => {
+            let vid = {
+          video: {
+           url: media.dl_link
+           }, 
+          caption:"*Done*\n" + '```' + `${media.title}` + '```',     
+          contextInfo:{
+           externalAdReply:{
+             showAdAttribution: true,
+             mediaType: 1
+            }
+           }
+         }
+        conn.sendMessage(from, vid, { quoted : msg }).catch((err) => {
   sticEror(from)
   })
 	         
@@ -1228,6 +1178,16 @@ addCmd(`#`+`instagram`, 1, dashboard)
   }
   })
   .catch((err) => {
+  bocil.instagramdl(q).then(data => {
+  for (let i of data) {
+  if (i.url.includes('mp4')) {
+  conn.sendMessage(from, { caption: ` Succes Download Video Instagram, Thanks For Using zBot`, video:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
+  } else {
+  conn.sendMessage(from, { caption: ` Succes Download Image Instagram, Thanks For Using zBot`, image:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
+  }
+  }
+  })
+  }).catch((err) => {
   sticEror(from)
   })
   
@@ -1370,10 +1330,10 @@ break
 			addCmd(`#`+command.slice(1), 1, dashboard)
             let search = await yts(`${q}`)
             let anu = `             *Data Berhasil Di Dapatkan*\n
- Judul : ${search.all[0].title}
- Durasi : ${search.all[0].timestamp}
- Upload : ${search.all[0].ago}
- Views : ${search.all[0].views}\n
+Judul : ${search.all[0].title}
+Durasi : ${search.all[0].timestamp}
+Upload : ${search.all[0].ago}
+Views : ${search.all[0].views}\n
 _Pilih Media Di Bawah Ini Untuk di Download_ \n`
 			let buffe = await getBuffer(`${search.all[0].thumbnail}`)
 			let butts = [
@@ -1426,23 +1386,6 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 				conn.sendMessage(from, { image: { url: yt[0].image }, caption: txt }, { quoted: msg })
 				
 				}).catch(() => sticEror(from))
-			    break
-			// Game Menu
-			case prefix+'tebakgambar':
-		        if (isGame(sender, isOwner, gcount, glimit)) return reply(`Limit game kamu sudah habis`)
-			    if (isPlayGame(from, tebakgambar)) return conn.reply(from, `Masih ada game yang belum diselesaikan`, tebakgambar[getGamePosi(from, tebakgambar)].msg)
-			    addCmd(`#`+command.slice(1), 1, dashboard)
-				kotz.tebakgambar().then( data => {
-				  data = data[0]
-				  data.jawaban = data.jawaban.split('Jawaban ').join('')
-				  var teks = `*TEBAK GAMBAR*\n\n`+monospace(`Petunjuk : ${data.jawaban.replace(/[b|c|d|f|g|h|j|k|l|m|n|p|q|r|s|t|v|w|x|y|z]/gi, '_')}\nWaktu : ${gamewaktu}s\n\nJawab Menggunakan Huruf Kecil Semua`)
-				  conn.sendMessage(from, { image: { url: data.image }, caption: teks }, { quoted: msg })
-				  .then( res => {
-					var jawab = data.jawaban.toLowerCase()
-					addPlayGame(from, 'Tebak Gambar', jawab, gamewaktu, res, tebakgambar)
-					gameAdd(sender, glimit)
-				  })
-				})
 			    break
 			// Group Menu
 			case prefix+'linkgc':

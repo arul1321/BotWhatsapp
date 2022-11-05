@@ -1,28 +1,5 @@
-const moment = require("moment-timezone");
 const fs = require("fs");
 const speed = require("performance-now");
-moment.tz.setDefault("Asia/Jakarta").locale("id");
-let dt = moment(Date.now()).tz('Asia/Jakarta').locale('id').format('a')
-const time = moment.tz('Asia/Jakarta').format('DD/MM HH:mm:ss')
-const time2 = moment().tz('Asia/Jakarta').format('HH:mm:ss')
-if(time2 < "23:59:00"){
-var ucapanWaktu = 'Good night🌃'
-}
-if(time2 < "19:00:00"){
-var ucapanWaktu = 'Good afternoon🌆'
-}
-if(time2 < "18:00:00"){
-var ucapanWaktu = 'Good afternoon🌅'
-}
-if(time2 < "15:00:00"){
-var ucapanWaktu = 'Good day🏙'
-}
-if(time2 < "11:00:00"){
-var ucapanWaktu = 'Good morning🌁'
-}
-if(time2 < "05:00:00"){
-var ucapanWaktu = 'Good morning🌉'
-}
 let setting = JSON.parse(fs.readFileSync('./config.json'))
 const { getLimit, getBalance, cekGLimit } = require("../lib/limit")
 
@@ -44,17 +21,12 @@ let latensi = speed() - timestamp
 exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium, balance, limit, limitCount, glimit, gcount, pendaftar) => {
     var p = 0
 	return `
-🎆 *Hallo ${ucapanWaktu} ${pushname !== undefined ? pushname : 'Kak'}*
+                       *Hallo Kak 👋🏻*
 
-*── 「      INFO Z-Bot Multidevice     」 ──*
-🗂Library : *Baileys-MD*.
-🕹Prefix : ( ${prefix} )
-🗓Tanggal Server : ${moment.tz('Asia/Jakarta').format('DD/MM/YY')}
-⏰Waktu Server : ${moment.tz('Asia/Jakarta').format('HH:mm:ss')}
-👥Total User Z-Bot : ${pendaftar.length}
-🕙Runtime : ${runtime(process.uptime())}
-⏳Speed : ${latensi.toFixed(4)} Second
- 
+                   *Z-Bot Multidevice*
+   *Z-Bot Tidak Akan Memproses Jika*
+           *Salah Dalam Penggunaan* 
+                         *Command*
 
   *(🌹)  Main Menu*
   ${p+=1}. ${yui}${prefix}menu${yui}
@@ -62,8 +34,6 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
   ${p+=1}. ${yui}${prefix}info${yui}
   ${p+=1}. ${yui}${prefix}speed${yui}
   ${p+=1}. ${yui}${prefix}runtime${yui}
-  ${p+=1}. ${yui}${prefix}cekpremium${yui}
-  ${p+=1}. ${yui}${prefix}listpremium${yui}
   ${p+=1}. ${yui}${prefix}dashboard${yui}
 
   *(🍉)  Converter/Tools*
@@ -79,6 +49,7 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
   *(🥝)  Downloader*
   ${p+=1}. ${yui}${prefix}tiktok link${yui} 
   ${p+=1}. ${yui}${prefix}tiktokaudio link${yui} 
+  ${p+=1}. ${yui}${prefix}instagram link${yui} 
   ${p+=1}. ${yui}${prefix}igfoto link${yui} 
   ${p+=1}. ${yui}${prefix}igvideo link${yui} 
   ${p+=1}. ${yui}${prefix}stickertele link${yui} 
@@ -86,19 +57,13 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
   ${p+=1}. ${yui}${prefix}ytmp3 link${yui} 
   ${p+=1}. ${yui}${prefix}ytmp4 link${yui} 
   ${p+=1}. ${yui}${prefix}gitclone link${yui} 
-  ${p+=1}. ${yui}${prefix}facebook link${yui} 
-  ${p+=1}. ${yui}${prefix}twitter link${yui} 
-  ${p+=1}. ${yui}${prefix}igstory username${yui} 
   ${readmore}
   *(🔎)  Search Menu*
   ${p+=1}. ${yui}${prefix}play${yui} 
   ${p+=1}. ${yui}${prefix}lirik${yui} 
   ${p+=1}. ${yui}${prefix}searchgrup${yui} 
   ${p+=1}. ${yui}${prefix}ytsearch${yui} 
-  
-  *(🎮)  Game Menu*
-  ${p+=1}. ${yui}${prefix}tebakgambar${yui} ⓖ
-  
+
   *(👥)  Group Menu*
   ${p+=1}. ${yui}${prefix}linkgrup${yui}
   ${p+=1}. ${yui}${prefix}setppgrup${yui}
@@ -201,6 +166,6 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
  ${p+=1}. ${yui}${prefix}1917${yui} 
  ${p+=1}. ${yui}${prefix}leaves${yui} 
 
-*──「 Simple Bot Whatsapp MD Beta 」──*
+*「 Simple Bot Whatsapp MD Beta 」*
 `
 }
