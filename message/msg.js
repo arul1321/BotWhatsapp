@@ -1023,13 +1023,13 @@ break
 			if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			addCmd(`#`+`ytmp3`, 1, dashboard)
 			sticWait(from)
-	        let { yta } = require('../lib/y2mate.js')
+	        // let { yta } = require('../lib/y2mate.js')
             let quality = '128kbps'
-            let media = await yta(q).catch((err) => {
+            let media = hxz.youtube(q).catch((err) => {
             sticEror(from)
              })
             let aud = {
-            audio: {url: media.dl_link},      
+            audio: {url: media.mp3},      
             mimetype: 'audio/mp4',
             contextInfo:{
             externalAdReply:{
@@ -1134,23 +1134,22 @@ case prefix+'igfoto':
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
 addCmd(`#`+command.slice(1), 1, dashboard)
   sticWait(from)
-  bocil.instagramdl(q).then(data => {
-  for (let i of data) {
+  xfar.downloader.instagram(q).then(data => {
+  for (let i of data.media) {
   conn.sendMessage(from, { caption: ` Succes Download Image Instagram, Thanks For Using zBot`, image:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
   }
   })
   .catch((err) => {
   sticEror(from)
   })
-  
   break
 case prefix+'igvideo':
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
 addCmd(`#`+command.slice(1), 1, dashboard)
   sticWait(from)
-  bocil.instagramdl(q).then(data => {
-  for (let i of data) {
+  xfar.downloader.instagram(q).then(data => {
+  for (let i of data.media) {
   conn.sendMessage(from, { caption: ` Succes Download Video Instagram, Thanks For Using zBot`, video:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
   }
   })
@@ -1159,7 +1158,7 @@ addCmd(`#`+command.slice(1), 1, dashboard)
   })
   
   break
-case prefix+'ig':case prefix+'instagram':
+case prefix+'ig':case prefix+'instagram': case prefix+'igdl':
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
 addCmd(`#`+`instagram`, 1, dashboard)
@@ -1174,16 +1173,6 @@ addCmd(`#`+`instagram`, 1, dashboard)
   }
   })
   .catch((err) => {
-  bocil.instagramdl(q).then(data => {
-  for (let i of data) {
-  if (i.url.includes('mp4')) {
-  conn.sendMessage(from, { caption: ` Succes Download Video Instagram, Thanks For Using zBot`, video:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
-  } else {
-  conn.sendMessage(from, { caption: ` Succes Download Image Instagram, Thanks For Using zBot`, image:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
-  }
-  }
-  })
-  }).catch((err) => {
   sticEror(from)
   })
   
