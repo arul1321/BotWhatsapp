@@ -1019,14 +1019,43 @@ break
 	    }
 	    break
 	        // Downloader Menu
-	        case prefix+'yt': case prefix+'ytmp3':{       
-		     if (args.length < 2) return reply(`Kirim perintah ${command} link`)
+	        case prefix+'yt': case prefix+'ytmp3':{        
+			if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			addCmd(`#`+`ytmp3`, 1, dashboard)
-			sticWait(from)
-                let { yta } = require('../lib/y2mate')
-                let quality = args[1] ? args[1] : '128kbps'
-                let media = await yta(q)
-                conn.sendMessage(from, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: msg })
+	        let { yta } = require('../lib/y2mate')
+            let quality = '128kbps'
+            let media = await yta(q).catch((err) => {
+  sticEror(from)
+  })
+            if (media.filesize >= 100000) return reply(`File Melebihi Batas Silahkan Download Sendiri\n *Link :* ${media.dl_link}`)
+            let med = await getBuffer(`${media.thumb}`)
+            let anu = ` Judul: ${media.title}\n• File Size : ${media.filesizeF}\n• Url : ${q}\n• Ext : MP3\n• Resolusi : ${args[1] || '128kbps'}`
+            let buttons = [
+{buttonId: `${prefix}ytmp4 ${q}`, buttonText: {displayText: ' Video'}, type: 1}
+]
+let buttonMessage = {
+document: thu,
+mimetype: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+fileName: `Z-Bot Whatsapp MD`,
+fileLength: 99999999999999,
+caption: anu,
+footer: `Z-Bot Multidevice`,
+buttons: buttons,
+headerType: 4,
+contextInfo:{externalAdReply:{
+title:`Play Youtube Mp3 Downloader`,
+mediaType: 1,
+renderLargerThumbnail: true , 
+showAdAttribution: true, 
+jpegThumbnail: med,
+mediaUrl: `${q}`,
+thumbnail: med,
+sourceUrl: ` `
+}}
+}
+conn.sendMessage(from, buttonMessage, { quoted: msg })
+            conn.sendMessage(from, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: msg })
+	        
 	}
 	        break
 	        case prefix+'ytmp4':{
