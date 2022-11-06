@@ -217,17 +217,17 @@ conn.reSize = async (image, width, height) => {
     let anu_user = `${num.split("@")[0]}`
     let time_wel = moment.tz('Asia/Jakarta').format("HH:mm")
             for (let num of participants) {
-                // Get Profile Picture User
                 try {
                     var pp_user = await conn.profilePictureUrl(num, 'image')
                 } catch {
                     var pp_user = 'https://tinyurl.com/yx93l6da'
                 }
-                let buffe = await getBuffer(`http://hadi-api.herokuapp.com/api/card/goodbye?nama=${anu_user}&descriminator=${time_wel}&memcount=${memeg}&gcname=${encodeURI(metadata.subject)}&pp=${pp_user}&bg=${background}`)
-                let buff = await getBuffer(`http://hadi-api.herokuapp.com/api/card/welcome?nama=${anu_user}&descriminator=${time_wel}&memcount=${memeg}&gcname=${encodeURI(metadata.subject)}&pp=${pp_user}&bg=${background}`)
+                let buffe = await getBuffer(`${pp_user}`)
+                let bufe = await getBuffer(pp_user)
+                let buff = await conn.reSize(bufe, 300, 150)
                 if (anu.action == 'add') {
                 let buttons = [
-{buttonId: `#owner`, buttonText: {displayText: 'Welcome'}, type: 1}
+{buttonId: ``, buttonText: {displayText: 'Welcome'}, type: 1}
 ]
 let buttonMessage = {
 document: fs.readFileSync('./media/tes.xlsx'),
@@ -245,7 +245,7 @@ mediaType: 1,
 renderLargerThumbnail: true , 
 showAdAttribution: true, 
 jpegThumbnail: buff,
-mediaUrl: `github.com/arulganz`,
+mediaUrl: `github.com/arul123`,
 thumbnail: buff,
 sourceUrl: ` `
 }}
@@ -253,7 +253,7 @@ sourceUrl: ` `
 conn.sendMessage(anu.id, buttonMessage)
                 } else if (anu.action == 'remove') {
                 	let buttons = [
-{buttonId: `#owner`, buttonText: {displayText: 'Good Bye'}, type: 1}
+{buttonId: ``, buttonText: {displayText: 'Good Bye'}, type: 1}
 ]
 let buttonMessage = {
 document: fs.readFileSync('./media/tes.xlsx'),
@@ -270,9 +270,9 @@ title:`Leave Message by Z-Bot Md`,
 mediaType: 1,
 renderLargerThumbnail: true , 
 showAdAttribution: true, 
-jpegThumbnail: buffe,
+jpegThumbnail: buff,
 mediaUrl: `github.com/arulganz`,
-thumbnail: buffe,
+thumbnail: buff,
 sourceUrl: ` `
 }}
 }
