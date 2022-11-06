@@ -26,6 +26,7 @@ const fs = require("fs");
 const moment = require('moment')
 const chalk = require('chalk')
 const logg = require('pino')
+const thu = fs.readFileSync('./media/thumb.jpg')
 const clui = require('clui')
 const { Spinner } = clui
 const { serialize } = require("./lib/myfunc");
@@ -208,82 +209,81 @@ conn.reSize = async (image, width, height) => {
     }
     
     conn.ev.on('group-participants.update', async (anu) => {
-        console.log(anu)
-        try {
-            let metadata = await conn.groupMetadata(anu.id)
-            let participants = anu.participants
-            let memeg = metadata.participants.length
-    let num = anu.participants[0]
-    let anu_user = `${num.split("@")[0]}`
-    let time_wel = moment.tz('Asia/Jakarta').format("HH:mm")
-            for (let num of participants) {
-                try {
-                    var pp_user = await conn.profilePictureUrl(num, 'image')
-                } catch {
-                    var pp_user = 'https://tinyurl.com/yx93l6da'
-                }
-                let buffe = await getBuffer(`${pp_user}`)
-                let bufe = await getBuffer(pp_user)
-                let buff = await conn.reSize(bufe, 300, 150)
-                if (anu.action == 'add') {
-                let buttons = [
-{buttonId: ``, buttonText: {displayText: 'Welcome'}, type: 1}
+console.log(anu)
+try {
+let metadata = await conn.groupMetadata(anu.id)
+let participants = anu.participants
+for (let num of participants) {
+try {
+var ppuser = await conn.profilePictureUrl(num, 'image')
+} catch {
+var ppuser = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
+}
+try {
+var ppgroup = await conn.profilePictureUrl(anu.id, 'image')
+} catch {
+var ppgroup = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
+}
+if (anu.action == 'add') {
+let buffe = await getBuffer(ppuser)
+			let butts = [
+{buttonId: `.menu`, buttonText: {displayText: 'MENU'}, type: 1},{buttonId: `.owner`, buttonText: {displayText: 'OWNER'}, type: 1}
 ]
 let buttonMessage = {
-document: fs.readFileSync('./media/tes.xlsx'),
+document: thu,
 mimetype: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-fileName: `Z-Bot Whatsapp MD`,
-fileLength: 99999999999999,
+fileName: `Z-Bot Multidevice`,
+fileLength: 99999999999,
 mentions:[num],
 caption: `Hai Kak @${num.split("@")[0]},\nSaya *Z-Bot Multidevice*, Selamat Datang Di ${metadata.subject}.`,
 footer: `Welcome Message by Z-Bot Multidevice`,
-buttons: buttons,
+buttons: butts,
 headerType: 4,
 contextInfo:{externalAdReply:{
-title:`Welcome Message by Z-Bot Md`,
+title:`Selamat Datang 👋🏻`,
 mediaType: 1,
 renderLargerThumbnail: true , 
 showAdAttribution: true, 
-jpegThumbnail: buff,
-mediaUrl: `github.com/arul123`,
-thumbnail: buff,
+jpegThumbnail: buffe,
+mediaUrl: ``,
+thumbnail: buffe,
 sourceUrl: ` `
 }}
 }
 conn.sendMessage(anu.id, buttonMessage)
-                } else if (anu.action == 'remove') {
-                	let buttons = [
-{buttonId: ``, buttonText: {displayText: 'Good Bye'}, type: 1}
+} else if (anu.action == 'remove') {
+let buffe = await getBuffer(ppuser)
+			let butts = [
+{buttonId: `.menu`, buttonText: {displayText: 'MENU'}, type: 1},{buttonId: `.owner`, buttonText: {displayText: 'OWNER'}, type: 1}
 ]
 let buttonMessage = {
-document: fs.readFileSync('./media/tes.xlsx'),
+document: thu,
 mimetype: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-fileName: `Z-Bot Whatsapp MD`,
-fileLength: 99999999999999,
+fileName: `Z-Bot Multidevice`,
+fileLength: 99999999999,
 mentions:[num],
 caption: `@${num.split("@")[0]} Keluar Dari ${metadata.subject}.`,
 footer: `Leave Message by Z-Bot Multidevice`,
-buttons: buttons,
+buttons: butts,
 headerType: 4,
 contextInfo:{externalAdReply:{
-title:`Leave Message by Z-Bot Md`,
+title:`Selamat Tinggal 👋🏻`,
 mediaType: 1,
 renderLargerThumbnail: true , 
 showAdAttribution: true, 
-jpegThumbnail: buff,
-mediaUrl: `github.com/arulganz`,
-thumbnail: buff,
+jpegThumbnail: buffe,
+mediaUrl: ``,
+thumbnail: buffe,
 sourceUrl: ` `
 }}
 }
 conn.sendMessage(anu.id, buttonMessage)
-                    //conn.sendMessage(anu.id, { image: buffe})
-                } 
-            }
-        } catch (err) {
-            console.log(err)
-        }
-    })
+}
+}
+} catch (err) {
+console.log(err)
+}
+})
     
 	conn.reply = (from, content, msg) => conn.sendMessage(from, { text: content }, { quoted: msg })
 
