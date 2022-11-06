@@ -1019,32 +1019,14 @@ break
 	    }
 	    break
 	        // Downloader Menu
-	        case prefix+'yt': case prefix+'ytmp3':{        
-			if (args.length < 2) return reply(`Kirim perintah ${command} link`)
+	        case prefix+'yt': case prefix+'ytmp3':{       
+		     if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			addCmd(`#`+`ytmp3`, 1, dashboard)
 			sticWait(from)
-	        // let { yta } = require('../lib/y2mate.js')
-            let quality = '128kbps'
-            let media = hxz.youtube(q).catch((err) => {
-            sticEror(from)
-             })
-            let aud = {
-            audio: {url: media.mp3},      
-            mimetype: 'audio/mp4',
-            contextInfo:{
-            externalAdReply:{
-             title: `media.title`,
-             body: `Downloader by Z-Bot`,
-             thumbnail: thu,
-             sourceUrl: "https://instagram.com/_daaa_1",
-             mediaUrl: "https://instagram.com/_daaa_1",
-             //renderLargerThumbnail: true,
-             showAdAttribution: true,
-             mediaType: 1
-            }
-           }
-         }
-            conn.sendMessage(from, aud, { quoted : msg })
+                let { yta } = require('../lib/y2mate')
+                let quality = args[1] ? args[1] : '128kbps'
+                let media = await yta(q)
+                conn.sendMessage(from, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: msg })
 	}
 	        break
 	        case prefix+'ytmp4':{
