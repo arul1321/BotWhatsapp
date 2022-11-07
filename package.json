@@ -13,7 +13,7 @@
   "author": "Galih Andrean",
   "license": "MIT",
   "dependencies": {
-    "@adiwajshing/baileys": "github:KirBotz/Baileys",
+    "@adiwajshing/baileys": "github:zeeone-ofc/Baileys",
     "@adiwajshing/keyed-db": "^0.2.4",
     "@bochilteam/scraper": "^2.0.0",
     "jimp": "^0.16.1",
