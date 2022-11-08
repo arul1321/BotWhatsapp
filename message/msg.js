@@ -1027,18 +1027,10 @@ break
 let data = await caliph.downloader.yt.mp3(q).catch((err) => {
   sticEror(from)
   })
-var nme = `./tempat/${Date.now()}.mp4`
- fs.writeFileSync(nme, await getBuffer(`${data.result.result}`)).catch((err) => {
+ let aud = await getBuffer(data.result.result)
+ conn.sendMessage(from, { audio: aud, mimetype: 'audio/mp4', fileName: `${data.result.title}.mp3` }, { quoted: msg }).catch((err) => {
   sticEror(from)
   })
- var ran = './tempat/'+getRandom('.mp3')
- exec(`ffmpeg -i ${nme} ${ran}`, async (err) => {
- conn.sendMessage(from, { audio: fs.readFileSync(ran), mimetype: 'audio/mp4', fileName: `${data.result.title}.mp3` }, { quoted: msg }).catch((err) => {
-  sticEror(from)
-  })
-fs.unlinkSync(nme)
-fs.unlinkSync(ran)
- })
 }
 break
 	        case prefix+'ytmp4':{
