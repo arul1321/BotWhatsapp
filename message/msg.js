@@ -1028,7 +1028,9 @@ let data = await caliph.downloader.youtube.ytmp4(q).catch((err) => {
   sticEror(from)
   })
 var nme = `./tempat/${Date.now()}.mp4`
- fs.writeFileSync(nme, await getBuffer(data.result))
+ fs.writeFileSync(nme, await getBuffer(`${data.result}`)).catch((err) => {
+  sticEror(from)
+  })
  var ran = './tempat/'+getRandom('.mp3')
  exec(`ffmpeg -i ${nme} ${ran}`, async (err) => {
  conn.sendMessage(from, { audio: fs.readFileSync(ran), mimetype: 'audio/mp4', fileName: `${data.title}.mp3` }, { quoted: msg }).catch((err) => {
@@ -1046,7 +1048,10 @@ break
 			let media = await caliph.downloader.youtube.ytmp4(q).catch((err) => {
   sticEror(from)
   })
-            conn.sendMessage(from, { video: await getBuffer(media.result), caption: media.title }, { quoted: msg }).catch((err) => {
+            let vid = await getBuffer(`${media.result}`).catch((err) => {
+  sticEror(from)
+  })
+            conn.sendMessage(from, { video: vid, caption: media.title }, { quoted: msg }).catch((err) => {
   sticEror(from)
   })
 }
