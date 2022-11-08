@@ -1024,13 +1024,13 @@ break
 		if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 		addCmd(`#`+command.slice(1), 1, dashboard)
 		sticWait(from)
-let data = await caliph.downloader.yt.mp4(q).catch((err) => {
+        let data = await caliph.downloader.yt.mp4(q).catch((err) => {
   sticEror(from)
   })
-let data2 = await caliph.downloader.yt.mp3(q).catch((err) => {
+        let data2 = await caliph.downloader.yt.mp3(q).catch((err) => {
   sticEror(from)
   })
-if (data.result.size >= 10000) return reply(`File Melebihi Batas Silahkan Download Sendiri\n *Link :* ${data2.result.result}`)
+        if (data.result.size > 10) return reply(`File Melebihi Batas Silahkan Download Sendiri\n *Link :* ${data2.result.result}`)
 var nme = `./tempat/${Date.now()}.mp4`
  fs.writeFileSync(nme, await getBuffer(`${data.result.result}`))
  var ran = './tempat/'+getRandom('.mp3')
@@ -1050,7 +1050,7 @@ break
 			let media = await caliph.downloader.yt.mp4(q).catch((err) => {
   sticEror(from)
   })
-  if (media.result.size >= 10000) return reply(`File Melebihi Batas Silahkan Download Sendiri\n *Link :* ${media.result.result}`)
+            if (media.result.size > 10) return reply(`File Melebihi Batas Silahkan Download Sendiri\n *Link :* ${media.result.result}`)
             let vid = await getBuffer(`${media.result.result}`).catch((err) => {
   sticEror(from)
   })
