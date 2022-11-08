@@ -21,6 +21,7 @@ const bocil = require('@bochilteam/scraper')
 const xfar = require('xfarr-api');
 const axios = require("axios");
 const hxz = require("hxz-api");
+const caliph = require('caliph-api')
 const ra = require("ra-api");
 const kotz = require("kotz-api");
 const yts = require("yt-search");
@@ -1019,70 +1020,35 @@ break
 	    }
 	    break
 	        // Downloader Menu
-	        case prefix+'yt': case prefix+'ytmp3':{        
-			if (args.length < 2) return reply(`Kirim perintah ${command} link`)
-			addCmd(`#`+`ytmp3`, 1, dashboard)
-	        let { yta } = require('../lib/y2mate')
-            let quality = '128kbps'
-            let media = await yta(q).catch((err) => {
+	       case prefix+'ytmp3':{
+		if (args.length < 2) return reply(`Kirim perintah ${command} link`)
+		addCmd(`#`+command.slice(1), 1, dashboard)
+		sticWait(from)
+let data = await caliph.downloader.youtube.ytmp4(q).catch((err) => {
   sticEror(from)
   })
-            if (media.filesize >= 100000) return reply(`File Melebihi Batas Silahkan Download Sendiri\n *Link :* ${media.dl_link}`)
-            let med = await getBuffer(`${media.thumb}`)
-            let anu = ` Judul: ${media.title}\n• File Size : ${media.filesizeF}\n• Url : ${q}\n• Ext : MP3\n• Resolusi : ${args[1] || '128kbps'}`
-            let buttons = [
-{buttonId: `${prefix}ytmp4 ${q}`, buttonText: {displayText: ' Video'}, type: 1}
-]
-let buttonMessage = {
-document: thu,
-mimetype: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-fileName: `Z-Bot Whatsapp MD`,
-fileLength: 99999999999999,
-caption: anu,
-footer: `Z-Bot Multidevice`,
-buttons: buttons,
-headerType: 4,
-contextInfo:{externalAdReply:{
-title:`Play Youtube Mp3 Downloader`,
-mediaType: 1,
-renderLargerThumbnail: true , 
-showAdAttribution: true, 
-jpegThumbnail: med,
-mediaUrl: `${q}`,
-thumbnail: med,
-sourceUrl: ` `
-}}
+var nme = `./tempat/${Date.now()}.mp4`
+ fs.writeFileSync(nme, await getBuffer(data.result))
+ var ran = './tempat/'+getRandom('.mp3')
+ exec(`ffmpeg -i ${nme} ${ran}`, async (err) => {
+ conn.sendMessage(from, { audio: fs.readFileSync(ran), mimetype: 'audio/mp4', fileName: `${data.title}.mp3` }, { quoted: msg }).catch((err) => {
+  sticEror(from)
+  })
+fs.unlinkSync(nme)
+fs.unlinkSync(ran)
+ })
 }
-conn.sendMessage(from, buttonMessage, { quoted: msg })
-            conn.sendMessage(from, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: msg })
-	        
-	}
-	        break
+break
 	        case prefix+'ytmp4':{
 			if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			addCmd(`#`+command.slice(1), 1, dashboard)
 			sticWait(from)
-			let { ytv } = require('../lib/y2mate.js')
-            let quality = args[1] ? args[1] : '480p'
-            let media = await ytv(q).catch((err) => {
+			let media = await caliph.downloader.youtube.ytmp4(q).catch((err) => {
   sticEror(from)
   })
-            let vid = {
-          video: {
-           url: media.dl_link
-           }, 
-          caption:"*Done*\n" + '```' + `${media.title}` + '```',     
-          contextInfo:{
-           externalAdReply:{
-             showAdAttribution: true,
-             mediaType: 1
-            }
-           }
-         }
-        conn.sendMessage(from, vid, { quoted : msg }).catch((err) => {
+            conn.sendMessage(from, { video: await getBuffer(media.result), caption: media.title }, { quoted: msg }).catch((err) => {
   sticEror(from)
   })
-	         
 }
 	        break
 	        case prefix+'mediafire':
