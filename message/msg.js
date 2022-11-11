@@ -1030,7 +1030,39 @@ break
         let data2 = await caliph.downloader.yt.mp3(q).catch((err) => {
   sticEror(from)
   })
-        if (data.result.size > 10) return reply(`File Melebihi Batas Silahkan Download Sendiri\n *Link :* ${data2.result.result}`)
+  let med = await getBuffer(`${data.result.thumb}`)
+    let cap = `
+ Judul : ${data.result.title}
+ Size : ${data.result.size}
+ Durasi : ${data.result.duration}
+ Deskripsi : ${data.result.desc}
+
+_Tunggu Beberapa Menit Ke Depan_
+`
+let buttons = [
+{buttonId: `${prefix}ytmp4 ${q}`, buttonText: {displayText: ' Video'}, type: 1}
+]
+let buttonMessage = {
+document: thu,
+mimetype: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+fileName: `Z-Bot Whatsapp MD`,
+fileLength: 99999999999999,
+caption: cap,
+footer: `Z-Bot Multidevice`,
+buttons: buttons,
+headerType: 4,
+contextInfo:{externalAdReply:{
+title:`Play Youtube Mp3 Downloader`,
+mediaType: 1,
+renderLargerThumbnail: true , 
+showAdAttribution: true, 
+jpegThumbnail: med,
+mediaUrl: `${q}`,
+thumbnail: med,
+sourceUrl: ` `
+}}
+}
+conn.sendMessage(from, buttonMessage, { quoted: msg })
 var nme = `./tempat/${Date.now()}.mp4`
  fs.writeFileSync(nme, await getBuffer(`${data.result.result}`))
  var ran = './tempat/'+getRandom('.mp3')
