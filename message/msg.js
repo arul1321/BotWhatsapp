@@ -1076,12 +1076,12 @@ break
         let data = await caliph.downloader.yt.mp4(q).catch((err) => {
   sticEror(from)
   })
-        let data2 = await caliph.downloader.yt.mp3(q).catch((err) => {
+  let data2 = await caliph.downloader.yt.mp3(q).catch((err) => {
   sticEror(from)
   })
   let med = await getBuffer(`${data.result.thumb}`)
     let cap = `
-_*Tunggu Sekitar Beberapa Menit Ke Depan Media Sedang Di Kirim*_
+_*Tunggu Sekitar Beberapa Menit Ke Depan Media Sedang Di Kirim*_  
 *Judul :* ${data2.result.title}
 *Size :* ${data2.result.size}
 *Durasi :* ${data2.result.duration}
@@ -1111,7 +1111,7 @@ sourceUrl: ` `
 }}
 }
 conn.sendMessage(from, buttonMessage, { quoted: msg })
-var nme = `./tempat/${Date.now()}.mp4`
+/*var nme = `./tempat/${Date.now()}.mp4`
  fs.writeFileSync(nme, await getBuffer(`${data.result.result}`))
  var ran = './tempat/'+getRandom('.mp3')
  exec(`ffmpeg -i ${nme} ${ran}`, async (err) => {
@@ -1120,7 +1120,10 @@ var nme = `./tempat/${Date.now()}.mp4`
   })
 fs.unlinkSync(nme)
 fs.unlinkSync(ran)
- })
+ })*/
+ var data = await fetchJson('https://yt.nxr.my.id/yt2?url=' + q + '&type=audio')
+ if (data.data.size > '50 MB') return reply(`File Melebihi Batas Silahkan Download Sendiri\n *Link :* ${data.data.url}`)
+ conn.sendMessage(from, {document: { url: data.data.url }, mimetype: 'audio/mp4', fileName: `${data.data.filename}.mp3 Downloader by Z-Bot Multidevice`}, { quoted : msg })
 }
 break
 	        case prefix+'ytmp4':{
@@ -1130,7 +1133,7 @@ break
 			let media = await caliph.downloader.yt.mp4(q).catch((err) => {
   sticEror(from)
   })
-            if (media.result.size > 10) return reply(`File Melebihi Batas Silahkan Download Sendiri\n *Link :* ${media.result.result}`)
+            if (media.result.size > '50 MB') return reply(`File Melebihi Batas Silahkan Download Sendiri\n *Link :* ${media.result.result}`)
             let vid = await getBuffer(`${media.result.result}`).catch((err) => {
   sticEror(from)
   })
