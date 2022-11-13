@@ -1122,7 +1122,7 @@ fs.unlinkSync(nme)
 fs.unlinkSync(ran)
  })*/
  var data = await fetchJson('https://yt.nxr.my.id/yt2?url=' + q + '&type=audio')
- if (data.data.size > '50 MB') return reply(`File Melebihi Batas Silahkan Download Sendiri\n *Link :* ${data.data.url}`)
+ if (data.data.size > '50 MB') return reply(`File Melebihi Batas Silahkan Download Sendiri\n*Link :* ${data.data.url}`)
  conn.sendMessage(from, {document: { url: data.data.url }, mimetype: 'audio/mp4', fileName: `${data.data.filename}.mp3 Downloader by Z-Bot Multidevice`}, { quoted : msg })
 }
 break
@@ -1133,7 +1133,7 @@ break
 			let media = await caliph.downloader.yt.mp4(q).catch((err) => {
   sticEror(from)
   })
-            if (media.result.size > '50 MB') return reply(`File Melebihi Batas Silahkan Download Sendiri\n *Link :* ${media.result.result}`)
+            if (media.result.size > '50 MB') return reply(`File Melebihi Batas Silahkan Download Sendiri\n*Link :* ${media.result.result}`)
             let vid = await getBuffer(`${media.result.result}`).catch((err) => {
   sticEror(from)
   })
