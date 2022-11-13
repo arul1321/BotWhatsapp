@@ -1079,7 +1079,7 @@ break
   let data2 = await caliph.downloader.yt.mp3(q).catch((err) => {
   sticEror(from)
   })
-  let med = await getBuffer(`${data.result.thumb}`)
+  let med = await getBuffer(`${data5.result.thumb}`)
     let cap = `
 _*Tunggu Sekitar Beberapa Menit Ke Depan Media Sedang Di Kirim*_  
 *Judul :* ${data2.result.title}
