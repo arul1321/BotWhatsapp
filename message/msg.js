@@ -1073,7 +1073,7 @@ break
 		if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 		addCmd(`#`+command.slice(1), 1, dashboard)
 		sticWait(from)
-        let data = await caliph.downloader.yt.mp4(q).catch((err) => {
+        let data5 = await caliph.downloader.yt.mp4(q).catch((err) => {
   sticEror(from)
   })
   let data2 = await caliph.downloader.yt.mp3(q).catch((err) => {
