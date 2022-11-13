@@ -99,6 +99,7 @@ var ucapanWaktu = 'Good morning'
 		const isCmd = command.startsWith(prefix)
 		const isGroup = msg.key.remoteJid.endsWith('@g.us')
 		const sender = isGroup ? (msg.key.participant ? msg.key.participant : msg.participant) : msg.key.remoteJid
+		const sender4 = msg.key.remoteJid
 		const isOwner = ownerNumber == sender ? true : ["6281578859076@s.whatsapp.net", "628990999699@s.whatsapp.net"].includes(sender) ? true : false
 		const pushname = msg.pushName
 		const quoted = msg.quoted ? msg.quoted : msg
@@ -330,33 +331,51 @@ var ucapanWaktu = 'Good morning'
         conn.readMessages([msg.key])
         console.log(chalk.black(chalk.bgWhite('[ PESAN ]')), chalk.black(chalk.bgGreen(ucapanWaktu)), chalk.black(chalk.bgBlue(chats)) + '\n' + chalk.magenta('=> Dari'), chalk.green(`${pushname}`), chalk.yellow(sender) + '\n' + chalk.blueBright('=> Di'), chalk.green(msg.isGroup ? pushname : 'Private Chat', from))
         }
-        /// Auto Block 212
-        var arr = sender.split(`6`, 1)
+        /// Auto Block +212 & +1
+        var arr1 = sender4.split(` `, 1)
+        if (arr1 == `1`){
+        reply(`You will be blocked, because this bot is specifically for +62 numbers`)
+        await sleep(3000)
+        await conn.updateBlockStatus(sender, 'block')
+        }
+        var arr31 = sender4.split(`(`, 1)
+        if (arr31 == `1 `){
+        reply(`You will be blocked, because this bot is specifically for +62 numbers`)
+        await sleep(3000)
+        await conn.updateBlockStatus(sender, 'block')
+        }
+        var arr = sender4.split(` `, 1)
         if (arr == `212`){
         reply(`You will be blocked, because this bot is specifically for +62 numbers`)
         await sleep(3000)
         await conn.updateBlockStatus(sender, 'block')
         }
-        var arr2 = sender.split(`7`, 1)
+        var arr2 = sender4.split(`7`, 1)
         if (arr2 == `212`){
         reply(`You will be blocked, because this bot is specifically for +62 numbers`)
         await sleep(3000)
         await conn.updateBlockStatus(sender, 'block')
         }
-        var arr3 = sender.split(`8`, 1)
+        var arr3 = sender4.split(`8`, 1)
         if (arr3 == `212`){
         reply(`You will be blocked, because this bot is specifically for +62 numbers`)
         await sleep(3000)
         await conn.updateBlockStatus(sender, 'block')
         }
-        var arr4 = sender.split(`9`, 1)
-        if (arr == `212`){
+        var arr4 = sender4.split(`9`, 1)
+        if (arr4 == `212`){
         reply(`You will be blocked, because this bot is specifically for +62 numbers`)
         await sleep(3000)
         await conn.updateBlockStatus(sender, 'block')
         }
-        var arr5 = sender.split(`5`, 1)
-        if (arr == `212`){
+        var arr5 = sender4.split(`5`, 1)
+        if (arr5 == `212`){
+        reply(`You will be blocked, because this bot is specifically for +62 numbers`)
+        await sleep(3000)
+        await conn.updateBlockStatus(sender, 'block')
+        }
+        var arr6 = sender4.split(`6`, 1)
+        if (arr6 == `212`){
         reply(`You will be blocked, because this bot is specifically for +62 numbers`)
         await sleep(3000)
         await conn.updateBlockStatus(sender, 'block')
