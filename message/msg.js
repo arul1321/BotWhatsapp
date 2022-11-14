@@ -1073,19 +1073,15 @@ break
 		if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 		addCmd(`#`+command.slice(1), 1, dashboard)
 		sticWait(from)
-        let data5 = await caliph.downloader.yt.mp4(q).catch((err) => {
-  sticEror(from)
-  })
-  let data2 = await caliph.downloader.yt.mp3(q).catch((err) => {
-  sticEror(from)
-  })
-  let med = await getBuffer(`${data5.result.thumb}`)
+        var data = await fetchJson('https://yt.nxr.my.id/yt2?url=' + q + '&type=audio')
+        if (data.data.size > '70 MB') return reply(`File Melebihi Batas Silahkan Download Sendiri\n*Link :* ${data.data.url}`)
+  let med = await getBuffer(`${data.thumbnail}`)
     let cap = `
 _*Tunggu Sekitar Beberapa Menit Ke Depan Media Sedang Di Kirim*_  
-*Judul :* ${data2.result.title}
-*Size :* ${data2.result.size}
-*Durasi :* ${data2.result.duration}
-*Deskripsi :* ${data2.result.desc}
+
+*Judul :* ${data.data.filename}
+*Size :* ${data.data.size}
+*Durasi :* ${data.data.duration}
 `
 let buttons = [
 {buttonId: `${prefix}ytmp4 ${q}`, buttonText: {displayText: 'Video'}, type: 1}
@@ -1121,23 +1117,21 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 fs.unlinkSync(nme)
 fs.unlinkSync(ran)
  })*/
- var data = await fetchJson('https://yt.nxr.my.id/yt2?url=' + q + '&type=audio')
- if (data.data.size > '50 MB') return reply(`File Melebihi Batas Silahkan Download Sendiri\n*Link :* ${data.data.url}`)
- conn.sendMessage(from, {document: { url: data.data.url }, mimetype: 'audio/mp3', fileName: `${data.data.filename} Downloader by Z-Bot Multidevice`}, { quoted : msg })
+  conn.sendMessage(from, {document: { url: data.data.url }, mimetype: 'audio/mp3', fileName: `${data.data.filename} Downloader by Z-Bot Multidevice`}, { quoted : msg })
 }
 break
 	        case prefix+'ytmp4':{
 			if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			addCmd(`#`+command.slice(1), 1, dashboard)
 			sticWait(from)
-			let media = await caliph.downloader.yt.mp4(q).catch((err) => {
+			var data = await fetchJson('https://yt.nxr.my.id/yt2?url=' + q + '&type=video').catch((err) => {
   sticEror(from)
   })
-            if (media.result.size > '50 MB') return reply(`File Melebihi Batas Silahkan Download Sendiri\n*Link :* ${media.result.result}`)
-            let vid = await getBuffer(`${media.result.result}`).catch((err) => {
+            if (data.data.size > '70 MB') return reply(`File Melebihi Batas Silahkan Download Sendiri\n*Link :* ${data.data.url}`)
+            let vid = await getBuffer(`${data.data.url}`).catch((err) => {
   sticEror(from)
   })
-            conn.sendMessage(from, { video: vid, caption: media.result.title }, { quoted: msg }).catch((err) => {
+            conn.sendMessage(from, { video: vid, caption: data.data.filename }, { quoted: msg }).catch((err) => {
   sticEror(from)
   })
 }
