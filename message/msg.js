@@ -1117,7 +1117,7 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
 fs.unlinkSync(nme)
 fs.unlinkSync(ran)
  })*/
-  conn.sendMessage(from, {document: { url: data.data.url }, mimetype: 'mp3', fileName: `${data.data.filename} Downloader by Z-Bot Multidevice`}, { quoted : msg })
+ conn.sendMessage(from, { audio: { url: data.data.url }, mimetype: 'audio/mp4' }, { quoted: msg })
 }
 break
 	        case prefix+'ytmp4':{
