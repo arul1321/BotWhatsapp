@@ -7,6 +7,7 @@ const { getBuffer, fetchJson, fetchText, getRandom, getGroupAdmins, runtime, sle
 const { floNime, toAudio } = require('../lib/convert.js')
 const { pinterest } = require("../lib/pinterest")
 const { Tiktok } = require('../lib/tiktokdl.js')
+const { uploadimg, upload } = require('../lib/uploadimg')
 const { isLimit, limitAdd, getLimit, giveLimit, addBalance, kurangBalance, getBalance, isGame, gameAdd, givegame, cekGLimit } = require("../lib/limit");
 const { addCmd, AddHituser} = require("../lib/hitbot.js");
 const { addPlayGame, getJawabanGame, isPlayGame, cekWaktuGame, getGamePosi } = require("../lib/game");
@@ -987,6 +988,20 @@ break
 			    })
 			    }
 			    break
+			case prefix+'tourl':
+                   if (isImage || isQuotedImage) {
+		           var stream = await downloadContentFromMessage(msg.message.imageMessage || msg.message.extendedTextMessage?.contextInfo.quotedMessage.imageMessage, 'image')
+			       var buffer = Buffer.from([])
+			       for await(const chunk of stream) {buffer = Buffer.concat([buffer, chunk])}
+			var rand1 = 'sticker/'+getRandom('.jpg')
+			var rand2 = 'sticker/'+getRandom('.webp')
+			fs.writeFileSync(`./${rand1}`, buffer)
+            let res = await upload(rand1)
+            reply(res)
+            } else {
+            reply('kirim/reply gambar/video')
+            }
+            break
 			case prefix+'stickerurl':
 			sendWebp(from, q)
 			break
