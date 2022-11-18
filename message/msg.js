@@ -388,7 +388,6 @@ var ucapanWaktu = 'Good morning'
 		
 		// Premium
 		_prem.expiredCheck(conn, premium)
-
 		
         // Game
 		cekWaktuGame(conn, tebakgambar)
@@ -1136,6 +1135,22 @@ break
   })
 }
 	        break
+	case prefix+'twitter':{
+			if (args.length < 2) return reply(`Kirim perintah ${command} link`)
+			addCmd(`#`+command.slice(1), 1, dashboard)
+			sticWait(from)
+			var data = await xfar.downloader.twitter(q).catch((err) => {
+  sticEror(from)
+  })
+            //if (data.data.size > '70 MB') return reply(`File Melebihi Batas Silahkan Download Sendiri\n*Link :* ${data.data.url}`)
+            let vid = await getBuffer(`${data.quality_720}`).catch((err) => {
+  sticEror(from)
+  })
+            conn.sendMessage(from, { video: vid, caption: data.caption }, { quoted: msg }).catch((err) => {
+  sticEror(from)
+  })
+}
+	        break
 	        case prefix+'mediafire':
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
@@ -1191,35 +1206,6 @@ for (let i = 0; i < gas.result.stickers.length; i++) {
 }
         
 break 
-case prefix+'igfoto':
-			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
-			    if (!isUrl(args[1])) return reply(mess.error.Iv)
-addCmd(`#`+command.slice(1), 1, dashboard)
-  sticWait(from)
-  xfar.downloader.instagram(q).then(data => {
-  for (let i of data.media) {
-  conn.sendMessage(from, { caption: ` Succes Download Image Instagram, Thanks For Using zBot`, image:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
-  }
-  })
-  .catch((err) => {
-  sticEror(from)
-  })
-  break
-case prefix+'igvideo':
-			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
-			    if (!isUrl(args[1])) return reply(mess.error.Iv)
-addCmd(`#`+command.slice(1), 1, dashboard)
-  sticWait(from)
-  xfar.downloader.instagram(q).then(data => {
-  for (let i of data.media) {
-  conn.sendMessage(from, { caption: ` Succes Download Video Instagram, Thanks For Using zBot`, video:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
-  }
-  })
-  .catch((err) => {
-  sticEror(from)
-  })
-  
-  break
 case prefix+'ig':case prefix+'instagram': case prefix+'igdl':
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
@@ -1313,63 +1299,6 @@ break
 				}
 				addCmd(`#`+command.slice(1), 1, dashboard)
 				break
-			case prefix+'addprem':
-                if (!isOwner) return sticOwner(from)
-                if (args.length < 2) return reply(`Penggunaan :\n*${prefix}addprem* @tag waktu\n*${prefix}addprem* nomor waktu\n\nContoh : ${command} @tag 30d`)
-                if (!args[2]) return reply(`Mau yang berapa hari?`)
-                if (mentioned.length !== 0) {
-                    _prem.addPremiumUser(mentioned[0], args[2], premium)
-                    reply('Sukses')
-                } else {
-                 var cekap = await conn.onWhatsApp(args[1]+"@s.whatsapp.net")
-                 if (cekap.length == 0) return reply(`Masukkan nomer yang valid/terdaftar di WhatsApp`)
-                    _prem.addPremiumUser(args[1] + '@s.whatsapp.net', args[2], premium)
-                    reply('Sukses')
-                }
-                addCmd(`#`+command.slice(1), 1, dashboard)
-                break
-            case prefix+'delprem':
-                if (!isOwner) return sticOwner(from)
-                if (args.length < 2) return reply(`Penggunaan :\n*${prefix}delprem* @tag\n*${prefix}delprem* nomor`)
-                if (mentioned.length !== 0){
-                    premium.splice(_prem.getPremiumPosition(mentioned[0], premium), 1)
-                    fs.writeFileSync('./database/premium.json', JSON.stringify(premium))
-                    reply('Sukses!')
-                } else {
-                 var cekpr = await conn.oWhatsApp(args[1]+"@s.whatsapp.net")
-                 if (cekpr.length == 0) return reply(`Masukkan nomer yang valid/terdaftar di WhatsApp`)
-                    premium.splice(_prem.getPremiumPosition(args[1] + '@s.whatsapp.net', premium), 1)
-                    fs.writeFileSync('./database/premium.json', JSON.stringify(premium))
-                    reply('Sukses!')
-                }
-                addCmd(`#`+command.slice(1), 1, dashboard)
-                break
-			// Search Menu
-			case prefix+'lirik':
-				if (args.length < 2) return reply(`Kirim perintah ${command} judul lagu`)
-				sticWait(from)
-			    ra.Musikmatch(q).then(async(data) => {
-				  var teks = `*${data.result.judul} - ${data.result.penyanyi}*\n\n${data.result.lirik}`
-				  conn.sendMessage(from, { image: { url: data.result.thumb }, caption: teks }, { quoted: msg })
-				}).catch(() => reply(`Judul lagu tidak ditemukan`))
-				
-                  addCmd(`#`+command.slice(1), 1, dashboard)
-				break
-			case prefix+'searchgrup':
-			    
-				if (args.length < 2) return reply(`Kirim perintah ${command} nama grup`)
-				sticWait(from)
-			    hxz.linkwa(q).then(async(data) => {
-				  if (data.length == 0) return reply(`Grup ${q} tidak ditemukan`)
-				  var teks = `*Hasil Pencarian Dari ${q}*\n\n`
-				  for (let x of data) {
-					teks += `*Nama :* ${x.nama}\n*Link :* ${x.link}\n\n`
-				  }
-				  reply(teks)
-				  
-                  addCmd(`#`+command.slice(1), 1, dashboard)
-				}).catch(() => sticEror(from))
-			    break
 			case prefix+'play':{
 			if (args.length < 2) return reply(`Kirim perintah ${command} query`)
 			sticWait(from)

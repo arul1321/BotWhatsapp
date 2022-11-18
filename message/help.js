@@ -23,7 +23,6 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
 	return `
                        *Hallo Kak 👋🏻*
 
-                   *Z-Bot Multidevice*
    *Z-Bot Tidak Akan Memproses Jika*
            *Salah Dalam Penggunaan* 
                          *Command*
@@ -47,11 +46,10 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
   ${p+=1}. ${yui}${prefix}semoji 😂${yui}
 
   *(🥝)  Downloader*
+  ${p+=1}. ${yui}${prefix}twitter link${yui} 
   ${p+=1}. ${yui}${prefix}tiktok link${yui} 
   ${p+=1}. ${yui}${prefix}tiktokaudio link${yui} 
   ${p+=1}. ${yui}${prefix}instagram link${yui} 
-  ${p+=1}. ${yui}${prefix}igfoto link${yui} 
-  ${p+=1}. ${yui}${prefix}igvideo link${yui} 
   ${p+=1}. ${yui}${prefix}stickertele link${yui} 
   ${p+=1}. ${yui}${prefix}mediafire link${yui} 
   ${p+=1}. ${yui}${prefix}ytmp3 link${yui} 
@@ -60,8 +58,6 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
   ${readmore}
   *(🔎)  Search Menu*
   ${p+=1}. ${yui}${prefix}play${yui} 
-  ${p+=1}. ${yui}${prefix}lirik${yui} 
-  ${p+=1}. ${yui}${prefix}searchgrup${yui} 
   ${p+=1}. ${yui}${prefix}ytsearch${yui} 
 
   *(👥)  Group Menu*
@@ -81,8 +77,6 @@ exports.allmenu = (speed, runtime, sender, prefix, pushname, isOwner, isPremium,
   ${p+=1}. ${yui}${prefix}bc${yui}
   ${p+=1}. ${yui}${prefix}setppbot${yui}
   ${p+=1}. ${yui}${prefix}leave${yui}
-  ${p+=1}. ${yui}${prefix}addprem${yui}
-  ${p+=1}. ${yui}${prefix}delprem${yui}
   ${p+=1}. ${yui}${prefix}sendsession${yui}
   ${p+=1}. ${yui}${prefix}getcase${yui}
   
