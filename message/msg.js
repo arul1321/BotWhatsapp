@@ -42,7 +42,8 @@ const authorstick = `Z-Bot Multi Device`
 // DB Game
 let tebakgambar = []
 
-// Database
+// Databaselet
+let blocks = ['91', '92', '212', '20', '1', '94', '48', '49']
 let pendaftar = JSON.parse(fs.readFileSync('./database/user.json'))
 let mess = JSON.parse(fs.readFileSync('./message/response.json'));
 let premium = JSON.parse(fs.readFileSync('./database/premium.json'));
@@ -332,55 +333,8 @@ var ucapanWaktu = 'Good morning'
         conn.readMessages([msg.key])
         console.log(chalk.black(chalk.bgWhite('[ PESAN ]')), chalk.black(chalk.bgGreen(ucapanWaktu)), chalk.black(chalk.bgBlue(chats)) + '\n' + chalk.magenta('=> Dari'), chalk.green(`${pushname}`), chalk.yellow(sender) + '\n' + chalk.blueBright('=> Di'), chalk.green(msg.isGroup ? pushname : 'Private Chat', from))
         }
-        /// Auto Block +212 & +1
-        var arr1 = sender4.split(` `, 1)
-        if (arr1 == `1`){
-        reply(`You will be blocked, because this bot is specifically for +62 numbers`)
-        await sleep(3000)
-        await conn.updateBlockStatus(sender, 'block')
-        }
-        var arr31 = sender4.split(`(`, 1)
-        if (arr31 == `1 `){
-        reply(`You will be blocked, because this bot is specifically for +62 numbers`)
-        await sleep(3000)
-        await conn.updateBlockStatus(sender, 'block')
-        }
-        var arr = sender4.split(` `, 1)
-        if (arr == `212`){
-        reply(`You will be blocked, because this bot is specifically for +62 numbers`)
-        await sleep(3000)
-        await conn.updateBlockStatus(sender, 'block')
-        }
-        var arr2 = sender4.split(`7`, 1)
-        if (arr2 == `212`){
-        reply(`You will be blocked, because this bot is specifically for +62 numbers`)
-        await sleep(3000)
-        await conn.updateBlockStatus(sender, 'block')
-        }
-        var arr3 = sender4.split(`8`, 1)
-        if (arr3 == `212`){
-        reply(`You will be blocked, because this bot is specifically for +62 numbers`)
-        await sleep(3000)
-        await conn.updateBlockStatus(sender, 'block')
-        }
-        var arr4 = sender4.split(`9`, 1)
-        if (arr4 == `212`){
-        reply(`You will be blocked, because this bot is specifically for +62 numbers`)
-        await sleep(3000)
-        await conn.updateBlockStatus(sender, 'block')
-        }
-        var arr5 = sender4.split(`5`, 1)
-        if (arr5 == `212`){
-        reply(`You will be blocked, because this bot is specifically for +62 numbers`)
-        await sleep(3000)
-        await conn.updateBlockStatus(sender, 'block')
-        }
-        var arr6 = sender4.split(`6`, 1)
-        if (arr6 == `212`){
-        reply(`You will be blocked, because this bot is specifically for +62 numbers`)
-        await sleep(3000)
-        await conn.updateBlockStatus(sender, 'block')
-        }
+        /// Auto Block 
+        if (blocks.some(no => sender.startsWith(no))) return conn.updateBlockStatus(sender, 'block')
 		// Auto Registrasi
 		if (isCmd && !isUser) {
 		  pendaftar.push(sender)
