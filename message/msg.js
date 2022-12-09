@@ -30,6 +30,7 @@ const speed = require("performance-now");
 const request = require("request");
 const ms = require("parse-ms");
 const thu = fs.readFileSync('./media/thumb.jpg')
+const tamnel = fs.readFileSync('./media/thumb.jpg')
 const maker = require('mumaker')
 const { mediafiredl } = require('../lib/mediafiredl')
 const { EmojiAPI } = require("emoji-api");
@@ -435,12 +436,58 @@ break
 
 Melanggar ?  *Block*
 `
-conn.sendMessage(from, { text: rules, footer: `Z-Bot Multidevice`, templateButtons: btn, quoted:msg})
+let buttons = [
+            {buttonId: `${prefix}owner`, buttonText: {displayText: 'Owner'}, type: 1}
+            ]
+            let buttonMessage = {
+            document: tamnel,
+            mimetype: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            fileName: `Z-Bot Whatsapp MD`,
+            fileLength: 99999999999999,
+            caption: rules,
+            footer: `Z-Bot Multidevice`,
+            buttons: buttons,
+            headerType: 4,
+            contextInfo:{externalAdReply:{
+            title:`Z-Bot Whatsapp`,
+            mediaType: 1,
+            renderLargerThumbnail: true , 
+            showAdAttribution: true, 
+            jpegThumbnail: tamnel,
+            mediaUrl: `instagram.com/_daaa_1`,
+            thumbnail: tamnel,
+            sourceUrl: ` `
+            }}
+            }
+            conn.sendMessage(from, buttonMessage, { quoted: msg })
 			break
 			case prefix+'menu':
 			   addCmd(`#`+command.slice(1), 1, dashboard)
 			    var teks = allmenu(speed, runtime, sender, prefix, pushname, isOwner, isPremium, balance, limit, limitCount, glimit, gcount, pendaftar)
-			    conn.sendMessage(from, { text: teks, footer: `Z-Bot Multidevice`, templateButtons: buttonsDefault, quoted:msg})
+			    let buttons = [
+            {buttonId: `${prefix}owner`, buttonText: {displayText: 'Owner'}, type: 1}
+            ]
+            let buttonMessage = {
+            document: tamnel,
+            mimetype: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            fileName: `Z-Bot Whatsapp MD`,
+            fileLength: 99999999999999,
+            caption: teks,
+            footer: `Z-Bot Multidevice`,
+            buttons: buttons,
+            headerType: 4,
+            contextInfo:{externalAdReply:{
+            title:`Menu Z-Bot Whatsapp`,
+            mediaType: 1,
+            renderLargerThumbnail: true , 
+            showAdAttribution: true, 
+            jpegThumbnail: tamnel,
+            mediaUrl: `instagram.com/_daaa_1`,
+            thumbnail: tamnel,
+            sourceUrl: ` `
+            }}
+            }
+            conn.sendMessage(from, buttonMessage, { quoted: msg })
 				break
 			case prefix+'runtime':
 			addCmd(`#`+command.slice(1), 1, dashboard)
@@ -1183,9 +1230,9 @@ addCmd(`#`+`instagram`, 1, dashboard)
   bocil.instagramdlv3(q).then(data => {
   for (let i of data) {
   if (i.url.includes('mp4')) {
-  conn.sendMessage(from, { caption: ` Succes Download Video Instagram, Thanks For Using zBot`, video:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
-  } else {
-  conn.sendMessage(from, { caption: ` Succes Download Image Instagram, Thanks For Using zBot`, image:{url:i.url}, templateButtons: butlink, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
+  conn.sendMessage(from, { caption: ` Succes Download Video Instagram, Thanks For Using zBot`, video:{url:i.url},quoted:msg} )
+            } else {
+  conn.sendMessage(from, { caption: ` Succes Download Image Instagram, Thanks For Using zBot`, image:{url:i.url},quoted:msg} )
   }
   }
   })
@@ -1214,11 +1261,7 @@ addCmd(`#`+`instagram`, 1, dashboard)
 			    bocil.tiktokdl(`${q}`).then( yut => {
 				  let anutxt = `TikTok Downloader by Z-Bot`
 				 // let vm = await getBuffer(`yut.no_watermak_hd`)
-			      var tidtod5 = [
-						{ urlButton: { displayText: `Link`, url : `${q}` } }
-				]
-				conn.sendMessage(from, { caption: anutxt, video: {url: yut.video.no_watermark}, templateButtons: tidtod5, footer: 'Z-Bot Multidevice', mentions: [panggil]} )
-			       
+			    conn.sendMessage(from, { caption: anutxt, video:{url:yut.video.no_watermark},quoted:msg} )
 				}).catch(() => sticEror(from))
 		        break
 			// Owner Menu
@@ -1425,10 +1468,30 @@ conn.sendMessage(from, buttonMessage, { quoted: msg })
                     top += `${p+=1}. Command : *${dashboard[i].id}*\n Telah Di Gunakan Sebanyak *${dashboard[i].total}* Kali\n\n`
                     arrTop.push(dashboard[i].id)
                 }
-                const btn = [
-			{ urlButton: { displayText: `Instagram`, url : `https://instagram.com/_daaa_1` } }
-		]
-conn.sendMessage(from, { text: top, footer: `Z-Bot Multidevice`, templateButtons: btn, quoted:msg})
+                let buttons = [
+            {buttonId: `${prefix}owner`, buttonText: {displayText: 'Owner'}, type: 1}
+            ]
+            let buttonMessage = {
+            document: tamnel,
+            mimetype: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            fileName: `Z-Bot Whatsapp MD`,
+            fileLength: 99999999999999,
+            caption: top,
+            footer: `Z-Bot Multidevice`,
+            buttons: buttons,
+            headerType: 4,
+            contextInfo:{externalAdReply:{
+            title:`Z-Bot Whatsapp`,
+            mediaType: 1,
+            renderLargerThumbnail: true , 
+            showAdAttribution: true, 
+            jpegThumbnail: tamnel,
+            mediaUrl: `instagram.com/_daaa_1`,
+            thumbnail: tamnel,
+            sourceUrl: ` `
+            }}
+            }
+            conn.sendMessage(from, buttonMessage, { quoted: msg })
             }
                 break
 			default:
