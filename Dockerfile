@@ -4,7 +4,6 @@ RUN apt-get update && \
   apt-get install -y \
   ffmpeg \
   figlet \
-  yt-search \
   imagemagick \
   webp && \
   apt-get upgrade -y && \
