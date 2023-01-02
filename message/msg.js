@@ -89,7 +89,7 @@ var ucapanWaktu = 'Good morning'
 		const chats = (type === 'conversation' && msg.message.conversation) ? msg.message.conversation : (type === 'imageMessage') && msg.message.imageMessage.caption ? msg.message.imageMessage.caption : (type === 'videoMessage') && msg.message.videoMessage.caption ? msg.message.videoMessage.caption : (type === 'extendedTextMessage') && msg.message.extendedTextMessage.text ? msg.message.extendedTextMessage.text : (type === 'buttonsResponseMessage') && quotedMsg.fromMe && msg.message.buttonsResponseMessage.selectedButtonId ? msg.message.buttonsResponseMessage.selectedButtonId : (type === 'templateButtonReplyMessage') && quotedMsg.fromMe && msg.message.templateButtonReplyMessage.selectedId ? msg.message.templateButtonReplyMessage.selectedId : (type === 'messageContextInfo') ? (msg.message.buttonsResponseMessage?.selectedButtonId || msg.message.listResponseMessage?.singleSelectReply.selectedRowId) : (type == 'listResponseMessage') && quotedMsg.fromMe && msg.message.listResponseMessage.singleSelectReply.selectedRowId ? msg.message.listResponseMessage.singleSelectReply.selectedRowId : ""
                 const toJSON = j => JSON.stringify(j, null,'\t')
 		if (conn.multi) {
-			var prefix = /^[°•÷×¶£¢€¥®™_=|~!?#%^&.+-,\/\\©^]/.test(chats) ? chats.match(/^[°•÷×¶£¢€¥®™_=|~!?#$%^&.+-,\/\\©^]/gi) : '#'
+			var prefix = /^[Â°â€¢Ã·Ã—Â¶Â£Â¢â‚¬Â¥Â®â„¢_=|~!?#%^&.+-,\/\\Â©^]/.test(chats) ? chats.match(/^[Â°â€¢Ã·Ã—Â¶Â£Â¢â‚¬Â¥Â®â„¢_=|~!?#$%^&.+-,\/\\Â©^]/gi) : '#'
 		} else {
 			if (conn.nopref) {
 				prefix = ''
@@ -353,7 +353,7 @@ var ucapanWaktu = 'Good morning'
 			addBalance(sender, htgm, balance)
 		    var polo= `*Selamat Jawaban Kamu Benar *\n\nJawaban : ${getJawabanGame(from, tebakgambar)}\nHadiah : ${htgm} balance\n\nIngin bermain lagi? tekan tombol dibawah`
 		    const btn = [
-			{ quickReplyButton: { displayText: `• Tebak Gambar`, id: `${prefix}tebakgambar` } }
+			{ quickReplyButton: { displayText: `â€¢ Tebak Gambar`, id: `${prefix}tebakgambar` } }
 		]
 		    conn.sendMessage(from, { text: polo, footer: `Z-Bot Multidevice`, templateButtons: btn, quoted:msg})
 		    tebakgambar.splice(getGamePosi(from, tebakgambar), 1)
@@ -461,12 +461,10 @@ let buttons = [
             }
             conn.sendMessage(from, buttonMessage, { quoted: msg })
 			break
-			case prefix+'menu':
-			   addCmd(`#`+command.slice(1), 1, dashboard)
-			    var teks = allmenu(speed, runtime, sender, prefix, pushname, isOwner, isPremium, balance, limit, limitCount, glimit, gcount, pendaftar)
-			    let buttons = [
-            {buttonId: `${prefix}owner`, buttonText: {displayText: 'Owner'}, type: 1}
-            ]
+		    case prefix+'menu':{
+			addCmd(`#`+command.slice(1), 1, dashboard)
+			var teks = allmenu(speed, runtime, sender, prefix, pushname, isOwner, isPremium, balance, limit, limitCount, glimit, gcount, pendaftar)
+			let buttons = [{buttonId: `${prefix}owner`, buttonText: {displayText: 'Owner'}, type: 1}]
             let buttonMessage = {
             document: tamnel,
             mimetype: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
@@ -488,6 +486,7 @@ let buttons = [
             }}
             }
             conn.sendMessage(from, buttonMessage, { quoted: msg })
+        }
 				break
 			case prefix+'runtime':
 			addCmd(`#`+command.slice(1), 1, dashboard)
